@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:textColor="@color/colorTextLogin"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/tvQuestion"
+        android:text="@string/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/colorTextLogin"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:id="@+id/tvContentQuestion"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tvQuestion"
+        app:layout_constraintTop_toTopOf="@+id/tvQuestion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:button="@android:color/transparent"
+        android:background="@drawable/custom_checkbox"
+        android:id="@+id/rdQuestionA"
+        app:layout_constraintTop_toTopOf="@id/tvQuestionA"
+        app:layout_constraintLeft_toLeftOf="@id/tvQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/colorTextLogin"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:id="@+id/tvQuestionA"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvContentQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/tvContentQuestion"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:button="@android:color/transparent"
+        android:background="@drawable/custom_checkbox"
+        android:id="@+id/rdQuestionB"
+        app:layout_constraintTop_toTopOf="@id/tvQuestionB"
+        app:layout_constraintLeft_toLeftOf="@id/tvQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/colorTextLogin"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:id="@+id/tvQuestionB"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvContentQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestionA"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:button="@android:color/transparent"
+        android:background="@drawable/custom_checkbox"
+        android:id="@+id/rdQuestionC"
+        app:layout_constraintTop_toTopOf="@id/tvQuestionC"
+        app:layout_constraintLeft_toLeftOf="@id/tvQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/colorTextLogin"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:id="@+id/tvQuestionC"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvContentQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestionB"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:button="@android:color/transparent"
+        android:background="@drawable/custom_checkbox"
+        android:id="@+id/rdQuestionD"
+        app:layout_constraintTop_toTopOf="@id/tvQuestionD"
+        app:layout_constraintLeft_toLeftOf="@id/tvQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/colorTextLogin"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:id="@+id/tvQuestionD"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvContentQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestionC"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">AppCTCT</string>
+    <string name="ctct">CTCT</string>
+    <string name="userName">UserName</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register Here</string>
+    <string name="loginFacebook">Login with Facebook</string>
+    <string name="fullname">Full Name</string>
+    <string name="email">Email</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="registerNow">Register Now</string>
+    <string name="avatar">Avatar</string>
+    <string name="welearnweshare">We learn We share</string>
+    <string name="question">Question</string>
+
+    <string name="title_activity_pdfreader">PDFReader</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
