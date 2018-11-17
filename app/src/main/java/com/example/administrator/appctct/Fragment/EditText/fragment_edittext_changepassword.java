@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Fragment.ChangPassword;
+package com.example.administrator.appctct.Fragment.EditText;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -35,5 +35,13 @@ public class fragment_edittext_changepassword extends Fragment{
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
             return;
         }
+    }
+
+    public void setError(){
+        editText.setError(getResources().getString(R.string.empty));
+    }
+
+    public String getText(){
+        return editText.getText().toString();
     }
 }

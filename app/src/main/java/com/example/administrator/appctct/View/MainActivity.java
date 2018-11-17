@@ -87,13 +87,18 @@ public class MainActivity extends AppCompatActivity implements ItemClick,CheckBo
 
     @Override
     public void checkboxListened(int position, String result) {
-        for (IdAndResult x: listIdandResult){
-            if (x.getId().equals(listQuestion.get(position).getId())){
-                listIdandResult.get(position).setResult(result);
-                return;
+        if (listIdandResult.size() > 0) {
+            for (IdAndResult x : listIdandResult) {
+                if (x.getId().equals(listQuestion.get(position).getId())) {
+                    Integer index = listIdandResult.indexOf(x);
+                    listIdandResult.get(index).setResult(result);
+                    return;
+                }
             }
+            listIdandResult.add(new IdAndResult(listQuestion.get(position).getId(), result));
+            return;
         }
-        listIdandResult.add(new IdAndResult(listQuestion.get(position).getId(),result));
+        listIdandResult.add(new IdAndResult(listQuestion.get(position).getId(), result));
     }
 
     @Override

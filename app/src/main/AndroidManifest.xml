@@ -13,12 +13,10 @@
         <activity android:name=".View.MainActivity">
 
         </activity>
-        <activity android:name=".View.Login_Activity" >
-
-        </activity>
-
+        <activity android:name=".View.Login_Activity"></activity>
         <activity android:name=".View.Register_Activity" />
-        <activity android:name=".View.PDFReaderActivity">
+        <activity android:name=".View.PDFReaderActivity"></activity>
+        <activity android:name=".View.ChangePasswordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

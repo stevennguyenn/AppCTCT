@@ -7,6 +7,6 @@
     <color name="colorTextLogin">#041635</color>
     <color name="colorOrange">#ef730e</color>
     <color name="colorFacebook">#3581f4</color>
-
+    <color name="black">#0a0909</color>
     <color name="black_overlay">#66000000</color>
 </resources>

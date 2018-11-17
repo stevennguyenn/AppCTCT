@@ -44,4 +44,10 @@ public interface DataClient {
     @POST("getresultquestion.php")
     Call<String> getResultTemp(@Field("arrid[]") String[] arrID,
                             @Field("arrresult[]") String[] arrResult);
+
+    @FormUrlEncoded
+    @POST("changpassword.php")
+    Call<String> changePassword(@Field("id") String id,
+                                @Field("currentPassword") String currentPassword,
+                                @Field("newPassword") String newPassword);
 }

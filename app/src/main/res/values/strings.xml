@@ -13,8 +13,11 @@
     <string name="avatar">Avatar</string>
     <string name="welearnweshare">We learn We share</string>
     <string name="question">Question</string>
+    <string name="currentpassword">Current Password</string>
+    <string name="newpassword">New Password</string>
+    <string name="confirmpassword">Confirm Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="empty">Empty</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
