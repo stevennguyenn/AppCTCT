@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "910305560076",
+    "firebase_url": "https://sendsmsfirebase.firebaseio.com",
+    "project_id": "sendsmsfirebase",
+    "storage_bucket": "sendsmsfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910305560076:android:8945719b5ffb4c98",
+        "android_client_info": {
+          "package_name": "com.example.administrator.appctct"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910305560076-f2ifi3jgkuq562d9tl5civkq5cg92i00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPUGPguJghpc_gQ46KNAn0Xtbd4q0KPBU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
