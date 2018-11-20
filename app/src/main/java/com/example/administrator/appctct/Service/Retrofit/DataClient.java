@@ -2,6 +2,7 @@ package com.example.administrator.appctct.Service.Retrofit;
 
 import android.support.annotation.FractionRes;
 
+import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 
@@ -50,4 +51,13 @@ public interface DataClient {
     Call<String> changePassword(@Field("id") String id,
                                 @Field("currentPassword") String currentPassword,
                                 @Field("newPassword") String newPassword);
+
+    @FormUrlEncoded
+    @POST("profile.php")
+    Call<Profile> getProfile(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("findcode_ctct.php")
+    Call<String> findCode(@Field("id") String id,
+                          @Field("code") String code);
 }

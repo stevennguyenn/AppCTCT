@@ -1,10 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActitivy">
+    tools:context=".View.ProfileActitivy"
+    android:background="@color/colorWhite">
+
+    <ImageView
+        android:src="@drawable/avt"
+        android:layout_marginTop="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/imgAvatarProfile"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
+    <ImageView
+        android:src="@drawable/ic_camera"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/imgAvatarProfile"
+        app:layout_constraintTop_toTopOf="@+id/imgAvatarProfile"
+        android:id="@+id/imgCameraProfile"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+    <ImageView
+        android:src="@drawable/ic_collection"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/imgCameraProfile"
+        app:layout_constraintRight_toRightOf="@+id/imgCameraProfile"
+        android:id="@+id/imgCollectionProfile"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+    
+    <TextView
+        android:text="@string/fullname"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imgAvatarProfile"
+        android:id="@+id/tvFullNameProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvFullNameProfile"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/tvFullNameProfile"
+        android:id="@+id/textFullNameProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="@string/password"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tvFullNameProfile"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/textFullNameProfile"
+        android:id="@+id/tvPassWordProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintTop_toTopOf="@+id/tvPassWordProfile"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvPassWordProfile"
+        android:id="@+id/textPassWordProfile"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="12sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/changepassword"
+        app:layout_constraintTop_toTopOf="@+id/textPassWordProfile"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/textPassWordProfile"
+        android:id="@+id/tvChangePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/textPassWordProfile"
+        app:layout_constraintLeft_toLeftOf="@id/tvPassWordProfile"
+        android:text="@string/phonenumber"
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@+id/textPassWordProfile"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvPhoneNumber"
+        android:id="@+id/textPhoneNumber"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textSize="12sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/updatephonenumber"
+        app:layout_constraintTop_toTopOf="@+id/textPhoneNumber"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/textPhoneNumber"
+        android:id="@+id/tvUpdatePhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:text="@string/permission"
+        app:layout_constraintLeft_toLeftOf="@+id/tvPhoneNumber"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber"
+        android:id="@+id/tvPermission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvMemberCTCT"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvPermission"
+        app:layout_constraintTop_toTopOf="@id/tvPermission"
+        android:text="@string/memberCTCT"
+        android:textSize="12sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/confirm"
+        android:background="@drawable/custom_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,5 @@
 package com.example.administrator.appctct.Interfaces.Dialog;
 
-public class ProcessCustomDialogClick {
+public interface ProcessCustomDialogClick {
+    void onClickPositive(String code);
 }

@@ -1,17 +1,12 @@
 package com.example.administrator.appctct.View;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.webkit.WebView;
 
 import com.example.administrator.appctct.R;
-import com.google.gson.annotations.Expose;
 
 import java.io.File;
 

@@ -33,8 +33,13 @@ public class fragment_edittext_changepassword extends Fragment{
     public void showPass(Boolean isShow){
         if (isShow){
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
-            return;
         }
+    }
+
+    public void noPermission(){
+        editText.setEnabled(false);
+        editText.setBackgroundColor(getResources().getColor(R.color.black_overlay));
+        tvTitle.setEnabled(false);
     }
 
     public void setError(){

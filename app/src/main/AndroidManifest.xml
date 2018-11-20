@@ -17,6 +17,8 @@
         <activity android:name=".View.Register_Activity" />
         <activity android:name=".View.PDFReaderActivity"></activity>
         <activity android:name=".View.ChangePasswordActivity">
+        </activity>
+        <activity android:name=".View.UpdatePhoneNumberActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

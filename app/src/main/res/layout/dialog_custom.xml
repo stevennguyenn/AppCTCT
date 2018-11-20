@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        android:text="@string/notification"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/tvTitleDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/edInputCode"
+        android:inputType="number"
+        android:lines="1"
+        android:textStyle="italic"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_overlay"
+        android:hint="@string/code_ctct"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleDialog"
+        android:background="@drawable/custom_edittext"
+        android:layout_width="200dp"
+        android:layout_height="40dp" />
+    <Button
+
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:id="@+id/btConfirmDialog"
+        android:text="@string/confirm"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/edInputCode"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_button"
+        android:layout_width="200dp"
+        android:layout_height="40dp" />
 
 </android.support.constraint.ConstraintLayout>

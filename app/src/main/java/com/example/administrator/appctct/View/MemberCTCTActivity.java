@@ -1,7 +1,9 @@
-package com.example.administrator.appctct;
+package com.example.administrator.appctct.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.administrator.appctct.R;
 
 public class MemberCTCTActivity extends AppCompatActivity {
 

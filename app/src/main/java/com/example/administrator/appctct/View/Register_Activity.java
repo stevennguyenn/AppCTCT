@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -84,9 +83,6 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
         new SetupView(this).hideNavigationBar();
     }
 
-//    private void showSystemUI(){
-//        new SetupView(this).showSystemUI();
-//    }
 
     @Override
     public void onClick(View v) {
@@ -225,7 +221,7 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                     String message = response.body();
                         if (message != null){
                             DataClient insertData = APIUtils.getData();
-                            retrofit2.Call<String> cb = insertData.insertData(fullName,userName,password,APIUtils.baseURL + "image/" + baseURL);
+                            retrofit2.Call<String> cb = insertData.insertData(fullName,userName,password,APIUtils.baseURL + "image/" + response.body());
                             cb.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(@NonNull retrofit2.Call<String> call,@NonNull Response<String> response) {
@@ -248,7 +244,7 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
 
                 @Override
                 public void onFailure(@NonNull retrofit2.Call<String> call,@NonNull Throwable t) {
-                    Log.d("AAA",t.getMessage());
+                    //Log.d("AAA",t.getMessage());
                 }
             });
         }

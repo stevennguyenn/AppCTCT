@@ -2,11 +2,11 @@
     <string name="app_name">AppCTCT</string>
     <string name="ctct">CTCT</string>
     <string name="userName">UserName</string>
-    <string name="password">Password</string>
+    <string name="password">Password:</string>
     <string name="login">Login</string>
     <string name="register">Register Here</string>
     <string name="loginFacebook">Login with Facebook</string>
-    <string name="fullname">Full Name</string>
+    <string name="fullname">Full Name:</string>
     <string name="email">Email</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="registerNow">Register Now</string>
@@ -18,6 +18,19 @@
     <string name="confirmpassword">Confirm Password</string>
     <string name="confirm">Confirm</string>
     <string name="empty">Empty</string>
+    <string name="changepassword">Change Password</string>
+    <string name="phonenumber">Phone Number:</string>
+    <string name="updatephonenumber">Update Phone Number</string>
+    <string name="permission">Permission:</string>
+    <string name="memberCTCT">Only Member CTCT</string>
+    <string name="notification">Notification</string>
+    <string name="code_ctct">Code</string>
+    <string name="currentphone">Current Phone</string>
+    <string name="newphone">New Phone</string>
+    <string name="confirmphonenumber">Confirm Phone Number</string>
+    <string name="confirmcode">Confirm Code</string>
+    <string name="facebook_app_id">251872742352854</string>
+    <string name="fb_login_protocol_scheme">fb251872742352854</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>

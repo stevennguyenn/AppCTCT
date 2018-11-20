@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.View;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.appctct.Component.CustomView.SetupView;
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Interfaces.Login.PresenterNotifyViewLogin;
 import com.example.administrator.appctct.Presenter.PresenterLogin;
@@ -32,6 +33,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     TextView tvRegister;
     ProgressBar indicator;
 
+    SharedPreferences share;
+
     private PresenterLogin presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         tvRegister.setOnClickListener(this);
         btLogin.setOnClickListener(this);
         presenter = new PresenterLogin(this);
+        share = getSharedPreferences(Strings.data,MODE_PRIVATE);
     }
 
     @Override
@@ -86,6 +90,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             public void onResponse(@NonNull Call<Student> call,@NonNull Response<Student> response) {
                 if (response.body() != null){
                     Toast.makeText(Login_Activity.this,"Login Success", LENGTH_SHORT).show();
+                    commitShare("31");
                     return;
                 }
                 Toast.makeText(Login_Activity.this,response.message(), LENGTH_SHORT).show();
@@ -96,5 +101,10 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+    }
+    private void commitShare(String id){
+        SharedPreferences.Editor editor = share.edit();
+        editor.putString("id",id);
+        editor.commit();
     }
 }
