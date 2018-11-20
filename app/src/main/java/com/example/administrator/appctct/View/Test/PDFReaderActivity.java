@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.View;
+package com.example.administrator.appctct.View.Test;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;

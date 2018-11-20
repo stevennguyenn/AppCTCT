@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.View;
+package com.example.administrator.appctct.View.CTCT;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

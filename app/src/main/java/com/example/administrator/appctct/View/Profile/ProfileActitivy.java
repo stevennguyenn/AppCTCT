@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.View;
+package com.example.administrator.appctct.View.Profile;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.appctct.Component.Constant.Strings;
@@ -20,6 +19,9 @@ import com.example.administrator.appctct.Interfaces.Dialog.ProcessCustomDialogCl
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Service.Retrofit.APIUtils;
 import com.example.administrator.appctct.Service.Retrofit.DataClient;
+import com.example.administrator.appctct.View.CTCT.MemberCTCTActivity;
+import com.example.administrator.appctct.View.Setting.ChangePasswordActivity;
+import com.example.administrator.appctct.View.Setting.UpdatePhoneNumberActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;

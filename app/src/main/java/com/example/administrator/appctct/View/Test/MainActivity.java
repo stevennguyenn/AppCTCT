@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.View;
+package com.example.administrator.appctct.View.Test;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;

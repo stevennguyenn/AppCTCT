@@ -31,6 +31,9 @@
     <string name="confirmcode">Confirm Code</string>
     <string name="facebook_app_id">251872742352854</string>
     <string name="fb_login_protocol_scheme">fb251872742352854</string>
+    <string name="tvDialogChoice">Please choice</string>
+    <string name="forgotPassword">Forgot Password</string>
+    <string name="numberPhone">Phone Number</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>

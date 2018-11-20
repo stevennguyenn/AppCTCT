@@ -9,4 +9,5 @@
     <color name="colorFacebook">#3581f4</color>
     <color name="black">#0a0909</color>
     <color name="black_overlay">#66000000</color>
+    <color name="color_red">#ef0909</color>
 </resources>

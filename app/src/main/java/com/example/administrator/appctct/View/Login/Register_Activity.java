@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.View;
+package com.example.administrator.appctct.View.Login;
 
 import android.Manifest;
 import android.content.Intent;

@@ -1,12 +1,16 @@
-package com.example.administrator.appctct.View;
+package com.example.administrator.appctct.View.Login;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,6 +23,7 @@ import com.example.administrator.appctct.Presenter.PresenterLogin;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Service.Retrofit.APIUtils;
 import com.example.administrator.appctct.Service.Retrofit.DataClient;
+import com.example.administrator.appctct.View.Setting.ForgotPasswordActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,9 +35,9 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
     EditText edUserName,edPassword;
     Button btLogin;
-    TextView tvRegister;
+    TextView tvRegister,tvForgotPassword;
     ProgressBar indicator;
-
+    Dialog dialog;
     SharedPreferences share;
 
     private PresenterLogin presenter;
@@ -44,6 +49,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void setID(){
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
         edUserName = findViewById(R.id.edUser);
         edPassword = findViewById(R.id.edPassword);
         btLogin = findViewById(R.id.btLogin);
@@ -53,6 +59,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         btLogin.setOnClickListener(this);
         presenter = new PresenterLogin(this);
         share = getSharedPreferences(Strings.data,MODE_PRIVATE);
+        tvForgotPassword.setOnClickListener(this);
     }
 
     @Override
@@ -67,8 +74,57 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                Intent intent = new Intent(Login_Activity.this,Register_Activity.class);
                startActivity(intent);
                break;
+           case R.id.tvForgotPassword:
+               showForgotPassword();
+               break;
        }
     }
+
+    private void showForgotPassword(){
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_choice_email_phone);
+
+        Button btConfirm = dialog.findViewById(R.id.btConfirm);
+        final CheckBox cbEmail = dialog.findViewById(R.id.cbEmail);
+        final CheckBox cbPhone = dialog.findViewById(R.id.cbPhone);
+        cbEmail.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    cbPhone.setChecked(false);
+                    cbEmail.setChecked(true);
+                }
+            }
+        });
+        cbPhone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    cbEmail.setChecked(false);
+                    cbPhone.setChecked(true);
+                }
+            }
+        });
+        btConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (!cbPhone.isChecked() && !cbEmail.isChecked()){
+                    return;
+                }
+                Intent intent = new Intent(Login_Activity.this,ForgotPasswordActivity.class);
+                if (cbPhone.isChecked()){
+                    intent.putExtra("isPhone",true);
+                } else {
+                    intent.putExtra("isPhone", false);
+                }
+                startActivity(intent);
+            }
+        });
+        dialog.show();
+    }
+
 
     @Override
     public void userIsEmpty() {
@@ -108,3 +164,4 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         editor.commit();
     }
 }
+

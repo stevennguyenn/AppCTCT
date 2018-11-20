@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.View;
+package com.example.administrator.appctct.View.Setting;
 import com.example.administrator.appctct.Fragment.EditText.FragmentButton.fragment_button;
 import com.example.administrator.appctct.Fragment.EditText.FragmentButton.register;
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
@@ -53,6 +53,6 @@ public class UpdatePhoneNumberActivity extends AppCompatActivity implements View
 
     @Override
     public void processRegister() {
-        
+
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Login_Activity"
+    tools:context=".View.Login.Login_Activity"
     android:background="@color/colorAccent">
     <ImageView
         android:contentDescription="@null"
@@ -104,6 +104,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvRegister"
+        android:textSize="14sp"
+        android:textColor="@color/color_red"
+        android:text="@string/forgotPassword"
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <ProgressBar
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
