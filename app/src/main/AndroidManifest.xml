@@ -10,21 +10,22 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/ctct"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".View.Test.MainActivity" />
+        <activity android:name=".View.Test.MainActivity"></activity>
         <activity android:name=".View.Login.Login_Activity">
-
-        </activity>
-        <activity android:name=".View.Login.Register_Activity" />
-        <activity android:name=".View.Test.PDFReaderActivity" />
-        <activity android:name=".View.Setting.ChangePasswordActivity" />
-        <activity android:name=".View.Setting.UpdatePhoneNumberActivity"></activity>
-        <activity android:name=".View.Setting.ForgotPasswordActivity"></activity>
-        <activity android:name=".View.Setting.SettingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".View.Login.Register_Activity" />
+        <activity android:name=".View.Test.PDFReaderActivity" />
+        <activity android:name=".View.Setting.ChangePasswordActivity"></activity>
+        <activity android:name=".View.Setting.UpdatePhoneNumberActivity">
+
+        </activity>
+        <activity android:name=".View.Setting.ForgotPasswordActivity">
+
         </activity>
     </application>
 
