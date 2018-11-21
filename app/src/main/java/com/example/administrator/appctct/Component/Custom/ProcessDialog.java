@@ -22,9 +22,9 @@ public class ProcessDialog implements DialogInterface.OnClickListener, View.OnCl
     private EditText edCode;
     private static Dialog dialog;
 
-    public void setListened(ProcessAlterDialogClick listened){
-        this.listened  = listened;
-    }
+//    public void setListened(ProcessAlterDialogClick listened){
+//        this.listened  = listened;
+//    }
 
     public void setListenedCustom(ProcessCustomDialogClick listenedCustom) {
         this.listenedCustom = listenedCustom;

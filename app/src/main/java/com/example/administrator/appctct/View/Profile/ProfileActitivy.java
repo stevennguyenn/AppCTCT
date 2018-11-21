@@ -66,7 +66,7 @@ public class ProfileActitivy extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onResponse(@NonNull  Call<Profile> call,@NonNull Response<Profile> response) {
                 if (response.body() != null){
-                    if (response.body().getFullname()!= null && response.body().getAvatar() != null) {
+                    if (response.body().getFullname() != null && response.body().getAvatar() != null) {
                         setProfile(response.body().getFullname(), response.body().getAvatar());
                     }
                 }

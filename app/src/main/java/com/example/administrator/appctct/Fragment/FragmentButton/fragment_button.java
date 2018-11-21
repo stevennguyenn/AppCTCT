@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.administrator.appctct.Fragment.FragmentButton.register;
 import com.example.administrator.appctct.R;
 
 public class fragment_button extends Fragment implements View.OnClickListener{

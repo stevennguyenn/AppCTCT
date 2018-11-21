@@ -1,6 +1,5 @@
 package com.example.administrator.appctct.Service;
 
-import android.support.annotation.FractionRes;
 
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.Student;

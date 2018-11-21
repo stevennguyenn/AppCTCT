@@ -12,7 +12,6 @@ import retrofit2.Response;
 
 public class ModelChangPassword {
     private ModelNotifyPresenter listened;
-    private String id = "28";
 
     public void setListened(ModelNotifyPresenter listened){
         this.listened = listened;
@@ -36,7 +35,7 @@ public class ModelChangPassword {
             return;
         }
         DataClient client = APIUtils.getData();
-        Call<String> call = client.changePassword(id,currentPass,newPass);
+        Call<String> call = client.changePassword("28",currentPass,newPass);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull  Call<String> call,@NonNull Response<String> response) {

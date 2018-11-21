@@ -35,12 +35,12 @@ public class fragment_edittext_changepassword extends Fragment{
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
     }
-
-    public void noPermission(){
-        editText.setEnabled(false);
-        editText.setBackgroundColor(getResources().getColor(R.color.black_overlay));
-        tvTitle.setEnabled(false);
-    }
+//
+//    public void noPermission(){
+//        editText.setEnabled(false);
+//        editText.setBackgroundColor(getResources().getColor(R.color.black_overlay));
+//        tvTitle.setEnabled(false);
+//    }
 
     public void setError(){
         editText.setError(getResources().getString(R.string.empty));

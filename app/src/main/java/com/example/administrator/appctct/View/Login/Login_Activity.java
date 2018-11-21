@@ -146,7 +146,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             public void onResponse(@NonNull Call<Student> call,@NonNull Response<Student> response) {
                 if (response.body() != null){
                     Toast.makeText(Login_Activity.this,"Login Success", LENGTH_SHORT).show();
-                    commitShare("31");
+                    commitShare();
                     return;
                 }
                 Toast.makeText(Login_Activity.this,response.message(), LENGTH_SHORT).show();
@@ -158,10 +158,10 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
-    private void commitShare(String id){
+    private void commitShare(){
         SharedPreferences.Editor editor = share.edit();
-        editor.putString("id",id);
-        editor.commit();
+        editor.putString("id", "31");
+        editor.apply();
     }
 }
 

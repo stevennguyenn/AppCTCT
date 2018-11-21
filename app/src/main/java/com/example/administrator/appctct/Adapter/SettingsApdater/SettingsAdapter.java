@@ -1,12 +1,10 @@
 package com.example.administrator.appctct.Adapter.SettingsApdater;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.administrator.appctct.R;
@@ -30,11 +28,9 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
            case 0:
                View view = layoutInflater.inflate(R.layout.line_setting, viewGroup, false);
                return new ViewHolderLineSetting(view);
-           case 1:
+           default:
                view = layoutInflater.inflate(R.layout.line_logout, viewGroup, false);
                return new ViewHolderLogOut(view);
-               default:
-                   return  null;
        }
     }
 
@@ -50,7 +46,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder.getItemViewType() == 0){
             ViewHolderLineSetting view = (ViewHolderLineSetting) viewHolder;
-            view.tvTile.setText(listSettings.get(i).toString());
+            view.tvTile.setText(listSettings.get(i));
         }
     }
 
@@ -61,7 +57,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public class ViewHolderLineSetting extends RecyclerView.ViewHolder{
         TextView tvTile;
-        public ViewHolderLineSetting(@NonNull View itemView) {
+        ViewHolderLineSetting(@NonNull View itemView) {
             super(itemView);
             tvTile = itemView.findViewById(R.id.tvLineSetting);
         }
@@ -69,7 +65,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public class ViewHolderLogOut extends RecyclerView.ViewHolder{
         TextView tvTitle;
-        public ViewHolderLogOut(@NonNull View itemView) {
+        ViewHolderLogOut(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvLogout);
         }

@@ -151,8 +151,10 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
             if (data != null)
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
-                    Bitmap bitmap = (Bitmap) bundle.get("data");
-                    imgAvatar.setImageBitmap(bitmap);
+                    if (bundle != null) {
+                        Bitmap bitmap = (Bitmap) bundle.get("data");
+                        imgAvatar.setImageBitmap(bitmap);
+                    }
                 } else {
                     Toast.makeText(Register_Activity.this, "Camera not found", Toast.LENGTH_SHORT).show();
                 }
