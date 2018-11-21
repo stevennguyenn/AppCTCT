@@ -3,8 +3,8 @@ package com.example.administrator.appctct.Model;
 import android.support.annotation.NonNull;
 
 import com.example.administrator.appctct.Interfaces.ChangePassword.ModelNotifyPresenter;
-import com.example.administrator.appctct.Service.Retrofit.APIUtils;
-import com.example.administrator.appctct.Service.Retrofit.DataClient;
+import com.example.administrator.appctct.Service.APIUtils;
+import com.example.administrator.appctct.Service.DataClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;

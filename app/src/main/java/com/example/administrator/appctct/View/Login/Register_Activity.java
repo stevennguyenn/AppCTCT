@@ -22,8 +22,8 @@ import com.example.administrator.appctct.Component.CustomView.SetupView;
 import com.example.administrator.appctct.Interfaces.Register.PresenterNotifyViewRegister;
 import com.example.administrator.appctct.Presenter.PresenterRegister;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.Service.Retrofit.APIUtils;
-import com.example.administrator.appctct.Service.Retrofit.DataClient;
+import com.example.administrator.appctct.Service.APIUtils;
+import com.example.administrator.appctct.Service.DataClient;
 
 import java.io.File;
 

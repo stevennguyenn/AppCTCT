@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Service.Retrofit;
+package com.example.administrator.appctct.Service;
 
 public class APIUtils {
     public static final String baseURL = "http://10.20.79.128/CTCT/";

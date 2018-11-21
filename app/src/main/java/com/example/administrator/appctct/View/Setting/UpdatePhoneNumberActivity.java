@@ -1,11 +1,10 @@
 package com.example.administrator.appctct.View.Setting;
-import com.example.administrator.appctct.Fragment.EditText.FragmentButton.fragment_button;
-import com.example.administrator.appctct.Fragment.EditText.FragmentButton.register;
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
+import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.register;
 import com.example.administrator.appctct.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 

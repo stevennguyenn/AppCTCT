@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Fragment.EditText.FragmentButton;
+package com.example.administrator.appctct.Fragment.FragmentButton;
 
 public interface register {
     void processRegister();

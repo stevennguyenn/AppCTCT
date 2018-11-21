@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Service.Retrofit;
+package com.example.administrator.appctct.Service;
 
 import android.support.annotation.FractionRes;
 

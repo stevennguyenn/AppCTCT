@@ -21,8 +21,8 @@ import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Interfaces.Login.PresenterNotifyViewLogin;
 import com.example.administrator.appctct.Presenter.PresenterLogin;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.Service.Retrofit.APIUtils;
-import com.example.administrator.appctct.Service.Retrofit.DataClient;
+import com.example.administrator.appctct.Service.APIUtils;
+import com.example.administrator.appctct.Service.DataClient;
 import com.example.administrator.appctct.View.Setting.ForgotPasswordActivity;
 
 import retrofit2.Call;

@@ -16,8 +16,8 @@ import com.example.administrator.appctct.Adapter.QuestionApdater.ItemClick;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.Service.Retrofit.APIUtils;
-import com.example.administrator.appctct.Service.Retrofit.DataClient;
+import com.example.administrator.appctct.Service.APIUtils;
+import com.example.administrator.appctct.Service.DataClient;
 
 import java.util.ArrayList;
 

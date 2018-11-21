@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Service.Retrofit;
+package com.example.administrator.appctct.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
