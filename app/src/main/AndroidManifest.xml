@@ -9,7 +9,7 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/ctct"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".View.Test.MainActivity" />
         <activity android:name=".View.Login.Login_Activity"></activity>
         <activity android:name=".View.Login.Register_Activity" />

@@ -54,13 +54,11 @@ public class NaviApdater extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .into(viewHoldHeader.imgHeader);
             viewHoldHeader.tvName.setText(header.getName());
             viewHoldHeader.tvPoint.setText(header.getPoints());
-            return;
         }
 
         if (type == 1) {
             ViewHolderCell viewHolderCell = (ViewHolderCell) viewHolder;
             viewHolderCell.tvTile.setText(lisCell.get(i - 1).getTitle());
-            return;
         }
     }
 
