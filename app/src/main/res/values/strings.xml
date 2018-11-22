@@ -36,6 +36,9 @@
     <string name="numberPhone">Phone Number</string>
     <string name="logout">Log out</string>
     <string name="label">Label</string>
+    <string name="user">User</string>
+    <string name="points">Points</string>
+    <string name="camera">Camera</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>
