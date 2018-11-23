@@ -35,8 +35,16 @@ public class ProcessDialog implements DialogInterface.OnClickListener, View.OnCl
                             .setTitle(Strings.Dialog.title)
                             .setMessage(message)
                             .setPositiveButton(Strings.Dialog.btYes,this)
-                            .setNegativeButton(Strings.Dialog.btNo,this)
+                            .setNegativeButton(Strings.Dialog.btCancel,this)
                             .show();
+    }
+
+    public void showNotification(Activity activity, String message){
+        AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setTitle(Strings.Dialog.title)
+                .setMessage(message)
+                .setNegativeButton(Strings.Dialog.btNo,this)
+                .show();
     }
 
     @Override

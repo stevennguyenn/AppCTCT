@@ -9,18 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
+import com.example.administrator.appctct.Component.Custom.CountTimer;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
@@ -156,6 +155,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onResponse(@NonNull Call<Student> call,@NonNull Response<Student> response) {
                 viewProgress.setVisibility(View.GONE);
+                CountTimer.cancelTimer();
                 if (response.body() != null){
                     Intent in = new Intent(Login_Activity.this, ControllerActivity.class);
                     startActivity(in);
@@ -181,6 +181,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     public void clickView(View v) {
         switch (v.getId()){
             case R.id.btLogin:
+                CountTimer.count(this, (long) 10000,"Network Error");
                 viewProgress.setVisibility(View.VISIBLE);
                 String userName = edUserName.getText().toString();
                 String password = edPassword.getText().toString();

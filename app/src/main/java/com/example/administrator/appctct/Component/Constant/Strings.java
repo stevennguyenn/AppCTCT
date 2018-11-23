@@ -12,6 +12,7 @@ public class Strings {
         static public final String title = "Notification";
         static public final String btYes = "Yes";
         static public final String btNo = "No";
+        static public final String btCancel = "Cancel";
     }
 
     public static class Settings {
