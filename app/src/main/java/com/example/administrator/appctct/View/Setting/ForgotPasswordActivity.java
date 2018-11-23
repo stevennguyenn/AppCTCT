@@ -2,13 +2,14 @@ package com.example.administrator.appctct.View.Setting;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
-import com.example.administrator.appctct.Fragment.FragmentButton.register;
+import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.R;
 
-public class ForgotPasswordActivity extends AppCompatActivity implements register {
+public class ForgotPasswordActivity extends AppCompatActivity implements ClickButton {
 
     fragment_edittext_changepassword fragmentPhoneEmail;
     fragment_button fragmentConfirm;
@@ -36,7 +37,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements registe
     }
 
     @Override
-    public void processRegister() {
+    public void clickView(View v) {
 
     }
 }

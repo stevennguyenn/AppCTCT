@@ -116,7 +116,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:text="@string/registerNow"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_button_enable"
         app:layout_constraintLeft_toLeftOf="@+id/edConfirmPassword"
         app:layout_constraintRight_toRightOf="@id/edConfirmPassword"
         android:layout_marginTop="10dp"

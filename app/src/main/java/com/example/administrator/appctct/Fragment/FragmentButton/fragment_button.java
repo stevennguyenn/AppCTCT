@@ -13,17 +13,22 @@ import com.example.administrator.appctct.R;
 
 public class fragment_button extends Fragment implements View.OnClickListener{
     private Button btButton;
-    private register listened;
+    private ClickButton listened;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_button_ctct,container,false);
         btButton = view.findViewById(R.id.btButton);
-        btButton.setOnClickListener(this);
         return view;
     }
 
-    public void setRegister(register listened){
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        btButton.setOnClickListener(this);
+    }
+
+    public void setRegister(ClickButton listened){
         this.listened = listened;
     }
 
@@ -31,15 +36,27 @@ public class fragment_button extends Fragment implements View.OnClickListener{
         btButton.setText(title);
     }
 
+    public void setButtonFacebook(){
+        btButton.setBackground(getResources().getDrawable(R.drawable.custom_button_facebook));
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btButton:
-                listened.processRegister();
+                listened.clickView(getView());
                 break;
                 default:
                     break;
         }
+    }
+
+    public void setButtonDisable(){
+        btButton.setEnabled(false);
+    }
+
+    public void setButtonVisible(){
+        btButton.setEnabled(true);
     }
 }
 

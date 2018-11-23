@@ -87,6 +87,8 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
 
      private void setToolbar(){
          toolbar = findViewById(R.id.tb_Controller);
+         toolbar.setTitle(getResources().getString(R.string.ctct));
+         toolbar.setTitleTextColor(getResources().getColor(R.color.color_red));
          setSupportActionBar(toolbar);
          ActionBar actionBar = getSupportActionBar();
          actionBar.setDisplayHomeAsUpEnabled(true);

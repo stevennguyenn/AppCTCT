@@ -71,7 +71,6 @@ public class ProfileActitivy extends AppCompatActivity implements View.OnClickLi
                     }
                 }
             }
-
             @Override
             public void onFailure(@NonNull Call<Profile> call,@NonNull Throwable t) {
 

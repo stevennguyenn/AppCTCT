@@ -2,16 +2,17 @@ package com.example.administrator.appctct.View.Setting;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
-import com.example.administrator.appctct.Fragment.FragmentButton.register;
+import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Interfaces.ChangePassword.PresenterNotifyView;
 import com.example.administrator.appctct.Presenter.PresentChangPassword;
 import com.example.administrator.appctct.R;
 
-public class ChangePasswordActivity extends AppCompatActivity implements register, PresenterNotifyView {
+public class ChangePasswordActivity extends AppCompatActivity implements ClickButton, PresenterNotifyView {
     fragment_edittext_changepassword fragmentCurrentPassword,fragmentNewPassword,fragmentConfirmPassword;
     fragment_button fragment_button_changpassword;
     private PresentChangPassword presenter;
@@ -47,14 +48,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements registe
     }
 
     @Override
-    public void processRegister() {
-        String currentPass = fragmentCurrentPassword.getText();
-        String newPass = fragmentNewPassword.getText();
-        String confirmPass = fragmentConfirmPassword.getText();
-        presenter.noticeModelChangePassword(currentPass,newPass,confirmPass);
-    }
-
-    @Override
     public void currentPassEmpty() {
         fragmentCurrentPassword.setError();
     }
@@ -77,5 +70,13 @@ public class ChangePasswordActivity extends AppCompatActivity implements registe
     @Override
     public void successed() {
         Toast.makeText(ChangePasswordActivity.this,"Change password successed",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void clickView(View v) {
+        String currentPass = fragmentCurrentPassword.getText();
+        String newPass = fragmentNewPassword.getText();
+        String confirmPass = fragmentConfirmPassword.getText();
+        presenter.noticeModelChangePassword(currentPass,newPass,confirmPass);
     }
 }

@@ -11,4 +11,6 @@
     <color name="black_overlay">#66000000</color>
     <color name="color_red">#ef0909</color>
     <color name="color_yellow">#f4b20b</color>
+    <color name="color_disable">#807d7d</color>
+    <color name="color_orange_process">#f5c158</color>
 </resources>

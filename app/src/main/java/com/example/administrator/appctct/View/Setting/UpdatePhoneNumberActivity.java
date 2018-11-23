@@ -1,14 +1,14 @@
 package com.example.administrator.appctct.View.Setting;
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
-import com.example.administrator.appctct.Fragment.FragmentButton.register;
+import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class UpdatePhoneNumberActivity extends AppCompatActivity implements View.OnClickListener,register {
+public class UpdatePhoneNumberActivity extends AppCompatActivity implements View.OnClickListener,ClickButton {
 
     fragment_edittext_changepassword fragCurrentPhoneNumber,fragNewPhoneNumber,codePhoneNumber;
     fragment_button fragConfirm;
@@ -43,15 +43,15 @@ public class UpdatePhoneNumberActivity extends AppCompatActivity implements View
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tvConfirmCode:
-
                 break;
                 default:
                     break;
         }
     }
 
+
     @Override
-    public void processRegister() {
+    public void clickView(View v) {
 
     }
 }
