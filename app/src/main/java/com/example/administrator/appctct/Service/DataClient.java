@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.Service;
 
 
+import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Entity.ModelQuestion;
@@ -59,4 +60,8 @@ public interface DataClient {
     @POST("findcode_ctct.php")
     Call<String> findCode(@Field("id") String id,
                           @Field("code") String code);
+
+    @FormUrlEncoded
+    @POST("getcontentheadernavi.php")
+    Call<ContentHeader> getContentHeader(@Field("id") String id);
 }
