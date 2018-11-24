@@ -30,8 +30,10 @@ public class Strings {
     public static class lineNavi {
         static public ArrayList<CellNavi> getLineNavi() {
             ArrayList<CellNavi> list = new ArrayList<>();
-            list.add(new CellNavi(R.drawable.ic_camera, "Camera"));
-            list.add(new CellNavi(R.drawable.ic_user, "User"));
+            list.add(new CellNavi(R.drawable.profile, "Profile"));
+            list.add(new CellNavi(R.drawable.test, "Test"));
+            list.add(new CellNavi(R.drawable.forum,"Forum"));
+            list.add(new CellNavi(R.drawable.settingnavi, "Settings"));
             return list;
         }
     }

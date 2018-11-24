@@ -40,10 +40,10 @@ public class ChangePasswordActivity extends AppCompatActivity implements ClickBu
         String newPass = getResources().getString(R.string.newpassword);
         String confirmPass = getResources().getString(R.string.confirmPassword);
         String confirm = getResources().getString(R.string.confirm);
-        fragmentCurrentPassword.setDataFagment(currentPass,currentPass);
+        fragmentCurrentPassword.setDataFagment(currentPass);
         fragmentCurrentPassword.showPass(true);
-        fragmentNewPassword.setDataFagment(newPass,newPass);
-        fragmentConfirmPassword.setDataFagment(confirmPass, confirmPass);
+        fragmentNewPassword.setDataFagment(newPass);
+        fragmentConfirmPassword.setDataFagment(confirmPass);
         fragment_button_changpassword.setTitleButton(confirm);
     }
 

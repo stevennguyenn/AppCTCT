@@ -23,10 +23,10 @@ public class UpdatePhoneNumberActivity extends AppCompatActivity implements View
     }
 
     private void setupView(){
-        fragNewPhoneNumber.setDataFagment("New Phone Number","New Phone Number");
-        fragCurrentPhoneNumber.setDataFagment("Current Phone Number","Current Phone Number");
-        codePhoneNumber.setDataFagment("Code Verigication","Code Verification");
-        fragConfirm.setTitleButton("Confirm");
+            fragNewPhoneNumber.setDataFagment(getResources().getString(R.string.newphonenumber));
+        fragCurrentPhoneNumber.setDataFagment(getResources().getString(R.string.currentphonenumber));
+        codePhoneNumber.setDataFagment(getResources().getString(R.string.codeverification));
+        fragConfirm.setTitleButton(getResources().getString(R.string.confirm));
         fragConfirm.setRegister(this);
     }
 

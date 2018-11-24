@@ -56,9 +56,6 @@ public class ProfileActitivy extends AppCompatActivity implements View.OnClickLi
 
     private void getData(){
         //get token:
-        if (getSharePre().equals("")){
-            return;
-        }
         String id = getSharePre();
         DataClient client = APIUtils.getData();
         Call<Profile> call = client.getProfile(id);

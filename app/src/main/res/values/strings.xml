@@ -40,6 +40,11 @@
     <string name="points">Points</string>
     <string name="camera">Camera</string>
     <string name="showPassword">Show Password</string>
+    <string name= "codeverification">Code Verification</string>
+    <string name="currentphonenumber">Current Phone Number</string>
+    <string name="newphonenumber">New Phone Number</string>
+    <string name="welcometoctct">Welcome to CTCT</string>
+    <string name="seeall">See all</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>

@@ -3,6 +3,8 @@ package com.example.administrator.appctct.View.Login;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -96,6 +98,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_choice_email_phone);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         Button btConfirm = dialog.findViewById(R.id.btConfirm);
         final CheckBox cbEmail = dialog.findViewById(R.id.cbEmail);
@@ -132,6 +135,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                     intent.putExtra("isPhone", false);
                 }
                 startActivity(intent);
+                overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
             }
         });
         dialog.show();

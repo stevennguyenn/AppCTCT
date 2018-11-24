@@ -1,5 +1,6 @@
 package com.example.administrator.appctct.View.Main;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,8 +19,10 @@ import com.example.administrator.appctct.Adapter.NaviAdapter.ClickNaviItem;
 import com.example.administrator.appctct.Adapter.NaviAdapter.NaviApdater;
 import com.example.administrator.appctct.Adapter.SettingsApdater.ItemOffetsetDecoration;
 import com.example.administrator.appctct.Component.Constant.Strings;
+import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
+import com.example.administrator.appctct.Fragment.FragmentListBook.FragmentListBook;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
@@ -38,19 +41,65 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     private Toolbar toolbar;
     private ArrayList<CellNavi> listNavi;
     private ContentHeader header = new ContentHeader();
+    private FragmentListBook listBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controller);
+        setID();
         setupView();
         setToolbar();
         getData();
     }
 
+    private void setID(){
+        listBook = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBook);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        rcNavi = findViewById(R.id.rc_navi);
+        NavigationView navi = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.tb_Controller);
+        ArrayList<Book> books = new ArrayList<>();
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
+        listBook.setListBook(books);
+    }
+
+    private void setupView(){
+        listBook.setupView("Element");
+        LinearLayoutManager layoutManager = new LinearLayoutManager(ControllerActivity.this,LinearLayoutManager.VERTICAL,false);
+        rcNavi.setLayoutManager(layoutManager);
+        listNavi = new ArrayList<>();
+        listNavi = Strings.lineNavi.getLineNavi();
+        adapter = new NaviApdater(this.getLayoutInflater(), listNavi,header);
+        adapter.setListened(this);
+        rcNavi.setAdapter(adapter);
+        ItemOffetsetDecoration itemOffetsetDecoration = new ItemOffetsetDecoration(5);
+        rcNavi.addItemDecoration(itemOffetsetDecoration);
+    }
+
+    private void setToolbar(){
+        toolbar.setTitle(getResources().getString(R.string.ctct));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.color_red));
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.tbnavi);
+    }
+
     private void getData(){
         DataClient client = APIUtils.getData();
-        Call<ContentHeader> call = client.getContentHeader("31");
+        Call<ContentHeader> call = client.getContentHeader(getSharePre());
         call.enqueue(new Callback<ContentHeader>() {
             @Override
             public void onResponse(@NonNull  Call<ContentHeader> call,@NonNull Response<ContentHeader> response) {
@@ -69,31 +118,6 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
             }
         });
     }
-
-     private void setupView(){
-         drawerLayout = findViewById(R.id.drawer_layout);
-         //NavigationView navi = findViewById(R.id.nav_view);
-         rcNavi = findViewById(R.id.rc_navi);
-         LinearLayoutManager layoutManager = new LinearLayoutManager(ControllerActivity.this,LinearLayoutManager.VERTICAL,false);
-         rcNavi.setLayoutManager(layoutManager);
-         listNavi = new ArrayList<>();
-         listNavi = Strings.lineNavi.getLineNavi();
-         adapter = new NaviApdater(this.getLayoutInflater(), listNavi,header);
-         adapter.setListened(this);
-         rcNavi.setAdapter(adapter);
-         ItemOffetsetDecoration itemOffetsetDecoration = new ItemOffetsetDecoration(5);
-         rcNavi.addItemDecoration(itemOffetsetDecoration);
-     }
-
-     private void setToolbar(){
-         toolbar = findViewById(R.id.tb_Controller);
-         toolbar.setTitle(getResources().getString(R.string.ctct));
-         toolbar.setTitleTextColor(getResources().getColor(R.color.color_red));
-         setSupportActionBar(toolbar);
-         ActionBar actionBar = getSupportActionBar();
-         actionBar.setDisplayHomeAsUpEnabled(true);
-         actionBar.setHomeAsUpIndicator(R.drawable.tbnavi);
-     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -119,4 +143,13 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     public void clickLogout() {
         Toast.makeText(ControllerActivity.this,"click logout",Toast.LENGTH_SHORT).show();
     }
+
+    private String getSharePre(){
+        SharedPreferences share = getSharedPreferences(Strings.data,MODE_PRIVATE);
+        if (!share.getString("id", "").equals("")){
+            return share.getString("id","");
+        }
+        return "";
+    }
+
 }
