@@ -84,6 +84,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
            case R.id.tvRegister:
                Intent intent = new Intent(Login_Activity.this,Register_Activity.class);
                startActivity(intent);
+               overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
                break;
            case R.id.tvForgotPassword:
                showForgotPassword();
@@ -158,6 +159,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 CountTimer.cancelTimer();
                 if (response.body() != null){
                     Intent in = new Intent(Login_Activity.this, ControllerActivity.class);
+                    overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
                     startActivity(in);
                     commitShare(response.body().getId());
                     return;
