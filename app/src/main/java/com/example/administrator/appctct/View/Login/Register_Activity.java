@@ -12,13 +12,20 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.administrator.appctct.Component.CustomView.SetupView;
+import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
+import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
 import com.example.administrator.appctct.Interfaces.Register.PresenterNotifyViewRegister;
 import com.example.administrator.appctct.Presenter.PresenterRegister;
 import com.example.administrator.appctct.R;
@@ -33,11 +40,12 @@ import okhttp3.RequestBody;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Register_Activity extends AppCompatActivity implements View.OnClickListener, PresenterNotifyViewRegister {
+public class Register_Activity extends AppCompatActivity implements View.OnClickListener, PresenterNotifyViewRegister,ClickButton,TextWatcher, CompoundButton.OnCheckedChangeListener {
 
     EditText edFullName,edUserName,edPassword,edConfirmPassword;
-    Button btRegister;
+    fragment_button btRegister;
     ImageView imgCamera,imgCollection,imgAvatar;
+    Switch swShowPass;
     private PresenterRegister present;
     private int REQUEST_CAMERA = 100;
     private int REQUEST_COLLECTION = 101;
@@ -47,21 +55,8 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_);
-        hideSystemUI();
         setupID();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        hideSystemUI();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        hideSystemUI();
-
+        setupView();
     }
 
     private void setupID(){
@@ -72,28 +67,26 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
         edUserName = findViewById(R.id.edUser);
         edPassword = findViewById(R.id.edPassword);
         edConfirmPassword = findViewById(R.id.edConfirmPassword);
-        btRegister = findViewById(R.id.btRegister);
-        btRegister.setOnClickListener(this);
+        btRegister = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btRegister);
+        swShowPass = findViewById(R.id.swShowPass);
+    }
+
+    private void setupView(){
+        btRegister.setRegister(this);
+        btRegister.setTitleButton(getResources().getString(R.string.register));
+        present = new PresenterRegister(this);
         imgCamera.setOnClickListener(this);
         imgCollection.setOnClickListener(this);
-        present = new PresenterRegister(this);
+        edFullName.addTextChangedListener(this);
+        edUserName.addTextChangedListener(this);
+        edPassword.addTextChangedListener(this);
+        edConfirmPassword.addTextChangedListener(this);
+        swShowPass.setOnCheckedChangeListener(this);
     }
-
-    private void hideSystemUI(){
-        new SetupView(this).hideNavigationBar();
-    }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btRegister:
-                String fullName = edFullName.getText().toString();
-                String userName = edUserName.getText().toString();
-                String password = edPassword.getText().toString();
-                String confirmPassword = edConfirmPassword.getText().toString();
-                present.notifyModelRegister(fullName,userName,password,confirmPassword,realPath);
-                break;
             case R.id.imgCamera:
                 requestPermissionCamera();
                 break;
@@ -181,26 +174,6 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
     }
 
     @Override
-    public void fullNameIsEmpty() {
-        edFullName.setError("Full Name is empty");
-    }
-
-    @Override
-    public void userNameIsEmpty() {
-        edUserName.setError("User Name is empty");
-    }
-
-    @Override
-    public void passwordIsEmpty() {
-        edPassword.setError("Password is empty");
-    }
-
-    @Override
-    public void confirmPasswordIsEmpty() {
-        edConfirmPassword.setError("Confirm password is empty");
-    }
-
-    @Override
     public void passwordIncorrect() {
         Toast.makeText(Register_Activity.this,"Please enter password and confirm password",Toast.LENGTH_SHORT).show();
     }
@@ -246,7 +219,6 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
 
                 @Override
                 public void onFailure(@NonNull retrofit2.Call<String> call,@NonNull Throwable t) {
-                    //Log.d("AAA",t.getMessage());
                 }
             });
         }
@@ -268,5 +240,47 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
             cursor.close();
         }
         return path;
+    }
+
+    @Override
+    public void clickView(View v) {
+        switch (v.getId()){
+            case R.id.btRegister:
+                String fullName = edFullName.getText().toString();
+                String userName = edUserName.getText().toString();
+                String password = edPassword.getText().toString();
+                String confirmPassword = edConfirmPassword.getText().toString();
+                present.notifyModelRegister(fullName,userName,password,confirmPassword,realPath);
+                break;
+        }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (!edFullName.getText().toString().equals("")&&!edUserName.getText().toString().equals("")&&!edPassword.getText().toString().equals("")&&!edConfirmPassword.getText().toString().equals("")&&!realPath.equals("")){
+            btRegister.setButtonVisible();
+            return;
+        }
+        btRegister.setButtonDisable();
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (!isChecked){
+            edPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            edConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            return;
+        }
+        edPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        edConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
     }
 }

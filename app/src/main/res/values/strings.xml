@@ -39,6 +39,7 @@
     <string name="user">User</string>
     <string name="points">Points</string>
     <string name="camera">Camera</string>
+    <string name="showPassword">Show Password</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>

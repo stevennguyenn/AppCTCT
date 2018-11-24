@@ -18,26 +18,6 @@ public class PresenterRegister implements ModelRegisterNotifyPresenter{
     }
 
     @Override
-    public void fullNameIsEmpty() {
-        callback.fullNameIsEmpty();
-    }
-
-    @Override
-    public void userNameIsEmpty() {
-        callback.userNameIsEmpty();
-    }
-
-    @Override
-    public void passwordIsEmpty() {
-        callback.passwordIsEmpty();
-    }
-
-    @Override
-    public void confirmPasswordIsEmpty() {
-        callback.confirmPasswordIsEmpty();
-    }
-
-    @Override
     public void passwordIncorrect() {
         callback.passwordIncorrect();
     }

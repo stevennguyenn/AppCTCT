@@ -12,21 +12,6 @@ public class ModelRegister {
 
     public void processRegister(String fullName,String userName,String password, String confirmPassord,String baseURL){
 
-        if (fullName.equals("")){
-            callback.fullNameIsEmpty();
-            return;
-        }
-        if (userName.equals("")){
-            callback.userNameIsEmpty();
-            return;
-        }
-        if (password.equals("")){
-            callback.passwordIsEmpty();
-        }
-        if(confirmPassord.equals("")){
-            callback.confirmPasswordIsEmpty();
-            return;
-        }
         if (!password.equals(confirmPassord)){
             callback.passwordIncorrect();
             return;
