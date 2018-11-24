@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.View.Login;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -23,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.administrator.appctct.Component.CustomView.SetupView;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
 import com.example.administrator.appctct.Interfaces.Register.PresenterNotifyViewRegister;
@@ -32,6 +33,7 @@ import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import okhttp3.MediaType;
@@ -147,6 +149,8 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                     if (bundle != null) {
                         Bitmap bitmap = (Bitmap) bundle.get("data");
                         imgAvatar.setImageBitmap(bitmap);
+                        Uri uri = getImageUri(this,bitmap);
+                        realPath = getRealPathFromUri(uri);
                     }
                 } else {
                     Toast.makeText(Register_Activity.this, "Camera not found", Toast.LENGTH_SHORT).show();
@@ -196,18 +200,20 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                     String message = response.body();
                         if (message != null){
                             DataClient insertData = APIUtils.getData();
+                            Log.d("AAA",APIUtils.baseURL + "image/" + response.body());
                             retrofit2.Call<String> cb = insertData.insertData(fullName,userName,password,APIUtils.baseURL + "image/" + response.body());
                             cb.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(@NonNull retrofit2.Call<String> call,@NonNull Response<String> response) {
                                     String result = response.body();
-                                    if (result != null && result.equals("Success")){
+                                    if (result != null && result.equals("Successed")){
                                         Toast.makeText(Register_Activity.this,"Create account success",Toast.LENGTH_SHORT).show();
                                         Intent in = new Intent(Register_Activity.this,Login_Activity.class);
+                                        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
                                         startActivity(in);
                                         return;
                                     }
-                                    Toast.makeText(Register_Activity.this,"Create account fail. Error: " + result, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register_Activity.this,"Error: " + result, Toast.LENGTH_SHORT).show();
                                 }
                                 @Override
                                 public void onFailure(@NonNull  retrofit2.Call<String> call,@NonNull Throwable t) {
@@ -222,6 +228,13 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                 }
             });
         }
+    }
+
+    public Uri getImageUri(Context context, Bitmap photo){
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        photo.compress(Bitmap.CompressFormat.JPEG,100,bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(),photo,"title",null);
+        return Uri.parse(path);
     }
 
     @Override
