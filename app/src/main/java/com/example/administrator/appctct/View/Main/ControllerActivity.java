@@ -40,7 +40,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     private Toolbar toolbar;
     private ArrayList<CellNavi> listNavi;
     private ContentHeader header = new ContentHeader();
-    private FragmentListBook listBook;
+    private FragmentListBook listBookOne,listBookTwo,listBookThree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,37 +53,79 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     }
 
     private void setID(){
-        listBook = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBook);
+        listBookOne = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookOne);
+        listBookTwo = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookTwo);
+        listBookThree = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookThree);
         drawerLayout = findViewById(R.id.drawer_layout);
         rcNavi = findViewById(R.id.rc_navi);
         NavigationView navi = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.tb_Controller);
-        getDataListBook();
-
+        getDataListBookOne();
+        getDataListBookTwo();
+        getDataListBookThree();
     }
 
-    private void getDataListBook(){
+    private void getDataListBookOne(){
         //list 1
         ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        books.add(new Book("https://visual-integrity.com/wp-content/uploads/2016/02/pdf-page.png","Book 1","4,5"));
-        listBook.setListBook(books);
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        listBookOne.setListBook(books);
         //list 2
 
     }
 
+    private void getDataListBookTwo(){
+        //list 1
+        ArrayList<Book> books = new ArrayList<>();
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        listBookTwo.setListBook(books);
+        //list 2
+    }
+    private void getDataListBookThree(){
+        //list 1
+        ArrayList<Book> books = new ArrayList<>();
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        books.add(new Book("Book 1","4,5"));
+        listBookThree.setListBook(books);
+        //list 2
+    }
+
+
+
     private void setupView(){
-        listBook.setupView("Element");
+        listBookOne.setupView("Element");
         LinearLayoutManager layoutManager = new LinearLayoutManager(ControllerActivity.this,LinearLayoutManager.VERTICAL,false);
         rcNavi.setLayoutManager(layoutManager);
         listNavi = new ArrayList<>();
@@ -111,7 +153,6 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
             @Override
             public void onResponse(@NonNull  Call<ContentHeader> call,@NonNull Response<ContentHeader> response) {
                 if (response.body() != null){
-                    Log.d("AAA",response.body().getAvatar());
                     header.setAvatar(response.body().getAvatar());
                     header.setFullname(response.body().getFullname());
                     header.setPoints(response.body().getPoints());

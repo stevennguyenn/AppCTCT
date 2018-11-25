@@ -39,13 +39,8 @@ public class ListBookAdapter extends RecyclerView.Adapter<ListBookAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ListBookAdapter.ViewHolderBook viewHolder, int i) {
-        Glide.with(inflater.getContext())
-                .load(Uri.parse(listBook.get(i).getImgBook()))
-                .into(viewHolder.imgBook);
         viewHolder.tvNameBook.setText(listBook.get(i).getNameBook());
         viewHolder.tvRatio.setText("Rate: "+listBook.get(i).getRatioBook());
-        Log.d("AAA",listBook.get(i).getImgBook());
-
     }
 
     @Override
@@ -54,11 +49,9 @@ public class ListBookAdapter extends RecyclerView.Adapter<ListBookAdapter.ViewHo
     }
 
     public class ViewHolderBook extends RecyclerView.ViewHolder{
-        ImageView imgBook;
         TextView tvNameBook, tvRatio;
         ViewHolderBook(@NonNull View itemView) {
             super(itemView);
-            imgBook = itemView.findViewById(R.id.imgBook);
             tvNameBook = itemView.findViewById(R.id.tvNameBook);
             tvRatio = itemView.findViewById(R.id.tvRatio);
         }

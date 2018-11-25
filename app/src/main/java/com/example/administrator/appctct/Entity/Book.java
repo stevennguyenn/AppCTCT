@@ -1,22 +1,12 @@
 package com.example.administrator.appctct.Entity;
 
 public class Book {
-    private String imgBook;
     private String nameBook;
     private String ratioBook;
 
-    public Book(String imgBook, String nameBook, String ratioBook) {
-        this.imgBook = imgBook;
+    public Book( String nameBook, String ratioBook) {
         this.nameBook = nameBook;
         this.ratioBook = ratioBook;
-    }
-
-    public String getImgBook() {
-        return imgBook;
-    }
-
-    public void setImgBook(String imgBook) {
-        this.imgBook = imgBook;
     }
 
     public String getNameBook() {
