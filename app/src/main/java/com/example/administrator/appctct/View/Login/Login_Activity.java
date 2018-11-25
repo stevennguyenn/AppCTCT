@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,8 +26,8 @@ import com.example.administrator.appctct.Component.Custom.CountTimer;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
-import com.example.administrator.appctct.Interfaces.Login.PresenterNotifyViewLogin;
-import com.example.administrator.appctct.Presenter.PresenterLogin;
+import com.example.administrator.appctct.Presenter.PresenterLogin.PresenterLoginListened;
+import com.example.administrator.appctct.Presenter.PresenterLogin.PresenterLogin;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
@@ -39,7 +40,7 @@ import retrofit2.Response;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
-public class Login_Activity extends AppCompatActivity implements View.OnClickListener, PresenterNotifyViewLogin,ClickButton,TextWatcher {
+public class Login_Activity extends AppCompatActivity implements View.OnClickListener, PresenterLoginListened,ClickButton,TextWatcher {
 
     EditText edUserName,edPassword;
     fragment_button btLogin,btLoginFacebook;
@@ -158,30 +159,28 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void loginSuccess(String account, String password) {
-        DataClient dataClient = APIUtils.getData();
-        Call<Student> call = dataClient.login(account,password);
-        call.enqueue(new Callback<Student>() {
-            @Override
-            public void onResponse(@NonNull Call<Student> call,@NonNull Response<Student> response) {
-                viewProgress.setVisibility(View.GONE);
-                CountTimer.cancelTimer();
-                if (response.body() != null){
-                    Intent in = new Intent(Login_Activity.this, ControllerActivity.class);
-                    overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
-                    startActivity(in);
-                    setToken(response.body().getId());
-                    return;
-                }
-                Toast.makeText(Login_Activity.this,"Login Failed", LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Student> call,@NonNull Throwable t) {
-                Toast.makeText(Login_Activity.this,t.getMessage(), LENGTH_SHORT).show();
-            }
-        });
+        viewProgress.setVisibility(View.GONE);
+        presenter.login(account,password);
     }
 
+    @Override
+    public void loginSuccessed(String token) {
+        Intent in = new Intent(Login_Activity.this, ControllerActivity.class);
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+        startActivity(in);
+        setToken(token);
+    }
+
+    @Override
+    public void loginFailed() {
+        Toast.makeText(Login_Activity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void connectFailed() {
+        Toast.makeText(Login_Activity.this,"Connect Failed",Toast.LENGTH_SHORT).show();
+    }
+    //delegate from fragment
     @Override
     public void clickView(View v) {
         switch (v.getId()){
@@ -225,4 +224,3 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         return getSharedPreferences("data",MODE_PRIVATE).getString("token","");
     }
 }
-

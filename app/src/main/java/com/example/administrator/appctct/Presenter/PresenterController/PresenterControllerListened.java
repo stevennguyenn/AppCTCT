@@ -1,11 +1,11 @@
-package com.example.administrator.appctct.Presenter.PresentController;
+package com.example.administrator.appctct.Presenter.PresenterController;
 
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
 
 import java.util.ArrayList;
 
-public interface PresentControllerListened {
+public interface PresenterControllerListened {
     void getDataGiaiTich1Successed(ArrayList<Book> result);
     void noDataInGiaiTich1();
     void connectFailed();

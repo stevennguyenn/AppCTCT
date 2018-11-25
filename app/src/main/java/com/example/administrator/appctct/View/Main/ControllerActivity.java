@@ -1,7 +1,6 @@
 package com.example.administrator.appctct.View.Main;
 
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -23,14 +22,14 @@ import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Fragment.FragmentListBook.FragmentListBook;
-import com.example.administrator.appctct.Presenter.PresentController.PresentController;
-import com.example.administrator.appctct.Presenter.PresentController.PresentControllerListened;
+import com.example.administrator.appctct.Presenter.PresenterController.PresenterController;
+import com.example.administrator.appctct.Presenter.PresenterController.PresenterControllerListened;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.View.SearchView.SearchActivity;
 
 import java.util.ArrayList;
 
-public class ControllerActivity extends AppCompatActivity implements ClickNaviItem, PresentControllerListened{
+public class ControllerActivity extends AppCompatActivity implements ClickNaviItem, PresenterControllerListened {
 
     private DrawerLayout drawerLayout;
     private RecyclerView rcNavi;
@@ -39,7 +38,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     private ArrayList<CellNavi> listNavi;
     private ContentHeader header = new ContentHeader();
     private FragmentListBook listBookOne,listBookTwo,listBookThree,listBookFor;
-    private PresentController present;
+    private PresenterController present;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         rcNavi.setAdapter(adapter);
         ItemOffetsetDecoration itemOffetsetDecoration = new ItemOffetsetDecoration(5);
         rcNavi.addItemDecoration(itemOffetsetDecoration);
-        present = new PresentController(this);
+        present = new PresenterController(this);
         listBookOne.setupView(getResources().getString(R.string.math1));
         listBookTwo.setupView(getResources().getString(R.string.math2));
         listBookThree.setupView(getResources().getString(R.string.physical1));

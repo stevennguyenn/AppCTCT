@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Presenter.PresentSearch;
+package com.example.administrator.appctct.Presenter.PresenterSearch;
 
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Model.ModelSearch.ModelSearch;
@@ -6,7 +6,7 @@ import com.example.administrator.appctct.Model.ModelSearch.ModelSearchListened;
 
 import java.util.ArrayList;
 
-public class PresentSearch implements ModelSearchListened {
+public class PresenterSearch implements ModelSearchListened {
 
     private PresenterSearchListened listened;
 

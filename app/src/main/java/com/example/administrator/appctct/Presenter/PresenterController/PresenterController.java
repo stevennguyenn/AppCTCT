@@ -1,19 +1,18 @@
-package com.example.administrator.appctct.Presenter.PresentController;
+package com.example.administrator.appctct.Presenter.PresenterController;
 
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Model.ModelController.ModelController;
 import com.example.administrator.appctct.Model.ModelController.ModelControllerListened;
-import com.example.administrator.appctct.Presenter.PresentSearch.PresenterSearchListened;
 
 import java.util.ArrayList;
 
-public class PresentController implements ModelControllerListened {
+public class PresenterController implements ModelControllerListened {
 
     private ModelController model = new ModelController(this);
-    private PresentControllerListened listened;
+    private PresenterControllerListened listened;
 
-    public PresentController(PresentControllerListened listened){
+    public PresenterController(PresenterControllerListened listened){
         this.listened = listened;
     }
 

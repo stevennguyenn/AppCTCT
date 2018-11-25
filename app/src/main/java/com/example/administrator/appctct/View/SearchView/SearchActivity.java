@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.administrator.appctct.Entity.Book;
-import com.example.administrator.appctct.Presenter.PresentSearch.PresentSearch;
-import com.example.administrator.appctct.Presenter.PresentSearch.PresenterSearchListened;
+import com.example.administrator.appctct.Presenter.PresenterSearch.PresenterSearch;
+import com.example.administrator.appctct.Presenter.PresenterSearch.PresenterSearchListened;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     EditText edSearch;
     TextView tvCancel;
-    private PresentSearch presentSearch;
+    private PresenterSearch presentSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private void setupView(){
         tvCancel.setOnClickListener(this);
         edSearch.addTextChangedListener(this);
-        presentSearch = new PresentSearch();
+        presentSearch = new PresenterSearch();
         presentSearch.setListened(this);
     }
 
