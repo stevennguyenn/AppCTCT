@@ -3,6 +3,7 @@ package com.example.administrator.appctct.Service;
 
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
+import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Entity.ModelQuestion;
@@ -85,4 +86,7 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("book/searchgiaitich1.php")
     Call<ArrayList<Book>> searchGiaiTich1(@Field("key") String key);
+
+    @GET("book/getallgiaitich1.php")
+    Call<ArrayList<FullBook>> getAllGiaiTich1();
 }

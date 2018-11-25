@@ -23,6 +23,11 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
     private LinearLayoutManager layoutManager;
     private ListBookAdapter adapter;
     private ArrayList<Book> listBook;
+    private ProcessPragmentListBook listened;
+
+    public void setListened(ProcessPragmentListBook listened){
+        this.listened = listened;
+    }
 
     @Nullable
     @Override
@@ -55,6 +60,10 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.tvSeeAll:
+                listened.clickSeeAll();
+                break;
+        }
     }
 }

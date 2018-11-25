@@ -1,10 +1,8 @@
 package com.example.administrator.appctct.View.Setting;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -17,7 +15,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -31,18 +28,13 @@ import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button
 import com.example.administrator.appctct.Presenter.PresenterRegister.PresenterRegisterListened;
 import com.example.administrator.appctct.Presenter.PresenterRegister.PresenterRegister;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.Service.APIUtils;
-import com.example.administrator.appctct.Service.DataClient;
 import com.example.administrator.appctct.View.Login.Login_Activity;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Register_Activity extends AppCompatActivity implements View.OnClickListener, PresenterRegisterListened,ClickButton,TextWatcher, CompoundButton.OnCheckedChangeListener {
 
@@ -214,9 +206,9 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void insertAccountSuccessed() {
-        Intent in = new Intent(Register_Activity.this,Login_Activity.class);
+        startActivity(new Intent(Register_Activity.this,Login_Activity.class));
         overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
-        startActivity(in);
+
     }
 
     @Override

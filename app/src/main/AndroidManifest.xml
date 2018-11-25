@@ -17,15 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Setting.Register_Activity"></activity>
+        <activity android:name=".View.Setting.Register_Activity" />
         <activity android:name=".View.Test.PDFReaderActivity" />
         <activity android:name=".View.Setting.ChangePasswordActivity" />
         <activity android:name=".View.Setting.UpdatePhoneNumberActivity" />
         <activity android:name=".View.Setting.ForgotPasswordActivity" />
         <activity android:name=".View.Setting.SettingActivity" />
         <activity android:name=".View.Main.ControllerActivity" />
-        <activity android:name=".View.Profile.ProfileActitivy"></activity>
-        <activity android:name=".View.SearchView.SearchActivity"></activity>
+        <activity android:name=".View.Profile.ProfileActitivy" />
+        <activity android:name=".View.SearchView.SearchActivity" />
+        <activity android:name=".View.Main.SeeAllGiaiTich1"></activity>
     </application>
 
 </manifest>

@@ -22,6 +22,7 @@ import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Fragment.FragmentListBook.FragmentListBook;
+import com.example.administrator.appctct.Fragment.FragmentListBook.ProcessPragmentListBook;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterController;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterControllerListened;
 import com.example.administrator.appctct.R;
@@ -29,7 +30,7 @@ import com.example.administrator.appctct.View.SearchView.SearchActivity;
 
 import java.util.ArrayList;
 
-public class ControllerActivity extends AppCompatActivity implements ClickNaviItem, PresenterControllerListened {
+public class ControllerActivity extends AppCompatActivity implements ClickNaviItem, PresenterControllerListened, ProcessPragmentListBook {
 
     private DrawerLayout drawerLayout;
     private RecyclerView rcNavi;
@@ -73,6 +74,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         rcNavi.addItemDecoration(itemOffetsetDecoration);
         present = new PresenterController(this);
         listBookOne.setupView(getResources().getString(R.string.math1));
+        listBookOne.setListened(this);
         listBookTwo.setupView(getResources().getString(R.string.math2));
         listBookThree.setupView(getResources().getString(R.string.physical1));
         listBookFor.setupView(getResources().getString(R.string.physical2));
@@ -130,8 +132,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.icSeach:
-                Intent in = new Intent(ControllerActivity.this, SearchActivity.class);
-                startActivity(in);
+                startActivity(new Intent(ControllerActivity.this, SearchActivity.class));
                 overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
                 return true;
 
@@ -192,5 +193,10 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     @Override
     public void noHeader() {
         Toast.makeText(ControllerActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void clickSeeAll() {
+        startActivity(new Intent(ControllerActivity.this,SeeAllGiaiTich1.class));
     }
 }

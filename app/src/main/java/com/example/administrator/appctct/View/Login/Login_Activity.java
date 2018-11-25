@@ -79,8 +79,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
        switch (v.getId()){
            case R.id.tvRegister:
-               Intent intent = new Intent(Login_Activity.this,Register_Activity.class);
-               startActivity(intent);
+               startActivity(new Intent(Login_Activity.this,Register_Activity.class));
                overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
                break;
            case R.id.tvForgotPassword:
@@ -155,9 +154,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void loginSuccessed(String token) {
-        Intent in = new Intent(Login_Activity.this, ControllerActivity.class);
+        startActivity(new Intent(Login_Activity.this, ControllerActivity.class));
         overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
-        startActivity(in);
         setToken(token);
     }
 
