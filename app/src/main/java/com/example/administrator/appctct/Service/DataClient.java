@@ -81,4 +81,8 @@ public interface DataClient {
     //get 20 row in table vat ly 2 for controller activity
     @GET("book/get20rowvatly2.php")
     Call<ArrayList<Book>> getDataVatLy2();
+
+    @FormUrlEncoded
+    @POST("book/searchgiaitich1.php")
+    Call<ArrayList<Book>> searchGiaiTich1(@Field("key") String key);
 }

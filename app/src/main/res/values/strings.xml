@@ -40,7 +40,7 @@
     <string name="points">Points</string>
     <string name="camera">Camera</string>
     <string name="showPassword">Show Password</string>
-    <string name= "codeverification">Code Verification</string>
+    <string name="codeverification">Code Verification</string>
     <string name="currentphonenumber">Current Phone Number</string>
     <string name="newphonenumber">New Phone Number</string>
     <string name="welcometoctct">Welcome to CTCT</string>
@@ -49,6 +49,8 @@
     <string name="math2">Math Two</string>
     <string name="physical1">Physical One</string>
     <string name="physical2">Physcal Two</string>
+    <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>

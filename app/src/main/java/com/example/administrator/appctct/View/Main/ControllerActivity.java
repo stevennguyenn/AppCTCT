@@ -1,6 +1,6 @@
 package com.example.administrator.appctct.View.Main;
 
-import android.support.annotation.NonNull;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -21,17 +23,14 @@ import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Fragment.FragmentListBook.FragmentListBook;
+import com.example.administrator.appctct.Presenter.PresentController.PresentController;
+import com.example.administrator.appctct.Presenter.PresentController.PresentControllerListened;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.Service.APIUtils;
-import com.example.administrator.appctct.Service.DataClient;
+import com.example.administrator.appctct.View.SearchView.SearchActivity;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class ControllerActivity extends AppCompatActivity implements ClickNaviItem{
+public class ControllerActivity extends AppCompatActivity implements ClickNaviItem, PresentControllerListened{
 
     private DrawerLayout drawerLayout;
     private RecyclerView rcNavi;
@@ -40,6 +39,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     private ArrayList<CellNavi> listNavi;
     private ContentHeader header = new ContentHeader();
     private FragmentListBook listBookOne,listBookTwo,listBookThree,listBookFor;
+    private PresentController present;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +58,8 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         listBookFor = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookFor);
         drawerLayout = findViewById(R.id.drawer_layout);
         rcNavi = findViewById(R.id.rc_navi);
-        NavigationView navi = findViewById(R.id.nav_view);
+        //NavigationView navi = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.tb_Controller);
-        getDataListBookOne();
-        getDataListBookTwo();
-        getDataListBookThree();
-        getDataListBookFor();
     }
 
     private void setupView(){
@@ -76,122 +72,30 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         rcNavi.setAdapter(adapter);
         ItemOffetsetDecoration itemOffetsetDecoration = new ItemOffetsetDecoration(5);
         rcNavi.addItemDecoration(itemOffetsetDecoration);
-    }
-
-    private void getDataListBookOne(){
+        present = new PresentController(this);
         listBookOne.setupView(getResources().getString(R.string.math1));
-        DataClient client = APIUtils.getData();
-        Call<ArrayList<Book>> call = client.getDataGiaiTich1();
-        call.enqueue(new Callback<ArrayList<Book>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<Book>> call,@NonNull Response<ArrayList<Book>> response) {
-                if (response.body() != null){
-                    listBookOne.setListBook(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<Book>> call,@NonNull Throwable t) {
-
-            }
-        });
-    }
-
-    private void getDataListBookTwo(){
         listBookTwo.setupView(getResources().getString(R.string.math2));
-        DataClient client = APIUtils.getData();
-        Call<ArrayList<Book>> call = client.getDataGiaiTich2();
-        call.enqueue(new Callback<ArrayList<Book>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<Book>> call,@NonNull Response<ArrayList<Book>> response) {
-                if (response.body() != null){
-                    listBookTwo.setListBook(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<Book>> call,@NonNull Throwable t) {
-
-            }
-        });
-    }
-    private void getDataListBookThree(){
         listBookThree.setupView(getResources().getString(R.string.physical1));
-        DataClient client = APIUtils.getData();
-        Call<ArrayList<Book>> call = client.getDataVatLy1();
-        call.enqueue(new Callback<ArrayList<Book>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<Book>> call,@NonNull Response<ArrayList<Book>> response) {
-                if (response.body() != null){
-                    listBookThree.setListBook(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<Book>> call,@NonNull Throwable t) {
-
-            }
-        });
-    }
-
-    private void getDataListBookFor(){
         listBookFor.setupView(getResources().getString(R.string.physical2));
-        DataClient client = APIUtils.getData();
-        Call<ArrayList<Book>> call = client.getDataVatLy2();
-        call.enqueue(new Callback<ArrayList<Book>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<Book>> call,@NonNull Response<ArrayList<Book>> response) {
-                if (response.body() != null){
-                    listBookFor.setListBook(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<Book>> call,@NonNull Throwable t) {
-
-            }
-        });
     }
-
 
     private void setToolbar(){
         toolbar.setTitle(getResources().getString(R.string.ctct));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.color_red));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         actionBar.setHomeAsUpIndicator(R.drawable.tbnavi);
     }
 
     private void getData(){
-        DataClient client = APIUtils.getData();
-        Call<ContentHeader> call = client.getContentHeader(getToken());
-        call.enqueue(new Callback<ContentHeader>() {
-            @Override
-            public void onResponse(@NonNull  Call<ContentHeader> call,@NonNull Response<ContentHeader> response) {
-                if (response.body() != null){
-                    header.setAvatar(response.body().getAvatar());
-                    header.setFullname(response.body().getFullname());
-                    header.setPoints(response.body().getPoints());
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ContentHeader> call,@NonNull Throwable t) {
-
-            }
-        });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+        present.getDataGiaiTich1();
+        present.getDataGiaiTich2();
+        present.getDataVatLy1();
+        present.getDataVatLy2();
+        present.getHeader(getToken());
     }
 
     @Override
@@ -211,5 +115,83 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
 
     private String getToken(){
         return getSharedPreferences("data",MODE_PRIVATE).getString("token","");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.icSeach:
+                Intent in = new Intent(ControllerActivity.this, SearchActivity.class);
+                startActivity(in);
+                overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void getDataGiaiTich1Successed(ArrayList<Book> result) {
+        listBookOne.setListBook(result);
+    }
+
+    @Override
+    public void noDataInGiaiTich1() {
+        Toast.makeText(ControllerActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void connectFailed() {
+        Toast.makeText(ControllerActivity.this,"Network Failed",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getDataGiaiTich2Successed(ArrayList<Book> result) {
+        listBookTwo.setListBook(result);
+    }
+
+    @Override
+    public void noDataInGiaiTich2() {
+        Toast.makeText(ControllerActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getDataVatLy1Successed(ArrayList<Book> result) {
+        listBookThree.setListBook(result);
+    }
+
+    @Override
+    public void noDataInVatLy1() {
+        Toast.makeText(ControllerActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getDataVatLy2Successed(ArrayList<Book> result) {
+        listBookFor.setListBook(result);
+    }
+
+    @Override
+    public void noDataInVatLy2() {
+        Toast.makeText(ControllerActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getHeader(ContentHeader header) {
+        adapter.setHeader(header);
+    }
+
+    @Override
+    public void noHeader() {
+        Toast.makeText(ControllerActivity.this,"Null",Toast.LENGTH_SHORT).show();
     }
 }

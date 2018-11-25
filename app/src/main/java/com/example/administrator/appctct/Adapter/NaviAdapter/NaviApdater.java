@@ -29,6 +29,11 @@ public class NaviApdater extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.listened = listened;
     }
 
+    public void setHeader(ContentHeader header){
+        this.header = header;
+        notifyDataSetChanged();
+    }
+
     public NaviApdater(LayoutInflater layoutInflater, ArrayList<CellNavi> lisCell, ContentHeader header){
         this.layoutInflater = layoutInflater;
         this.lisCell = lisCell;
