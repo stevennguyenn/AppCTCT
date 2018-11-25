@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.Service;
 
 
+import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.Student;
@@ -64,4 +65,20 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("getcontentheadernavi.php")
     Call<ContentHeader> getContentHeader(@Field("id") String id);
+
+    //get 20 row in table giai tich 1 for controller activity
+    @GET("book/get20rowgiaitich1.php")
+    Call<ArrayList<Book>> getDataGiaiTich1();
+
+    //get 20 row in table giai tich 2 for controller activity
+    @GET("book/get20rowgiaitich2.php")
+    Call<ArrayList<Book>> getDataGiaiTich2();
+
+    //get 20 row in table vat ly 1 for controller activity
+    @GET("book/get20rowvatly1.php")
+    Call<ArrayList<Book>> getDataVatLy1();
+
+    //get 20 row in table vat ly 2 for controller activity
+    @GET("book/get20rowvatly2.php")
+    Call<ArrayList<Book>> getDataVatLy2();
 }

@@ -39,7 +39,7 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
         rcListBook = view.findViewById(R.id.rcListBook);
         layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         rcListBook.setLayoutManager(layoutManager);
-        rcListBook.setHasFixedSize(false);
+        rcListBook.setHasFixedSize(true);
         listBook = new ArrayList<>();
         adapter = new ListBookAdapter(getActivity().getLayoutInflater(),listBook);
         rcListBook.setAdapter(adapter);

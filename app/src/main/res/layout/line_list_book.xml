@@ -28,6 +28,8 @@
             android:layout_width="80dp"
             android:layout_height="100dp" />
         <TextView
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/tvNameBook"
             android:textColor="@color/black"
             android:textSize="12sp"
@@ -37,7 +39,7 @@
             app:layout_constraintTop_toBottomOf="@id/imgBook"
             android:gravity="center"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="14dp" />
         <TextView
             android:id="@+id/tvRatio"
             android:layout_marginTop="0dp"

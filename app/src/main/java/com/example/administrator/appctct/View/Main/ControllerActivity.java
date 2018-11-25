@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -40,7 +39,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     private Toolbar toolbar;
     private ArrayList<CellNavi> listNavi;
     private ContentHeader header = new ContentHeader();
-    private FragmentListBook listBookOne,listBookTwo,listBookThree;
+    private FragmentListBook listBookOne,listBookTwo,listBookThree,listBookFor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +55,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         listBookOne = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookOne);
         listBookTwo = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookTwo);
         listBookThree = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookThree);
+        listBookFor = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookFor);
         drawerLayout = findViewById(R.id.drawer_layout);
         rcNavi = findViewById(R.id.rc_navi);
         NavigationView navi = findViewById(R.id.nav_view);
@@ -63,69 +63,10 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         getDataListBookOne();
         getDataListBookTwo();
         getDataListBookThree();
+        getDataListBookFor();
     }
-
-    private void getDataListBookOne(){
-        //list 1
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        listBookOne.setListBook(books);
-        //list 2
-
-    }
-
-    private void getDataListBookTwo(){
-        //list 1
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        listBookTwo.setListBook(books);
-        //list 2
-    }
-    private void getDataListBookThree(){
-        //list 1
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        books.add(new Book("Book 1","4,5"));
-        listBookThree.setListBook(books);
-        //list 2
-    }
-
-
 
     private void setupView(){
-        listBookOne.setupView("Element");
         LinearLayoutManager layoutManager = new LinearLayoutManager(ControllerActivity.this,LinearLayoutManager.VERTICAL,false);
         rcNavi.setLayoutManager(layoutManager);
         listNavi = new ArrayList<>();
@@ -136,6 +77,82 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         ItemOffetsetDecoration itemOffetsetDecoration = new ItemOffetsetDecoration(5);
         rcNavi.addItemDecoration(itemOffetsetDecoration);
     }
+
+    private void getDataListBookOne(){
+        listBookOne.setupView(getResources().getString(R.string.math1));
+        DataClient client = APIUtils.getData();
+        Call<ArrayList<Book>> call = client.getDataGiaiTich1();
+        call.enqueue(new Callback<ArrayList<Book>>() {
+            @Override
+            public void onResponse(@NonNull Call<ArrayList<Book>> call,@NonNull Response<ArrayList<Book>> response) {
+                if (response.body() != null){
+                    listBookOne.setListBook(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArrayList<Book>> call,@NonNull Throwable t) {
+
+            }
+        });
+    }
+
+    private void getDataListBookTwo(){
+        listBookTwo.setupView(getResources().getString(R.string.math2));
+        DataClient client = APIUtils.getData();
+        Call<ArrayList<Book>> call = client.getDataGiaiTich2();
+        call.enqueue(new Callback<ArrayList<Book>>() {
+            @Override
+            public void onResponse(@NonNull Call<ArrayList<Book>> call,@NonNull Response<ArrayList<Book>> response) {
+                if (response.body() != null){
+                    listBookTwo.setListBook(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArrayList<Book>> call,@NonNull Throwable t) {
+
+            }
+        });
+    }
+    private void getDataListBookThree(){
+        listBookThree.setupView(getResources().getString(R.string.physical1));
+        DataClient client = APIUtils.getData();
+        Call<ArrayList<Book>> call = client.getDataVatLy1();
+        call.enqueue(new Callback<ArrayList<Book>>() {
+            @Override
+            public void onResponse(@NonNull Call<ArrayList<Book>> call,@NonNull Response<ArrayList<Book>> response) {
+                if (response.body() != null){
+                    listBookThree.setListBook(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArrayList<Book>> call,@NonNull Throwable t) {
+
+            }
+        });
+    }
+
+    private void getDataListBookFor(){
+        listBookFor.setupView(getResources().getString(R.string.physical2));
+        DataClient client = APIUtils.getData();
+        Call<ArrayList<Book>> call = client.getDataVatLy2();
+        call.enqueue(new Callback<ArrayList<Book>>() {
+            @Override
+            public void onResponse(@NonNull Call<ArrayList<Book>> call,@NonNull Response<ArrayList<Book>> response) {
+                if (response.body() != null){
+                    listBookFor.setListBook(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArrayList<Book>> call,@NonNull Throwable t) {
+
+            }
+        });
+    }
+
 
     private void setToolbar(){
         toolbar.setTitle(getResources().getString(R.string.ctct));

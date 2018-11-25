@@ -1,7 +1,19 @@
 package com.example.administrator.appctct.Entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Book {
+    @SerializedName("id")
+    @Expose
+    private String id;
+
+    @SerializedName("name")
+    @Expose
     private String nameBook;
+
+    @SerializedName("ratio")
+    @Expose
     private String ratioBook;
 
     public Book( String nameBook, String ratioBook) {
@@ -9,19 +21,15 @@ public class Book {
         this.ratioBook = ratioBook;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getNameBook() {
         return nameBook;
     }
 
-    public void setNameBook(String nameBook) {
-        this.nameBook = nameBook;
-    }
-
     public String getRatioBook() {
         return ratioBook;
-    }
-
-    public void setRatioBook(String ratioBook) {
-        this.ratioBook = ratioBook;
     }
 }

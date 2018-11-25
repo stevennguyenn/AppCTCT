@@ -45,6 +45,10 @@
     <string name="newphonenumber">New Phone Number</string>
     <string name="welcometoctct">Welcome to CTCT</string>
     <string name="seeall">See all</string>
+    <string name="math1">Math One</string>
+    <string name="math2">Math Two</string>
+    <string name="physical1">Physical One</string>
+    <string name="physical2">Physcal Two</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>
