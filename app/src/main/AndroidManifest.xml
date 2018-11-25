@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Login.Register_Activity"></activity>
+        <activity android:name=".View.Setting.Register_Activity"></activity>
         <activity android:name=".View.Test.PDFReaderActivity" />
         <activity android:name=".View.Setting.ChangePasswordActivity" />
         <activity android:name=".View.Setting.UpdatePhoneNumberActivity" />

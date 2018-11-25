@@ -1,6 +1,6 @@
-package com.example.administrator.appctct.Interfaces.ChangePassword;
+package com.example.administrator.appctct.Presenter.PresenterChangePassword;
 
-public interface ModelNotifyPresenter {
+public interface PresenterChangePasswordListened {
     void currentPassEmpty();
     void newPassEmpty();
     void confirmPassEmpty();

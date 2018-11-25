@@ -1,8 +1,7 @@
-package com.example.administrator.appctct.Model;
+package com.example.administrator.appctct.Model.ModelChangePassword;
 
 import android.support.annotation.NonNull;
 
-import com.example.administrator.appctct.Interfaces.ChangePassword.ModelNotifyPresenter;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
 
@@ -10,10 +9,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ModelChangPassword {
-    private ModelNotifyPresenter listened;
+public class ModelChangePassword {
+    private ModelChangePasswordListened listened;
 
-    public void setListened(ModelNotifyPresenter listened){
+    public void setListened(ModelChangePasswordListened listened){
         this.listened = listened;
     }
 

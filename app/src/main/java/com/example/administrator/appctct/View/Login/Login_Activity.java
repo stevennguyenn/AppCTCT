@@ -5,13 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -23,22 +21,14 @@ import android.widget.Toast;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Custom.CountTimer;
-import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
 import com.example.administrator.appctct.Presenter.PresenterLogin.PresenterLoginListened;
 import com.example.administrator.appctct.Presenter.PresenterLogin.PresenterLogin;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.Service.APIUtils;
-import com.example.administrator.appctct.Service.DataClient;
 import com.example.administrator.appctct.View.Main.ControllerActivity;
 import com.example.administrator.appctct.View.Setting.ForgotPasswordActivity;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static android.widget.Toast.LENGTH_SHORT;
+import com.example.administrator.appctct.View.Setting.Register_Activity;
 
 public class Login_Activity extends AppCompatActivity implements View.OnClickListener, PresenterLoginListened,ClickButton,TextWatcher {
 

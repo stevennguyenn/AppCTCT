@@ -8,14 +8,14 @@ import android.widget.Toast;
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
-import com.example.administrator.appctct.Interfaces.ChangePassword.PresenterNotifyView;
-import com.example.administrator.appctct.Presenter.PresentChangPassword;
+import com.example.administrator.appctct.Presenter.PresenterChangePassword.PresenterChangePasswordListened;
+import com.example.administrator.appctct.Presenter.PresenterChangePassword.PresentChangePassword;
 import com.example.administrator.appctct.R;
 
-public class ChangePasswordActivity extends AppCompatActivity implements ClickButton, PresenterNotifyView {
+public class ChangePasswordActivity extends AppCompatActivity implements ClickButton, PresenterChangePasswordListened {
     fragment_edittext_changepassword fragmentCurrentPassword,fragmentNewPassword,fragmentConfirmPassword;
     fragment_button fragment_button_changpassword;
-    private PresentChangPassword presenter;
+    private PresentChangePassword presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ClickBu
         fragmentConfirmPassword = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragmentconfirmpassword);
         fragment_button_changpassword = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.fragmentbuttonchangepassword);
         fragment_button_changpassword.setRegister(this);
-        presenter = new PresentChangPassword();
+        presenter = new PresentChangePassword();
         presenter.setListened(this);
     }
 

@@ -1,17 +1,16 @@
-package com.example.administrator.appctct.Presenter;
+package com.example.administrator.appctct.Presenter.PresenterChangePassword;
 
-import com.example.administrator.appctct.Interfaces.ChangePassword.ModelNotifyPresenter;
-import com.example.administrator.appctct.Interfaces.ChangePassword.PresenterNotifyView;
-import com.example.administrator.appctct.Model.ModelChangPassword;
+import com.example.administrator.appctct.Model.ModelChangePassword.ModelChangePasswordListened;
+import com.example.administrator.appctct.Model.ModelChangePassword.ModelChangePassword;
 
-public class PresentChangPassword implements ModelNotifyPresenter{
-    private PresenterNotifyView listened;
+public class PresentChangePassword implements ModelChangePasswordListened {
+    private PresenterChangePasswordListened listened;
 
-    public void setListened(PresenterNotifyView listened){
+    public void setListened(PresenterChangePasswordListened listened){
         this.listened = listened;
     }
     public void noticeModelChangePassword(String currentPass,String newPass,String confirmPass){
-        ModelChangPassword model = new ModelChangPassword();
+        ModelChangePassword model = new ModelChangePassword();
         model.setListened(this);
         model.process(currentPass,newPass,confirmPass);
     }

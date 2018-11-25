@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.View.Login;
+package com.example.administrator.appctct.View.Setting;
 
 import android.Manifest;
 import android.content.Context;
@@ -25,13 +25,15 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.administrator.appctct.Component.Custom.InformationImage;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
-import com.example.administrator.appctct.Interfaces.Register.PresenterNotifyViewRegister;
-import com.example.administrator.appctct.Presenter.PresenterRegister;
+import com.example.administrator.appctct.Presenter.PresenterRegister.PresenterRegisterListened;
+import com.example.administrator.appctct.Presenter.PresenterRegister.PresenterRegister;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
+import com.example.administrator.appctct.View.Login.Login_Activity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,7 +44,7 @@ import okhttp3.RequestBody;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Register_Activity extends AppCompatActivity implements View.OnClickListener, PresenterNotifyViewRegister,ClickButton,TextWatcher, CompoundButton.OnCheckedChangeListener {
+public class Register_Activity extends AppCompatActivity implements View.OnClickListener, PresenterRegisterListened,ClickButton,TextWatcher, CompoundButton.OnCheckedChangeListener {
 
     EditText edFullName,edUserName,edPassword,edConfirmPassword;
     fragment_button btRegister;
@@ -149,8 +151,8 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
                     if (bundle != null) {
                         Bitmap bitmap = (Bitmap) bundle.get("data");
                         imgAvatar.setImageBitmap(bitmap);
-                        Uri uri = getImageUri(this,bitmap);
-                        realPath = getRealPathFromUri(uri);
+                        Uri uri = InformationImage.getImageUri(this,bitmap);
+                        realPath = InformationImage.getRealPathFromUri(this,uri);
                     }
                 } else {
                     Toast.makeText(Register_Activity.this, "Camera not found", Toast.LENGTH_SHORT).show();
@@ -162,7 +164,7 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
         if (requestCode == REQUEST_COLLECTION){
             if (resultCode == RESULT_OK && data != null){
                 Uri uri = data.getData();
-                realPath = getRealPathFromUri(uri);
+                realPath = realPath = InformationImage.getRealPathFromUri(this,uri);
                 imgAvatar.setImageURI(uri);
             }
             else{
@@ -190,69 +192,36 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
             String[] arrFilePath = filePath.split("\\.");
             filePath = arrFilePath[0] + System.currentTimeMillis() +"."+arrFilePath[1];
             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file);
-            final MultipartBody.Part body = MultipartBody.Part.createFormData("upload_file",filePath,requestBody);
-
-            final DataClient dataClient = APIUtils.getData();
-            retrofit2.Call<String> callBack = dataClient.uploadImage(body);
-            callBack.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(@NonNull  retrofit2.Call<String> call,@NonNull Response<String> response) {
-                    String message = response.body();
-                        if (message != null){
-                            DataClient insertData = APIUtils.getData();
-                            Log.d("AAA",APIUtils.baseURL + "image/" + response.body());
-                            retrofit2.Call<String> cb = insertData.insertData(fullName,userName,password,APIUtils.baseURL + "image/" + response.body());
-                            cb.enqueue(new Callback<String>() {
-                                @Override
-                                public void onResponse(@NonNull retrofit2.Call<String> call,@NonNull Response<String> response) {
-                                    String result = response.body();
-                                    if (result != null && result.equals("Successed")){
-                                        Toast.makeText(Register_Activity.this,"Create account success",Toast.LENGTH_SHORT).show();
-                                        Intent in = new Intent(Register_Activity.this,Login_Activity.class);
-                                        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
-                                        startActivity(in);
-                                        return;
-                                    }
-                                    Toast.makeText(Register_Activity.this,"Error: " + result, Toast.LENGTH_SHORT).show();
-                                }
-                                @Override
-                                public void onFailure(@NonNull  retrofit2.Call<String> call,@NonNull Throwable t) {
-                                    Toast.makeText(Register_Activity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                }
-
-                @Override
-                public void onFailure(@NonNull retrofit2.Call<String> call,@NonNull Throwable t) {
-                }
-            });
+            MultipartBody.Part body = MultipartBody.Part.createFormData("upload_file",filePath,requestBody);
+            present.insertAccountIntoDatabase(body,fullName,userName,password);
         }
-    }
-
-    public Uri getImageUri(Context context, Bitmap photo){
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        photo.compress(Bitmap.CompressFormat.JPEG,100,bytes);
-        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(),photo,"title",null);
-        return Uri.parse(path);
     }
 
     @Override
     public void baseURLIsEmpty() {
         Toast.makeText(Register_Activity.this,"Please choice avatar",Toast.LENGTH_SHORT).show();
     }
-    private String getRealPathFromUri(Uri uri){
-        String path = null;
-        String[] proj =  {MediaStore.MediaColumns.DATA};
-        Cursor cursor = getContentResolver().query(uri,proj,null,null,null);
-        if (cursor != null){
-            if (cursor.moveToFirst()) {
-                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-                path = cursor.getString(columnIndex);
-            }
-            cursor.close();
-        }
-        return path;
+
+    @Override
+    public void loadImageFailed() {
+        Toast.makeText(Register_Activity.this,"Load Image to Databease failed",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void connectFailed() {
+        Toast.makeText(Register_Activity.this,"Connect Failed",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void insertAccountSuccessed() {
+        Intent in = new Intent(Register_Activity.this,Login_Activity.class);
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+        startActivity(in);
+    }
+
+    @Override
+    public void insertAccountFailed() {
+        Toast.makeText(Register_Activity.this,"Create account failed",Toast.LENGTH_SHORT).show();
     }
 
     @Override
