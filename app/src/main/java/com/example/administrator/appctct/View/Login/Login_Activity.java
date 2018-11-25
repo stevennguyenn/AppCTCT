@@ -53,8 +53,12 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_);
-        setID();
-        setupView();
+        if (getToken().equals("")){
+            setID();
+            setupView();
+            return;
+        }
+        startActivity(new Intent(Login_Activity.this,ControllerActivity.class));
     }
 
     private void setID(){
@@ -165,7 +169,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                     Intent in = new Intent(Login_Activity.this, ControllerActivity.class);
                     overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
                     startActivity(in);
-                    commitShare(response.body().getId());
+                    setToken(response.body().getId());
                     return;
                 }
                 Toast.makeText(Login_Activity.this,"Login Failed", LENGTH_SHORT).show();
@@ -176,11 +180,6 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(Login_Activity.this,t.getMessage(), LENGTH_SHORT).show();
             }
         });
-    }
-    private void commitShare(String id){
-        SharedPreferences.Editor editor = share.edit();
-        editor.putString("id", id);
-        editor.apply();
     }
 
     @Override
@@ -214,6 +213,16 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    private void setToken(String token){
+        SharedPreferences share = getSharedPreferences("data",MODE_PRIVATE);
+        SharedPreferences.Editor editor = share.edit();
+        editor.putString("token",token);
+        editor.apply();
+    }
+    private String getToken(){
+        return getSharedPreferences("data",MODE_PRIVATE).getString("token","");
     }
 }
 
