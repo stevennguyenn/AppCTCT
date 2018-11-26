@@ -1,5 +1,6 @@
 package com.example.administrator.appctct.View.Main;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -7,16 +8,19 @@ import android.widget.Toast;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.FragmentSellAllListBook;
+import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.SearchSeeAllListened;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAll;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAllListened;
 import com.example.administrator.appctct.R;
+import com.example.administrator.appctct.View.SearchView.SearchActivity;
 
 import java.util.ArrayList;
 
-public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened {
+public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened, SearchSeeAllListened {
 
-    FragmentSellAllListBook fragmentSeeAllGiaiTich1;
+    FragmentSellAllListBook fragmentSeeAll;
     private PresenterSeeAll presenter;
+    private int type = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +32,17 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
     }
 
     private void setID(){
-        fragmentSeeAllGiaiTich1 = (FragmentSellAllListBook) getSupportFragmentManager().findFragmentById(R.id.fragmentSeeAllListGiaiTich1);
+        fragmentSeeAll = (FragmentSellAllListBook) getSupportFragmentManager().findFragmentById(R.id.fragmentSeeAllListGiaiTich1);
     }
 
     private void setupView(){
         presenter = new PresenterSeeAll(this);
+        fragmentSeeAll.setListened(this);
     }
 
     private void getData(){
         int searchType = getIntent().getIntExtra(Strings.typeSearch,0);
+        type = searchType;
         switch (searchType){
             case 1:
                 presenter.getDataGiaiTich1();
@@ -55,7 +61,7 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
 
     @Override
     public void getAllSuccessed(ArrayList<FullBook> listBook) {
-        fragmentSeeAllGiaiTich1.setListBook(listBook);
+        fragmentSeeAll.setListBook(listBook,type);
     }
 
     @Override
@@ -66,5 +72,13 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
     @Override
     public void connectFailed() {
         Toast.makeText(SeeAll.this,"Connect Failed",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void clickSearch(int typeSearch) {
+        Intent intent = new Intent(SeeAll.this, SearchActivity.class);
+        intent.putExtra(Strings.typeSearch,typeSearch);
+        startActivity(intent);
+        overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
 }

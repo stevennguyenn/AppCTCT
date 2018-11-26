@@ -18,10 +18,17 @@ import com.example.administrator.appctct.R;
 import java.util.ArrayList;
 
 public class FragmentSellAllListBook extends Fragment implements View.OnClickListener {
+
     private RecyclerView rcSeeAll;
     private ImageView imgSearch;
     private SeeAllListBookAdapter adapter;
     private ArrayList<FullBook> listBook;
+    private int typeSearch = 0;
+    private SearchSeeAllListened listened;
+
+    public void setListened(SearchSeeAllListened listened) {
+        this.listened = listened;
+    }
 
     @Nullable
     @Override
@@ -44,12 +51,13 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
         imgSearch.setOnClickListener(this);
     }
 
-    public void setListBook(ArrayList<FullBook> listBook){
+    public void setListBook(ArrayList<FullBook> listBook,int typeSearch){
         adapter.setListBook(listBook);
+        this.typeSearch = typeSearch;
     }
 
     @Override
     public void onClick(View v) {
-
+        listened.clickSearch(typeSearch);
     }
 }
