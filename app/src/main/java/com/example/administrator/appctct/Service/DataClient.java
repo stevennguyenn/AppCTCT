@@ -102,4 +102,16 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("book/search/searchgiaitich1.php")
     Call<ArrayList<Book>> searchGiaiTich1(@Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("book/search/searchgiaitich2.php")
+    Call<ArrayList<Book>> searchGiaiTich2(@Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("book/search/searchvatly1.php")
+    Call<ArrayList<Book>> searchVatLy1(@Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("book/search/searchvatly2.php")
+    Call<ArrayList<Book>> searchVatLy2(@Field("key") String key);
 }

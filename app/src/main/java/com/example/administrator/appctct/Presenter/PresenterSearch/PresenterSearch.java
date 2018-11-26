@@ -9,15 +9,26 @@ import java.util.ArrayList;
 public class PresenterSearch implements ModelSearchListened {
 
     private PresenterSearchListened listened;
+    private ModelSearch model = new ModelSearch(this);
 
     public void setListened(PresenterSearchListened listened){
         this.listened = listened;
     }
 
-    public void searchForKey(String key){
-        ModelSearch model = new ModelSearch();
-        model.setListened(this);
-        model.searchForKey(key);
+    public void searchForKeyGiaiTich1(String key){
+        model.searchForKeyGiaiTich1(key);
+    }
+
+    public void searchForKeyGiaiTich2(String key){
+        model.searchForKeyGiaiTich2(key);
+    }
+
+    public void searchForKeyVatLy1(String key){
+        model.searchForKeyVatLy1(key);
+    }
+
+    public void searchForKeyVatLy2(String key){
+        model.searchForKeyVatLy2(key);
     }
 
     @Override

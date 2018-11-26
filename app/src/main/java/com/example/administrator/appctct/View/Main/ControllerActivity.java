@@ -202,7 +202,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
 
     @Override
     public void clickSeeAll(View view) {
-        Intent intent = new Intent(ControllerActivity.this,SeeAll.class);
+        Intent intent = new Intent(ControllerActivity.this,SeeAllActivity.class);
         int typeSearch = 0;
         switch (view.getId()){
             case R.id.viewListBookOne:

@@ -7,12 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.administrator.appctct.Adapter.SearchBookAdapter.SearchBookAdapter;
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Presenter.PresenterSearch.PresenterSearch;
 import com.example.administrator.appctct.Presenter.PresenterSearch.PresenterSearchListened;
@@ -29,6 +29,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     LinearLayoutManager layoutManager;
     SearchBookAdapter adapter;
     ConstraintLayout viewNoResultSearch;
+    private int typeSearch = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void setupView(){
+        typeSearch = getIntent().getIntExtra(Strings.typeSearch,0);
         tvCancel.setOnClickListener(this);
         edSearch.addTextChangedListener(this);
         presentSearch = new PresenterSearch();
@@ -79,7 +81,20 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        presentSearch.searchForKey(s.toString());
+        switch (typeSearch){
+            case 1:
+                presentSearch.searchForKeyGiaiTich1(s.toString());
+                break;
+            case 2:
+                presentSearch.searchForKeyGiaiTich2(s.toString());
+                break;
+            case 3:
+                presentSearch.searchForKeyVatLy1(s.toString());
+                break;
+            case 4:
+                presentSearch.searchForKeyVatLy2(s.toString());
+                break;
+        }
     }
 
     @Override

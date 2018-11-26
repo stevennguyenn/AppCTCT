@@ -17,7 +17,7 @@ import com.example.administrator.appctct.View.SearchView.SearchActivity;
 
 import java.util.ArrayList;
 
-public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened, SearchSeeAllListened, LoadMoreForFragment {
+public class SeeAllActivity extends AppCompatActivity implements PresenterSeeAllListened, SearchSeeAllListened, LoadMoreForFragment {
 
     FragmentSellAllListBook fragmentSeeAll;
     private PresenterSeeAll presenter;
@@ -77,12 +77,12 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
 
     @Override
     public void connectFailed(String message) {
-        Toast.makeText(SeeAll.this,message,Toast.LENGTH_SHORT).show();
+        Toast.makeText(SeeAllActivity.this,message,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void clickSearch(int typeSearch) {
-        Intent intent = new Intent(SeeAll.this, SearchActivity.class);
+        Intent intent = new Intent(SeeAllActivity.this, SearchActivity.class);
         intent.putExtra(Strings.typeSearch,typeSearch);
         startActivity(intent);
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
