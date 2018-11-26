@@ -15,8 +15,8 @@ public class PresenterSeeAll implements ModelSeeAllListened {
         this.listened = listened;
     }
 
-    public void getDataGiaiTich1(){
-        model.getData();
+    public void getDataGiaiTich1(int page){
+        model.getData(page);
     }
 
     public void getDataGiaiTich2(){
@@ -42,7 +42,7 @@ public class PresenterSeeAll implements ModelSeeAllListened {
     }
 
     @Override
-    public void connectFailed() {
-        listened.connectFailed();
+    public void connectFailed(String message) {
+        listened.connectFailed(message);
     }
 }

@@ -51,6 +51,7 @@
     <string name="physical2">Physcal Two</string>
     <string name="cancel">Cancel</string>
     <string name="search">Search</string>
+    <string name="loading">Loading</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>

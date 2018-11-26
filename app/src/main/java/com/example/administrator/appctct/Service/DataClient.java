@@ -87,8 +87,9 @@ public interface DataClient {
     @POST("book/searchgiaitich1.php")
     Call<ArrayList<Book>> searchGiaiTich1(@Field("key") String key);
 
-    @GET("book/getallgiaitich1.php")
-    Call<ArrayList<FullBook>> getAllGiaiTich1();
+    @FormUrlEncoded
+    @POST("book/getallgiaitich1.php")
+    Call<ArrayList<FullBook>> getAllGiaiTich1(@Field("page") int page);
 
     @GET("book/getallgiaitich2.php")
     Call<ArrayList<FullBook>> getAllGiaiTich2();

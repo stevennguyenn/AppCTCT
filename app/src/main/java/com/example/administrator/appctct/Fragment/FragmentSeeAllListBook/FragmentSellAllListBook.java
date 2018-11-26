@@ -11,13 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.administrator.appctct.Adapter.SeeAllListBook.LoadMore;
 import com.example.administrator.appctct.Adapter.SeeAllListBook.SeeAllListBookAdapter;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class FragmentSellAllListBook extends Fragment implements View.OnClickListener {
+public class FragmentSellAllListBook extends Fragment implements View.OnClickListener, LoadMore {
 
     private RecyclerView rcSeeAll;
     private ImageView imgSearch;
@@ -25,6 +26,12 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
     private ArrayList<FullBook> listBook;
     private int typeSearch = 0;
     private SearchSeeAllListened listened;
+    private LoadMoreForFragment loadMore;
+
+
+    public void setLoadMore(LoadMoreForFragment loadMore){
+        this.loadMore = loadMore;
+    }
 
     public void setListened(SearchSeeAllListened listened) {
         this.listened = listened;
@@ -46,7 +53,8 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
         rcSeeAll.setLayoutManager(layoutManager);
         rcSeeAll.setHasFixedSize(true);
         listBook = new ArrayList<>();
-        adapter = new SeeAllListBookAdapter(getLayoutInflater(),listBook);
+        adapter = new SeeAllListBookAdapter(rcSeeAll,getLayoutInflater(),listBook);
+        adapter.setLoadMore(this);
         rcSeeAll.setAdapter(adapter);
         imgSearch.setOnClickListener(this);
     }
@@ -59,5 +67,10 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         listened.clickSearch(typeSearch);
+    }
+
+    @Override
+    public void onLoadMore() {
+        loadMore.onLoadMore();
     }
 }

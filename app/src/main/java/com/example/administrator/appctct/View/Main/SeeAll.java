@@ -3,11 +3,13 @@ package com.example.administrator.appctct.View.Main;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.FragmentSellAllListBook;
+import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.LoadMoreForFragment;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.SearchSeeAllListened;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAll;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAllListened;
@@ -16,11 +18,12 @@ import com.example.administrator.appctct.View.SearchView.SearchActivity;
 
 import java.util.ArrayList;
 
-public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened, SearchSeeAllListened {
+public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened, SearchSeeAllListened, LoadMoreForFragment {
 
     FragmentSellAllListBook fragmentSeeAll;
     private PresenterSeeAll presenter;
     private int type = 0;
+    private int page = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
     private void setupView(){
         presenter = new PresenterSeeAll(this);
         fragmentSeeAll.setListened(this);
+        fragmentSeeAll.setLoadMore(this);
     }
 
     private void getData(){
@@ -45,7 +49,7 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
         type = searchType;
         switch (searchType){
             case 1:
-                presenter.getDataGiaiTich1();
+                presenter.getDataGiaiTich1(page);
                 break;
             case 2:
                 presenter.getDataGiaiTich2();
@@ -70,8 +74,8 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
     }
 
     @Override
-    public void connectFailed() {
-        Toast.makeText(SeeAll.this,"Connect Failed",Toast.LENGTH_SHORT).show();
+    public void connectFailed(String message) {
+        Toast.makeText(SeeAll.this,message,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -80,5 +84,12 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
         intent.putExtra(Strings.typeSearch,typeSearch);
         startActivity(intent);
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
+    }
+
+    @Override
+    public void onLoadMore() {
+        page += 1;
+        Log.d("BBB",page+"");
+        presenter.getDataGiaiTich1(page);
     }
 }

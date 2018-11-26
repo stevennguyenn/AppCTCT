@@ -7,5 +7,5 @@ import java.util.ArrayList;
 public interface ModelSeeAllListened {
     void getAllSuccessed(ArrayList<FullBook> listBook);
     void getAllFailed();
-    void connectFailed();
+    void connectFailed(String message);
 }

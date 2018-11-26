@@ -21,8 +21,8 @@ public class ModelSeeAll {
         this.listened = listened;
     }
 
-    public void getData(){
-        Call<ArrayList<FullBook>> call = client.getAllGiaiTich1();
+    public void getData(int page){
+        Call<ArrayList<FullBook>> call = client.getAllGiaiTich1(page);
         call.enqueue(new Callback<ArrayList<FullBook>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<FullBook>> call,@NonNull Response<ArrayList<FullBook>> response) {
@@ -35,7 +35,7 @@ public class ModelSeeAll {
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<FullBook>> call,@NonNull Throwable t) {
-                listened.connectFailed();
+                listened.connectFailed(t.getMessage());
             }
         });
     }
@@ -54,7 +54,7 @@ public class ModelSeeAll {
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<FullBook>> call,@NonNull Throwable t) {
-                listened.connectFailed();
+                listened.connectFailed(t.getMessage());
             }
         });
     }
@@ -73,7 +73,7 @@ public class ModelSeeAll {
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<FullBook>> call,@NonNull Throwable t) {
-                listened.connectFailed();
+                listened.connectFailed(t.getMessage());
             }
         });
     }
@@ -92,7 +92,7 @@ public class ModelSeeAll {
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<FullBook>> call,@NonNull Throwable t) {
-                listened.connectFailed();
+                listened.connectFailed(t.getMessage());
             }
         });
     }
