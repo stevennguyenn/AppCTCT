@@ -68,38 +68,38 @@ public interface DataClient {
     Call<ContentHeader> getContentHeader(@Field("id") String id);
 
     //get 20 row in table giai tich 1 for controller activity
-    @GET("book/get20rowgiaitich1.php")
+    @GET("book/getinfomation/get20rowgiaitich1.php")
     Call<ArrayList<Book>> getDataGiaiTich1();
 
     //get 20 row in table giai tich 2 for controller activity
-    @GET("book/get20rowgiaitich2.php")
+    @GET("book/getinfomation/get20rowgiaitich2.php")
     Call<ArrayList<Book>> getDataGiaiTich2();
 
     //get 20 row in table vat ly 1 for controller activity
-    @GET("book/get20rowvatly1.php")
+    @GET("book/getinfomation/get20rowvatly1.php")
     Call<ArrayList<Book>> getDataVatLy1();
 
     //get 20 row in table vat ly 2 for controller activity
-    @GET("book/get20rowvatly2.php")
+    @GET("book/getinfomation/get20rowvatly2.php")
     Call<ArrayList<Book>> getDataVatLy2();
 
     @FormUrlEncoded
-    @POST("book/searchgiaitich1.php")
-    Call<ArrayList<Book>> searchGiaiTich1(@Field("key") String key);
-
-    @FormUrlEncoded
-    @POST("book/getallgiaitich1.php")
+    @POST("book/getinfomation/getallgiaitich1.php")
     Call<ArrayList<FullBook>> getAllGiaiTich1(@Field("page") int page);
 
     @FormUrlEncoded
-    @POST("book/getallgiaitich2.php")
+    @POST("book/getinfomation/getallgiaitich2.php")
     Call<ArrayList<FullBook>> getAllGiaiTich2(@Field("page") int page);
 
     @FormUrlEncoded
-    @POST("book/getallvatly1.php")
+    @POST("book/getinfomation/getallvatly1.php")
     Call<ArrayList<FullBook>> getAllVatLy1(@Field("page") int page);
 
     @FormUrlEncoded
-    @POST("book/getallvatly2.php")
+    @POST("book/getinfomation/getallvatly2.php")
     Call<ArrayList<FullBook>> getAllVatLy2(@Field("page") int page);
+
+    @FormUrlEncoded
+    @POST("book/search/searchgiaitich1.php")
+    Call<ArrayList<Book>> searchGiaiTich1(@Field("key") String key);
 }
