@@ -91,12 +91,15 @@ public interface DataClient {
     @POST("book/getallgiaitich1.php")
     Call<ArrayList<FullBook>> getAllGiaiTich1(@Field("page") int page);
 
-    @GET("book/getallgiaitich2.php")
-    Call<ArrayList<FullBook>> getAllGiaiTich2();
+    @FormUrlEncoded
+    @POST("book/getallgiaitich2.php")
+    Call<ArrayList<FullBook>> getAllGiaiTich2(@Field("page") int page);
 
-    @GET("book/getallvatly1.php")
-    Call<ArrayList<FullBook>> getAllVatLy1();
+    @FormUrlEncoded
+    @POST("book/getallvatly1.php")
+    Call<ArrayList<FullBook>> getAllVatLy1(@Field("page") int page);
 
-    @GET("book/getallvatly2.php")
-    Call<ArrayList<FullBook>> getAllVatLy2();
+    @FormUrlEncoded
+    @POST("book/getallvatly2.php")
+    Call<ArrayList<FullBook>> getAllVatLy2(@Field("page") int page);
 }

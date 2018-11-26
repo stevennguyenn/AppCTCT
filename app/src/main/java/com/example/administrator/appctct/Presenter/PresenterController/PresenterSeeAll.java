@@ -19,16 +19,16 @@ public class PresenterSeeAll implements ModelSeeAllListened {
         model.getData(page);
     }
 
-    public void getDataGiaiTich2(){
-        model.getDataGiaiTich2();
+    public void getDataGiaiTich2(int page){
+        model.getDataGiaiTich2(page);
     }
 
-    public void getDataVatLy1(){
-        model.getDataVatLy1();
+    public void getDataVatLy1(int page){
+        model.getDataVatLy1(page);
     }
 
-    public void getDataVatLy2(){
-        model.getDataVatLy2();
+    public void getDataVatLy2(int page){
+        model.getDataVatLy2(page);
     }
 
     @Override

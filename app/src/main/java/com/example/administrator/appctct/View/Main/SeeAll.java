@@ -3,7 +3,6 @@ package com.example.administrator.appctct.View.Main;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
@@ -52,13 +51,13 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
                 presenter.getDataGiaiTich1(page);
                 break;
             case 2:
-                presenter.getDataGiaiTich2();
+                presenter.getDataGiaiTich2(page);
                 break;
             case 3:
-                presenter.getDataVatLy1();
+                presenter.getDataVatLy1(page);
                 break;
             case 4:
-                presenter.getDataVatLy2();
+                presenter.getDataVatLy2(page);
                 break;
         }
     }
@@ -66,11 +65,14 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
     @Override
     public void getAllSuccessed(ArrayList<FullBook> listBook) {
         fragmentSeeAll.setListBook(listBook,type);
+        if (listBook.size() == 20){
+            page += 1;
+            return;
+        }
     }
 
     @Override
     public void getAllFailed() {
-        Toast.makeText(SeeAll.this,"Null",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -88,8 +90,19 @@ public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened
 
     @Override
     public void onLoadMore() {
-        page += 1;
-        Log.d("BBB",page+"");
-        presenter.getDataGiaiTich1(page);
+        switch (type){
+            case 1:
+                presenter.getDataGiaiTich1(page);
+                break;
+            case 2:
+                presenter.getDataGiaiTich2(page);
+                break;
+            case 3:
+                presenter.getDataVatLy1(page);
+                break;
+            case 4:
+                presenter.getDataVatLy2(page);
+                break;
+        }
     }
 }

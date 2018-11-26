@@ -1,7 +1,10 @@
 package com.example.administrator.appctct.View.SearchView;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.administrator.appctct.Adapter.SearchBookAdapter.SearchBookAdapter;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Presenter.PresenterSearch.PresenterSearch;
 import com.example.administrator.appctct.Presenter.PresenterSearch.PresenterSearchListened;
@@ -21,6 +25,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     EditText edSearch;
     TextView tvCancel;
     private PresenterSearch presentSearch;
+    RecyclerView rcSearch;
+    LinearLayoutManager layoutManager;
+    SearchBookAdapter adapter;
+    ConstraintLayout viewNoResultSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private void setID(){
         edSearch = findViewById(R.id.edSearch);
         tvCancel = findViewById(R.id.tvCancel);
+        rcSearch = findViewById(R.id.rcSearch);
+        viewNoResultSearch = findViewById(R.id.viewNoResultSearch);
     }
 
     private void setupView(){
@@ -40,6 +50,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         edSearch.addTextChangedListener(this);
         presentSearch = new PresenterSearch();
         presentSearch.setListened(this);
+        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        rcSearch.setLayoutManager(layoutManager);
+        rcSearch.setHasFixedSize(true);
+        adapter = new SearchBookAdapter(getLayoutInflater(),new ArrayList<Book>());
+        rcSearch.setAdapter(adapter);
     }
 
     @Override
@@ -73,17 +88,22 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void successed(ArrayList<Book> result) {
-        Log.d("AAA",result.size()+"");
+    public void successed(ArrayList<Book> listBook) {
+        if (listBook.size() > 0) {
+            adapter.setListBook(listBook);
+            viewNoResultSearch.setVisibility(View.GONE);
+            return;
+        }
+        viewNoResultSearch.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void failed() {
-        Log.d("AAA","null");
+        viewNoResultSearch.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void connectFailed() {
-        Log.d("AAA","connect failed");
+        viewNoResultSearch.setVisibility(View.VISIBLE);
     }
 }

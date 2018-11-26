@@ -40,8 +40,8 @@ public class ModelSeeAll {
         });
     }
 
-    public void getDataGiaiTich2(){
-        Call<ArrayList<FullBook>> call = client.getAllGiaiTich2();
+    public void getDataGiaiTich2(int page){
+        Call<ArrayList<FullBook>> call = client.getAllGiaiTich2(page);
         call.enqueue(new Callback<ArrayList<FullBook>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<FullBook>> call,@NonNull Response<ArrayList<FullBook>> response) {
@@ -59,8 +59,8 @@ public class ModelSeeAll {
         });
     }
 
-    public void getDataVatLy1(){
-        Call<ArrayList<FullBook>> call = client.getAllVatLy1();
+    public void getDataVatLy1(int page){
+        Call<ArrayList<FullBook>> call = client.getAllVatLy1(page);
         call.enqueue(new Callback<ArrayList<FullBook>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<FullBook>> call,@NonNull Response<ArrayList<FullBook>> response) {
@@ -78,8 +78,8 @@ public class ModelSeeAll {
         });
     }
 
-    public void getDataVatLy2(){
-        Call<ArrayList<FullBook>> call = client.getAllVatLy2();
+    public void getDataVatLy2(int page){
+        Call<ArrayList<FullBook>> call = client.getAllVatLy2(page);
         call.enqueue(new Callback<ArrayList<FullBook>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<FullBook>> call,@NonNull Response<ArrayList<FullBook>> response) {

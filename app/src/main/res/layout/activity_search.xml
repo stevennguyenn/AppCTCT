@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".View.SearchView.SearchActivity">
     <EditText
+        android:inputType="text"
         android:drawableStart="@drawable/icsearch"
         android:drawableLeft="@drawable/icsearch"
         android:lines="1"
@@ -39,6 +40,42 @@
         android:text="@string/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@id/edSearch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/rcSearch"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+    <android.support.constraint.ConstraintLayout
+        android:background="@color/colorWhite"
+        android:id="@+id/viewNoResultSearch"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/edSearch"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+            android:layout_marginBottom="10dp"
+            app:layout_constraintLeft_toLeftOf="@+id/viewNoResultSearch"
+            app:layout_constraintRight_toRightOf="@+id/viewNoResultSearch"
+            app:layout_constraintBottom_toTopOf="@+id/tvNoResult"
+            android:scaleType="center"
+            android:src="@drawable/searchnoresult"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        <TextView
+            android:id="@+id/tvNoResult"
+            app:layout_constraintBottom_toBottomOf="@+id/viewNoResultSearch"
+            app:layout_constraintRight_toRightOf="@+id/viewNoResultSearch"
+            app:layout_constraintLeft_toLeftOf="@+id/viewNoResultSearch"
+            app:layout_constraintTop_toTopOf="@+id/viewNoResultSearch"
+            android:text="@string/noresult"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:textColor="@color/black_overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.constraint.ConstraintLayout>

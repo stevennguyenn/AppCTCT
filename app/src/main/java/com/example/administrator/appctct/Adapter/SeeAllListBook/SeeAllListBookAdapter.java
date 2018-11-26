@@ -21,6 +21,8 @@ public class SeeAllListBookAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private LayoutInflater inflater;
     private ArrayList<FullBook> listBook;
     private LoadMore loadMore;
+    private LinearLayoutManager layoutManager;
+    private Boolean isHiddenLoadmore = false;
 
     public void setLoadMore(LoadMore loadMore){
         this.loadMore = loadMore;
@@ -30,6 +32,7 @@ public class SeeAllListBookAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.inflater = inflater;
         this.listBook = listBook;
         final LinearLayoutManager layoutManager = (LinearLayoutManager) rcView.getLayoutManager();
+        this.layoutManager = layoutManager;
         rcView.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -49,8 +52,9 @@ public class SeeAllListBookAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             View view = inflater.inflate(R.layout.line_see_all, viewGroup, false);
             return new SeeAllViewHolder(view);
         }
-        View view = inflater.inflate(R.layout.line_loading,viewGroup,false);
+        View view = inflater.inflate(R.layout.line_loading, viewGroup, false);
         return new LoadingViewHolder(view);
+
     }
 
     @Override
@@ -101,5 +105,4 @@ public class SeeAllListBookAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             rbRatio = itemView.findViewById(R.id.rbRatio);
         }
     }
-
 }

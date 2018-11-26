@@ -52,6 +52,7 @@
     <string name="cancel">Cancel</string>
     <string name="search">Search</string>
     <string name="loading">Loading</string>
+    <string name="noresult">Search no result</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>
