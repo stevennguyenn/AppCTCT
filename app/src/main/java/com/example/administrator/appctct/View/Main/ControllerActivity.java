@@ -220,5 +220,6 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         }
         intent.putExtra(Strings.typeSearch,typeSearch);
         startActivity(intent);
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.show_view_navigation);
     }
 }
