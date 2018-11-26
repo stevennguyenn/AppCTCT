@@ -2,11 +2,11 @@
     <string name="app_name">AppCTCT</string>
     <string name="ctct">CTCT</string>
     <string name="userName">UserName</string>
-    <string name="password">Password:</string>
+    <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register Here</string>
     <string name="loginFacebook">Login with Facebook</string>
-    <string name="fullname">Full Name:</string>
+    <string name="fullname">Full Name</string>
     <string name="email">Email</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="registerNow">Register Now</string>
@@ -19,9 +19,9 @@
     <string name="confirm">Confirm</string>
     <string name="empty">Empty</string>
     <string name="changepassword">Change Password</string>
-    <string name="phonenumber">Phone Number:</string>
+    <string name="phonenumber">Phone Number</string>
     <string name="updatephonenumber">Update Phone Number</string>
-    <string name="permission">Permission:</string>
+    <string name="permission">Permission</string>
     <string name="memberCTCT">Only Member CTCT</string>
     <string name="notification">Notification</string>
     <string name="code_ctct">Code</string>
@@ -53,6 +53,10 @@
     <string name="search">Search</string>
     <string name="loading">Loading</string>
     <string name="noresult">Search no result</string>
+    <string name="codemember">Enter code member</string>
+    <string name="noinformation">No Information</string>
+    <string name="nopermisstion">No Permission</string>
+    <string name="updateemail">Update Email</string>
 
     <string name="title_activity_pdfreader">PDFReader</string>
 </resources>

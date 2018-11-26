@@ -28,6 +28,7 @@ import com.example.administrator.appctct.Fragment.FragmentListBook.ProcessPragme
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterController;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterControllerListened;
 import com.example.administrator.appctct.R;
+import com.example.administrator.appctct.View.Profile.ProfileActitivy;
 import com.example.administrator.appctct.View.SearchView.SearchActivity;
 
 import java.util.ArrayList;
@@ -111,7 +112,13 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
 
     @Override
     public void clickLineCell(int position) {
-        Toast.makeText(ControllerActivity.this,"click line " + position,Toast.LENGTH_SHORT).show();
+        switch (position){
+            case 0:
+                Intent intent = new Intent(ControllerActivity.this, ProfileActitivy.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+                break;
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.administrator.appctct.Fragment.EditText.TextWatcherListened;
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
@@ -12,9 +13,9 @@ import com.example.administrator.appctct.Presenter.PresenterChangePassword.Prese
 import com.example.administrator.appctct.Presenter.PresenterChangePassword.PresentChangePassword;
 import com.example.administrator.appctct.R;
 
-public class ChangePasswordActivity extends AppCompatActivity implements ClickButton, PresenterChangePasswordListened {
-    fragment_edittext_changepassword fragmentCurrentPassword,fragmentNewPassword,fragmentConfirmPassword;
-    fragment_button fragment_button_changpassword;
+public class ChangePasswordActivity extends AppCompatActivity implements ClickButton,PresenterChangePasswordListened,TextWatcherListened {
+    fragment_edittext_changepassword edCurrentPassword, edNewPassword, edConfirmPassword;
+    fragment_button btConfirm;
     private PresentChangePassword presenter;
 
     @Override
@@ -26,11 +27,10 @@ public class ChangePasswordActivity extends AppCompatActivity implements ClickBu
     }
 
     private void setID(){
-        fragmentCurrentPassword = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragmentcurrentpassword);
-        fragmentNewPassword = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragmentnewpassword);
-        fragmentConfirmPassword = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragmentconfirmpassword);
-        fragment_button_changpassword = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.fragmentbuttonchangepassword);
-        fragment_button_changpassword.setRegister(this);
+        edCurrentPassword = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragmentcurrentpassword);
+        edNewPassword = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragmentnewpassword);
+        edConfirmPassword = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragmentconfirmpassword);
+        btConfirm = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.fragmentbuttonchangepassword);
         presenter = new PresentChangePassword();
         presenter.setListened(this);
     }
@@ -40,26 +40,30 @@ public class ChangePasswordActivity extends AppCompatActivity implements ClickBu
         String newPass = getResources().getString(R.string.newpassword);
         String confirmPass = getResources().getString(R.string.confirmPassword);
         String confirm = getResources().getString(R.string.confirm);
-        fragmentCurrentPassword.setDataFagment(currentPass);
-        fragmentCurrentPassword.showPass(true);
-        fragmentNewPassword.setDataFagment(newPass);
-        fragmentConfirmPassword.setDataFagment(confirmPass);
-        fragment_button_changpassword.setTitleButton(confirm);
+        edNewPassword.setDataFagment(newPass);
+        edConfirmPassword.setDataFagment(confirmPass);
+        btConfirm.setTitleButton(confirm);
+        btConfirm.setRegister(this);
+        edCurrentPassword.setDataFagment(currentPass);
+        edCurrentPassword.setListened(this);
+        edConfirmPassword.setListened(this);
+        edNewPassword.setListened(this);
+        edCurrentPassword.showPass(true);
     }
 
     @Override
     public void currentPassEmpty() {
-        fragmentCurrentPassword.setError();
+        edCurrentPassword.setError();
     }
 
     @Override
     public void newPassEmpty() {
-        fragmentNewPassword.setError();
+        edNewPassword.setError();
     }
 
     @Override
     public void confirmPassEmpty() {
-        fragmentConfirmPassword.setError();
+        edConfirmPassword.setError();
     }
 
     @Override
@@ -74,9 +78,18 @@ public class ChangePasswordActivity extends AppCompatActivity implements ClickBu
 
     @Override
     public void clickView(View v) {
-        String currentPass = fragmentCurrentPassword.getText();
-        String newPass = fragmentNewPassword.getText();
-        String confirmPass = fragmentConfirmPassword.getText();
+        String currentPass = edCurrentPassword.getText();
+        String newPass = edNewPassword.getText();
+        String confirmPass = edConfirmPassword.getText();
         presenter.noticeModelChangePassword(currentPass,newPass,confirmPass);
+    }
+
+    @Override
+    public void textWatcher(String text) {
+        if (!edCurrentPassword.getText().equals("")&&!edCurrentPassword.getText().equals("")&&!edConfirmPassword.getText().equals("")){
+            btConfirm.setButtonVisible();
+            return;
+        }
+        btConfirm.setButtonDisable();
     }
 }

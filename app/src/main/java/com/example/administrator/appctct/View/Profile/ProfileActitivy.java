@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.appctct.Component.Constant.Strings;
@@ -16,6 +17,8 @@ import com.example.administrator.appctct.Component.Custom.ProcessDialog;
 import com.example.administrator.appctct.Component.Custom.Shared;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Interfaces.Dialog.ProcessCustomDialogClick;
+import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterProfile;
+import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterProfileListened;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
@@ -27,10 +30,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileActitivy extends AppCompatActivity implements View.OnClickListener,ProcessCustomDialogClick{
+public class ProfileActitivy extends AppCompatActivity implements View.OnClickListener,ProcessCustomDialogClick, PresenterProfileListened{
 
-    TextView tvChangPassword,tvPhoneNumber,tvMemberCTCT,textFullNameProfile,textPhoneNumber;
+    TextView tvChangPassword,tvPhoneNumber,tvMemberCTCT,textFullNameProfile,textPhoneNumber,tvUpdateEmail;
     ImageView imgAvatarProfile;
+    private PresenterProfile presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,38 +51,17 @@ public class ProfileActitivy extends AppCompatActivity implements View.OnClickLi
         textPhoneNumber = findViewById(R.id.textPhoneNumber);
         textFullNameProfile = findViewById(R.id.textFullNameProfile);
         imgAvatarProfile = findViewById(R.id.imgAvatarProfile);
+        tvUpdateEmail = findViewById(R.id.tvUpdateEmail);
         tvChangPassword.setOnClickListener(this);
         tvPhoneNumber.setOnClickListener(this);
         tvMemberCTCT.setOnClickListener(this);
+        presenter = new PresenterProfile(this);
     }
-
-
 
     private void getData(){
         //get token:
-        String id = getSharePre();
-        DataClient client = APIUtils.getData();
-        Call<Profile> call = client.getProfile(id);
-        call.enqueue(new Callback<Profile>() {
-            @Override
-            public void onResponse(@NonNull  Call<Profile> call,@NonNull Response<Profile> response) {
-                if (response.body() != null){
-                    if (response.body().getFullname() != null && response.body().getAvatar() != null) {
-                        setProfile(response.body().getFullname(), response.body().getAvatar());
-                    }
-                }
-            }
-            @Override
-            public void onFailure(@NonNull Call<Profile> call,@NonNull Throwable t) {
-
-            }
-        });
-
-    }
-
-    private void setProfile(String fullname,String avatar){
-        textFullNameProfile.setText(fullname);
-        Glide.with(this).load(Uri.parse(avatar)).into(imgAvatarProfile);
+        String id = getToken();
+        presenter.getInformation(id);
     }
 
     @Override
@@ -93,6 +76,8 @@ public class ProfileActitivy extends AppCompatActivity implements View.OnClickLi
             case R.id.tvMemberCTCT:
                 setTvPhoneNumber();
                 break;
+            case R.id.tvUpdateEmail:
+                break;
         }
     }
 
@@ -104,19 +89,13 @@ public class ProfileActitivy extends AppCompatActivity implements View.OnClickLi
         }
         in.putExtra("showcurrent",result);
         startActivity(in);
+        overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
 
     private void openChangePaswword(){
         Intent intent = new Intent(ProfileActitivy.this,ChangePasswordActivity.class);
         startActivity(intent);
-    }
-
-    private String getSharePre(){
-        SharedPreferences share = getSharedPreferences(Strings.data,MODE_PRIVATE);
-        if (!share.getString("id", "").equals("")){
-            return share.getString("id","");
-        }
-        return "";
+        overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
 
     private void setTvPhoneNumber(){
@@ -127,26 +106,39 @@ public class ProfileActitivy extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClickPositive(String code) {
-        DataClient client = APIUtils.getData();
-        Call<String> call = client.findCode("31",code);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(@NonNull Call<String> call,@NonNull Response<String> response) {
-                if (response.body() != null){
-                    ProcessDialog.dismissCustomDialog();
-                    if (response.body().equals("successed")){
-                        Intent in = new Intent(ProfileActitivy.this,MemberCTCTActivity.class);
-                        startActivity(in);
-                        return;
-                    }
-                    Shared.showToast(ProfileActitivy.this,"Code Failed");
-                }
-            }
+        presenter.checkCode(getToken(),code);
+    }
 
-            @Override
-            public void onFailure(@NonNull Call<String> call,@NonNull Throwable t) {
+    private String getToken(){
+        return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
+    }
 
-            }
-        });
+    @Override
+    public void getInformationSuccessed(Profile profile) {
+        textFullNameProfile.setText(profile.getFullname());
+        Glide.with(this).load(Uri.parse(profile.getAvatar())).into(imgAvatarProfile);
+    }
+
+    @Override
+    public void getInformationFailed() {
+        Toast.makeText(ProfileActitivy.this,"Null",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void connectFailed(String message) {
+        Toast.makeText(ProfileActitivy.this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void checkCodeSuccessed() {
+        ProcessDialog.dismissCustomDialog();
+        startActivity(new Intent(ProfileActitivy.this,MemberCTCTActivity.class));
+        overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
+    }
+
+    @Override
+    public void checkCodeFailed() {
+        ProcessDialog.dismissCustomDialog();
+        Toast.makeText(ProfileActitivy.this,"Code Error",Toast.LENGTH_SHORT).show();
     }
 }

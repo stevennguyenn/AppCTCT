@@ -27,6 +27,7 @@
         <activity android:name=".View.Profile.ProfileActitivy" />
         <activity android:name=".View.SearchView.SearchActivity" />
         <activity android:name=".View.Main.SeeAllActivity"></activity>
+        <activity android:name=".View.CTCT.MemberCTCTActivity"></activity>
     </application>
 
 </manifest>

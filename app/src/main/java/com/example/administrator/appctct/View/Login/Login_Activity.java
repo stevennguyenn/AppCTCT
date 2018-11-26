@@ -124,9 +124,9 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 }
                 Intent intent = new Intent(Login_Activity.this,ForgotPasswordActivity.class);
                 if (cbPhone.isChecked()){
-                    intent.putExtra("isPhone",true);
+                    intent.putExtra(Strings.isPhone,true);
                 } else {
-                    intent.putExtra("isPhone", false);
+                    intent.putExtra(Strings.isPhone, false);
                 }
                 startActivity(intent);
                 overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
@@ -203,12 +203,12 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void setToken(String token){
-        SharedPreferences share = getSharedPreferences("data",MODE_PRIVATE);
+        SharedPreferences share = getSharedPreferences(Strings.data,MODE_PRIVATE);
         SharedPreferences.Editor editor = share.edit();
-        editor.putString("token",token);
+        editor.putString(Strings.token,token);
         editor.apply();
     }
     private String getToken(){
-        return getSharedPreferences("data",MODE_PRIVATE).getString("token","");
+        return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
     }
 }

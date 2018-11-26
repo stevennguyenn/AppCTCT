@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -64,7 +66,8 @@ public class ProcessDialog implements DialogInterface.OnClickListener, View.OnCl
     public void showDialogInputCode(Activity activity) {
         dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setContentView(R.layout.dialog_update_code_ctct);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button yes = dialog.findViewById(R.id.btConfirmDialog);
         edCode = dialog.findViewById(R.id.edInputCode);
         yes.setOnClickListener(this);

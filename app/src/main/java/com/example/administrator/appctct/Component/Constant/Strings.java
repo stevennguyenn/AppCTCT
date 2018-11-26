@@ -9,6 +9,10 @@ public class Strings {
     static public final String data = "data";
     static public final String typeSearch = "TYPESEARCH";
     static public final String isPhone = "isPhone";
+    static public final String token = "token";
+    static public final String successed = "Successed";
+    static public final String failed = "Failed";
+
 
     public class Dialog {
         static public final String title = "Notification";
