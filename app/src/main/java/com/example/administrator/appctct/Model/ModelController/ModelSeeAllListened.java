@@ -1,9 +1,10 @@
-package com.example.administrator.appctct.Presenter.PresenterController;
+package com.example.administrator.appctct.Model.ModelController;
 
 import com.example.administrator.appctct.Entity.FullBook;
+
 import java.util.ArrayList;
 
-public interface PresenterSeeAllListGiaiTich1Listened {
+public interface ModelSeeAllListened {
     void getAllSuccessed(ArrayList<FullBook> listBook);
     void getAllFailed();
     void connectFailed();

@@ -12,12 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.administrator.appctct.Adapter.NaviAdapter.ClickNaviItem;
 import com.example.administrator.appctct.Adapter.NaviAdapter.NaviApdater;
 import com.example.administrator.appctct.Adapter.SettingsApdater.ItemOffetsetDecoration;
 import com.example.administrator.appctct.Component.Constant.Strings;
+import com.example.administrator.appctct.Component.Constant.TypeSearch;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
@@ -76,8 +78,11 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         listBookOne.setupView(getResources().getString(R.string.math1));
         listBookOne.setListened(this);
         listBookTwo.setupView(getResources().getString(R.string.math2));
+        listBookTwo.setListened(this);
         listBookThree.setupView(getResources().getString(R.string.physical1));
+        listBookThree.setListened(this);
         listBookFor.setupView(getResources().getString(R.string.physical2));
+        listBookFor.setListened(this);
     }
 
     private void setToolbar(){
@@ -196,7 +201,24 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     }
 
     @Override
-    public void clickSeeAll() {
-        startActivity(new Intent(ControllerActivity.this,SeeAllGiaiTich1.class));
+    public void clickSeeAll(View view) {
+        Intent intent = new Intent(ControllerActivity.this,SeeAll.class);
+        int typeSearch = 0;
+        switch (view.getId()){
+            case R.id.viewListBookOne:
+                typeSearch = TypeSearch.SEARCHGT1.rawValue();
+                break;
+            case R.id.viewListBookTwo:
+                typeSearch = TypeSearch.SEARCHGT2.rawValue();
+                break;
+            case R.id.viewListBookThree:
+                typeSearch = TypeSearch.SEARCHVL1.rawValue();
+                break;
+            case R.id.viewListBookFor:
+                typeSearch = TypeSearch.SEARCHVL2.rawValue();
+                break;
+        }
+        intent.putExtra(Strings.typeSearch,typeSearch);
+        startActivity(intent);
     }
 }

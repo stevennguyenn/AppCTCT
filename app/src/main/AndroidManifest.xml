@@ -26,7 +26,7 @@
         <activity android:name=".View.Main.ControllerActivity" />
         <activity android:name=".View.Profile.ProfileActitivy" />
         <activity android:name=".View.SearchView.SearchActivity" />
-        <activity android:name=".View.Main.SeeAllGiaiTich1"></activity>
+        <activity android:name=".View.Main.SeeAll"></activity>
     </application>
 
 </manifest>

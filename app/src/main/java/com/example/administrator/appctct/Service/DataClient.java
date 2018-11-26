@@ -89,4 +89,13 @@ public interface DataClient {
 
     @GET("book/getallgiaitich1.php")
     Call<ArrayList<FullBook>> getAllGiaiTich1();
+
+    @GET("book/getallgiaitich2.php")
+    Call<ArrayList<FullBook>> getAllGiaiTich2();
+
+    @GET("book/getallvatly1.php")
+    Call<ArrayList<FullBook>> getAllVatLy1();
+
+    @GET("book/getallvatly2.php")
+    Call<ArrayList<FullBook>> getAllVatLy2();
 }

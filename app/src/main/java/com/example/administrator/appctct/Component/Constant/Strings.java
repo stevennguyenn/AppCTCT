@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class Strings {
     static public final String data = "data";
+    static public final String typeSearch = "TYPESEARCH";
+    static public final String isPhone = "isPhone";
 
     public class Dialog {
         static public final String title = "Notification";

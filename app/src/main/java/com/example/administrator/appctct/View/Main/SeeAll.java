@@ -4,18 +4,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.FragmentSellAllListBook;
-import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAllListGiaiTich1;
-import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAllListGiaiTich1Listened;
+import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAll;
+import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAllListened;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class SeeAllGiaiTich1 extends AppCompatActivity implements PresenterSeeAllListGiaiTich1Listened {
+public class SeeAll extends AppCompatActivity implements PresenterSeeAllListened {
 
     FragmentSellAllListBook fragmentSeeAllGiaiTich1;
-    private PresenterSeeAllListGiaiTich1 presenter;
+    private PresenterSeeAll presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +30,27 @@ public class SeeAllGiaiTich1 extends AppCompatActivity implements PresenterSeeAl
     private void setID(){
         fragmentSeeAllGiaiTich1 = (FragmentSellAllListBook) getSupportFragmentManager().findFragmentById(R.id.fragmentSeeAllListGiaiTich1);
     }
+
     private void setupView(){
-        presenter = new PresenterSeeAllListGiaiTich1(this);
+        presenter = new PresenterSeeAll(this);
     }
+
     private void getData(){
-        presenter.getData();
+        int searchType = getIntent().getIntExtra(Strings.typeSearch,0);
+        switch (searchType){
+            case 1:
+                presenter.getDataGiaiTich1();
+                break;
+            case 2:
+                presenter.getDataGiaiTich2();
+                break;
+            case 3:
+                presenter.getDataVatLy1();
+                break;
+            case 4:
+                presenter.getDataVatLy2();
+                break;
+        }
     }
 
     @Override
@@ -43,11 +60,11 @@ public class SeeAllGiaiTich1 extends AppCompatActivity implements PresenterSeeAl
 
     @Override
     public void getAllFailed() {
-        Toast.makeText(SeeAllGiaiTich1.this,"Null",Toast.LENGTH_SHORT).show();
+        Toast.makeText(SeeAll.this,"Null",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void connectFailed() {
-        Toast.makeText(SeeAllGiaiTich1.this,"Connect Failed",Toast.LENGTH_SHORT).show();
+        Toast.makeText(SeeAll.this,"Connect Failed",Toast.LENGTH_SHORT).show();
     }
 }
