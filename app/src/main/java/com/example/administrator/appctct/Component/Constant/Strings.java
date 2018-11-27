@@ -38,6 +38,7 @@ public class Strings {
             ArrayList<CellNavi> list = new ArrayList<>();
             list.add(new CellNavi(R.drawable.profile, "Profile"));
             list.add(new CellNavi(R.drawable.test, "Test"));
+            list.add(new CellNavi(R.drawable.icvideo,"Videos"));
             list.add(new CellNavi(R.drawable.forum,"Forum"));
             list.add(new CellNavi(R.drawable.settingnavi, "Settings"));
             return list;

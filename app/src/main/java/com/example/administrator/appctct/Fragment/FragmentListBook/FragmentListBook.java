@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
+import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.ListBookAdapter.ListBookAdapter;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.R;
@@ -24,6 +26,7 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
     private ListBookAdapter adapter;
     private ArrayList<Book> listBook;
     private ProcessPragmentListBook listened;
+    private RecyclerViewSkeletonScreen skeleton;
 
     public void setListened(ProcessPragmentListBook listened){
         this.listened = listened;
@@ -35,19 +38,24 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_line_viewcontroller,container,false);
         tvSeeAll = view.findViewById(R.id.tvSeeAll);
         tvTile = view.findViewById(R.id.tvTitle);
+        rcListBook = view.findViewById(R.id.rcListBook);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tvSeeAll.setOnClickListener(this);
-        rcListBook = view.findViewById(R.id.rcListBook);
         layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         rcListBook.setLayoutManager(layoutManager);
         rcListBook.setHasFixedSize(true);
         listBook = new ArrayList<>();
         adapter = new ListBookAdapter(getActivity().getLayoutInflater(),listBook);
         rcListBook.setAdapter(adapter);
+        skeleton = Skeleton.bind(rcListBook)
+                .adapter(adapter)
+                .load(R.layout.layout_skeleton_controller)
+                .angle(0)
+                .show();
     }
 
     public void setupView(String title){
@@ -56,6 +64,10 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
 
     public void setListBook(ArrayList<Book> listBook){
         adapter.setListBook(listBook);
+        if (skeleton != null){
+            skeleton.hide();
+            skeleton = null;
+        }
     }
 
     @Override

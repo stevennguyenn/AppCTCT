@@ -7,136 +7,141 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
+import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.QuestionApdater.CheckBoxClick;
 import com.example.administrator.appctct.Adapter.QuestionApdater.QuestionAdapter;
 import com.example.administrator.appctct.Adapter.QuestionApdater.ItemClick;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
+import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMain;
+import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainGetQuestion;
+import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainGetQuestionListened;
+import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainListened;
+import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProcessResult;
+import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProcessResultListened;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements ItemClick,CheckBoxClick,View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainListened,PresenterMainGetQuestionListened,PresenterProcessResultListened{
 
     RecyclerView rcQuestion;
-    ArrayList<ModelQuestion> listQuestion;
-    QuestionAdapter adapter;
-    Button btCTCT;
-    ArrayList<IdAndResult> listIdandResult;
-
+    private ArrayList<ModelQuestion> listQuestion;
+    private QuestionAdapter adapter;
+    private ArrayList<IdAndResult> listIdandResult;
+    private RecyclerViewSkeletonScreen skeleton;
+    fragment_button btCTCT;
+    private PresenterMain presenter;
+    private PresenterMainGetQuestion presenterGetQuestion;
+    private PresenterProcessResult processResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setID();
-        setData();
+        setupView();
         getData();
     }
 
     private void getData(){
-        DataClient client = APIUtils.getData();
-        Call<ArrayList<ModelQuestion>> call = client.getQuestion();
-        call.enqueue(new Callback<ArrayList<ModelQuestion>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Response<ArrayList<ModelQuestion>> response) {
-                if (response.body() != null) {
-                    listQuestion.addAll(response.body());
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        presenterGetQuestion.getQuestion();
     }
 
     private void setID(){
         rcQuestion = findViewById(R.id.rcMain);
-        btCTCT = findViewById(R.id.btCTCT);
-        btCTCT.setOnClickListener(this);
+        btCTCT = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btCTCT);
     }
 
-    private void setData(){
+    private void setupView(){
+        btCTCT.setTitleButton(getResources().getString(R.string.confirm));
+        btCTCT.setRegister(this);
+        btCTCT.setButtonVisible();
+        presenter = new PresenterMain(this);
+        presenterGetQuestion = new PresenterMainGetQuestion(this);
+        processResult = new PresenterProcessResult(this);
         rcQuestion.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         rcQuestion.setLayoutManager(layoutManager);
         listQuestion = new ArrayList<>();
         adapter = new QuestionAdapter(listQuestion,MainActivity.this);
         adapter.setCheckBoxClickListened(this);
-        adapter.setClickListned(this);
         rcQuestion.setAdapter(adapter);
+        skeleton = Skeleton.bind(rcQuestion)
+                            .adapter(adapter)
+                            .load(R.layout.layout_default_item_skeleton)
+                            .angle(0)
+                            .show();
         listIdandResult = new ArrayList<>();
     }
 
     @Override
-    public void click(View v, int position) {
-        //Toast.makeText(MainActivity.this,listQuestion.get(position).getQuestion_a()+"",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void checkboxListened(int position, String result) {
-        if (listIdandResult.size() > 0) {
-            for (IdAndResult x : listIdandResult) {
-                if (x.getId().equals(listQuestion.get(position).getId())) {
-                    Integer index = listIdandResult.indexOf(x);
-                    listIdandResult.get(index).setResult(result);
-                    return;
-                }
-            }
-            listIdandResult.add(new IdAndResult(listQuestion.get(position).getId(), result));
-            return;
-        }
-        listIdandResult.add(new IdAndResult(listQuestion.get(position).getId(), result));
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btCTCT:
-                showResult();
-                break;
-        }
+        Object[] objects = new Object[4];
+        objects[0] = listIdandResult;
+        objects[1] = position;
+        objects[2] = result;
+        objects[3] = listQuestion;
+        processResult.process(objects);
     }
 
     private void showResult(){
-        if (listIdandResult.size() == 0){
-            Toast.makeText(MainActivity.this,"Please choice result",Toast.LENGTH_SHORT).show();
-            return;
+        presenter.getResult(listIdandResult);
+    }
+
+    @Override
+    public void clickView(View v) {
+        showResult();
+    }
+
+    @Override
+    public void noChoice() {
+        Toast.makeText(MainActivity.this,"Please Choice Question",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getPointSuccessed(int point) {
+        Toast.makeText(MainActivity.this,point+"",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getPointFailed() {
+        Toast.makeText(MainActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getQuestionSuccessed(ArrayList<ModelQuestion> listQuestion) {
+        this.listQuestion.addAll(listQuestion);
+        adapter.notifyDataSetChanged();
+        if (skeleton != null){
+            skeleton.hide();
+            skeleton = null;
         }
-        String[] arrid = new String[listIdandResult.size()];
-        String[] arrresult = new String[listIdandResult.size()];
+    }
 
-        for (int i = 0 ;i<listIdandResult.size();i++){
-            arrid[i] = listIdandResult.get(i).getId();
-            arrresult[i] = listIdandResult.get(i).getResult();
-        }
+    @Override
+    public void getQuestionFailed() {
+        Toast.makeText(MainActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    }
 
-        DataClient client = APIUtils.getData();
-        Call<Integer> callback = client.getResult(arrid,arrresult);
-        callback.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(@NonNull  Call<Integer> call,@NonNull Response<Integer> response) {
-                if (response.body() != null){
-                    Toast.makeText(MainActivity.this,response.body()+"",Toast.LENGTH_SHORT).show();
-                }
-            }
+    @Override
+    public void connectFailed(String message) {
+        Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
+    }
 
-            @Override
-            public void onFailure(@NonNull  Call<Integer> call,@NonNull Throwable t) {
-                Log.d("AAAB",t.getLocalizedMessage());
-            }
-        });
+    @Override
+    public void getResult(ArrayList<IdAndResult> list) {
+        listIdandResult = list;
     }
 }

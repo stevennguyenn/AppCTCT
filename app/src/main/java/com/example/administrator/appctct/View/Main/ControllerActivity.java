@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.View.Main;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -30,6 +31,8 @@ import com.example.administrator.appctct.Presenter.PresenterController.Presenter
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.View.Profile.ProfileActitivy;
 import com.example.administrator.appctct.View.SearchView.SearchActivity;
+import com.example.administrator.appctct.View.Setting.SettingActivity;
+import com.example.administrator.appctct.View.Test.MainActivity;
 
 import java.util.ArrayList;
 
@@ -116,6 +119,16 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
             case 0:
                 Intent intent = new Intent(ControllerActivity.this, ProfileActitivy.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+                break;
+            case 4:
+                Intent intent3 = new Intent(ControllerActivity.this, SettingActivity.class);
+                startActivity(intent3);
+                overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+                break;
+            case 1:
+                Intent intent1 = new Intent(ControllerActivity.this, MainActivity.class);
+                startActivity(intent1);
                 overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
                 break;
         }

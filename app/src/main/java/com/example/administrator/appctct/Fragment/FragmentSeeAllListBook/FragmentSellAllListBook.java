@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
+import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.SeeAllListBook.LoadMore;
 import com.example.administrator.appctct.Adapter.SeeAllListBook.SeeAllListBookAdapter;
 import com.example.administrator.appctct.Entity.FullBook;
@@ -27,6 +29,7 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
     private int typeSearch = 0;
     private SearchSeeAllListened listened;
     private LoadMoreForFragment loadMore;
+    private RecyclerViewSkeletonScreen skeleton;
 
 
     public void setLoadMore(LoadMoreForFragment loadMore){
@@ -56,12 +59,22 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
         adapter = new SeeAllListBookAdapter(rcSeeAll,getLayoutInflater(),listBook);
         adapter.setLoadMore(this);
         rcSeeAll.setAdapter(adapter);
+        skeleton = Skeleton.bind(rcSeeAll)
+                .adapter(adapter)
+                .load(R.layout.layout_default_item_skeleton)
+                .angle(0)
+                .show();
         imgSearch.setOnClickListener(this);
+
     }
 
     public void setListBook(ArrayList<FullBook> listBook,int typeSearch){
         adapter.setListBook(listBook);
         this.typeSearch = typeSearch;
+        if (skeleton != null){
+            skeleton.hide();
+            skeleton = null;
+        }
     }
 
     @Override
