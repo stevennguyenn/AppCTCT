@@ -1,13 +1,9 @@
 package com.example.administrator.appctct.Model.ModelMain;
 
 import android.support.annotation.NonNull;
-import android.widget.Toast;
-
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
-import com.example.administrator.appctct.View.Test.MainActivity;
-
 import java.util.ArrayList;
 
 import retrofit2.Call;

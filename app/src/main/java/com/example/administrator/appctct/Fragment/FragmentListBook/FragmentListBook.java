@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.ListBookAdapter.ListBookAdapter;
@@ -22,9 +21,7 @@ import java.util.ArrayList;
 public class FragmentListBook extends Fragment implements View.OnClickListener{
     TextView tvSeeAll,tvTile;
     RecyclerView rcListBook;
-    private LinearLayoutManager layoutManager;
     private ListBookAdapter adapter;
-    private ArrayList<Book> listBook;
     private ProcessPragmentListBook listened;
     private RecyclerViewSkeletonScreen skeleton;
 
@@ -45,11 +42,11 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tvSeeAll.setOnClickListener(this);
-        layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rcListBook.setLayoutManager(layoutManager);
         rcListBook.setHasFixedSize(true);
-        listBook = new ArrayList<>();
-        adapter = new ListBookAdapter(getActivity().getLayoutInflater(),listBook);
+        ArrayList<Book> listBook = new ArrayList<>();
+        adapter = new ListBookAdapter(getActivity().getLayoutInflater(), listBook);
         rcListBook.setAdapter(adapter);
         skeleton = Skeleton.bind(rcListBook)
                 .adapter(adapter)

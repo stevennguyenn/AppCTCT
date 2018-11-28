@@ -1,16 +1,12 @@
 package com.example.administrator.appctct.Model.ModelProfile;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Custom.ProcessDialog;
-import com.example.administrator.appctct.Component.Custom.Shared;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
-import com.example.administrator.appctct.View.CTCT.MemberCTCTActivity;
-import com.example.administrator.appctct.View.Profile.ProfileActitivy;
 
 import retrofit2.Call;
 import retrofit2.Callback;

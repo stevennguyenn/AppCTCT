@@ -19,5 +19,5 @@ public enum TypeSearch {
                 default:
                     return 0;
         }
-    };
+    }
 }

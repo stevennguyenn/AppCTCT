@@ -1,9 +1,7 @@
 package com.example.administrator.appctct.View.Profile;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,21 +12,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Custom.ProcessDialog;
-import com.example.administrator.appctct.Component.Custom.Shared;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Interfaces.Dialog.ProcessCustomDialogClick;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterProfile;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterProfileListened;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.Service.APIUtils;
-import com.example.administrator.appctct.Service.DataClient;
 import com.example.administrator.appctct.View.CTCT.MemberCTCTActivity;
 import com.example.administrator.appctct.View.Setting.ChangePasswordActivity;
 import com.example.administrator.appctct.View.Setting.UpdatePhoneNumberActivity;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ProfileActitivy extends AppCompatActivity implements View.OnClickListener,ProcessCustomDialogClick, PresenterProfileListened{
 

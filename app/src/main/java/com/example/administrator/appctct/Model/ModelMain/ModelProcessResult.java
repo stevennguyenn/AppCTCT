@@ -1,7 +1,6 @@
 package com.example.administrator.appctct.Model.ModelMain;
 
 import android.os.AsyncTask;
-
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 

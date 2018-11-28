@@ -19,7 +19,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @NonNull
     private ArrayList<ModelQuestion> listQuestion;
     private LayoutInflater layoutInflater;
-    private ItemClick itemClickListened;
     private CheckBoxClick checkBoxClickListened;
 
     public QuestionAdapter(@NonNull ArrayList<ModelQuestion> listQuestion, Context context){
@@ -58,10 +57,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         this.checkBoxClickListened = checkBoxClickListened;
     }
 
-    public void setClickListned(ItemClick itemClickListened){
-        this.itemClickListened = itemClickListened;
-    }
-    public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener{
         TextView tvContentQuestion, tvQuestionA, tvQuestionB, tvQuestionC, tvQuestionD;
         CheckBox rdQuestionA,rdQuestionB,rdQuestionC,rdQuestionD;
 
@@ -76,12 +72,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             rdQuestionB = itemView.findViewById(R.id.rdQuestionB);
             rdQuestionC = itemView.findViewById(R.id.rdQuestionC);
             rdQuestionD = itemView.findViewById(R.id.rdQuestionD);
-
             rdQuestionA.setOnCheckedChangeListener(this);
             rdQuestionB.setOnCheckedChangeListener(this);
             rdQuestionC.setOnCheckedChangeListener(this);
             rdQuestionD.setOnCheckedChangeListener(this);
-            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -127,13 +121,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                         default:
                             break;
                 }
-            }
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (itemClickListened != null){
-                itemClickListened.click(v,getAdapterPosition());
             }
         }
     }

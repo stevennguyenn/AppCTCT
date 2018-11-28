@@ -25,7 +25,6 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
     private RecyclerView rcSeeAll;
     private ImageView imgSearch;
     private SeeAllListBookAdapter adapter;
-    private ArrayList<FullBook> listBook;
     private int typeSearch = 0;
     private SearchSeeAllListened listened;
     private LoadMoreForFragment loadMore;
@@ -55,8 +54,8 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         rcSeeAll.setLayoutManager(layoutManager);
         rcSeeAll.setHasFixedSize(true);
-        listBook = new ArrayList<>();
-        adapter = new SeeAllListBookAdapter(rcSeeAll,getLayoutInflater(),listBook);
+        ArrayList<FullBook> listBook = new ArrayList<>();
+        adapter = new SeeAllListBookAdapter(rcSeeAll,getLayoutInflater(), listBook);
         adapter.setLoadMore(this);
         rcSeeAll.setAdapter(adapter);
         skeleton = Skeleton.bind(rcSeeAll)

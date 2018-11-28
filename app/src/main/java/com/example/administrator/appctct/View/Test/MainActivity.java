@@ -1,11 +1,9 @@
 package com.example.administrator.appctct.View.Test;
 
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,7 +11,6 @@ import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.QuestionApdater.CheckBoxClick;
 import com.example.administrator.appctct.Adapter.QuestionApdater.QuestionAdapter;
-import com.example.administrator.appctct.Adapter.QuestionApdater.ItemClick;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
@@ -25,15 +22,7 @@ import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainLi
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProcessResult;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProcessResultListened;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.Service.APIUtils;
-import com.example.administrator.appctct.Service.DataClient;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainListened,PresenterMainGetQuestionListened,PresenterProcessResultListened{
 
