@@ -29,6 +29,16 @@ public class ModelQuestion {
     @Expose
     private String question_d;
 
+    private Boolean isExpanding = false;
+
+    public void setIsExpanding(Boolean isExpanding){
+        this.isExpanding = isExpanding;
+    }
+
+    public Boolean getExpanding() {
+        return isExpanding;
+    }
+
     public String getId() {
         return id;
     }

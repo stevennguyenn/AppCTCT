@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.appctct.Entity.ModelQuestion;
@@ -20,6 +23,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private ArrayList<ModelQuestion> listQuestion;
     private LayoutInflater layoutInflater;
     private CheckBoxClick checkBoxClickListened;
+    private Animation start,end,rotate_down,rotate_up;
 
     public QuestionAdapter(@NonNull ArrayList<ModelQuestion> listQuestion, Context context){
         this.layoutInflater = LayoutInflater.from(context);
@@ -30,39 +34,43 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)  {
         View view = layoutInflater.inflate(R.layout.layout_line_question,viewGroup,false);
+        start = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.slide_down);
+        end = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.slide_up);
+        rotate_down = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.rotate_down);
+        rotate_up = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.rotate_up);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         ModelQuestion modelQuestion = listQuestion.get(i);
+        viewHolder.tvNumberQuestion.setText(String.valueOf("Question "+(i+1)+":"));
         viewHolder.tvContentQuestion.setText(modelQuestion.getContent_question());
         viewHolder.tvQuestionA.setText(modelQuestion.getQuestion_a());
         viewHolder.tvQuestionB.setText(modelQuestion.getQuestion_b());
         viewHolder.tvQuestionC.setText(modelQuestion.getQuestion_c());
         viewHolder.tvQuestionD.setText(modelQuestion.getQuestion_d());
+        viewHolder.imgText.setVisibility(View.GONE);
     }
 
     @Override
     public int getItemCount() {
         return listQuestion.size();
     }
-//
-//    public void removeItem(int postion){
-//        listQuestion.remove(postion);
-//        notifyItemRemoved(postion);
-//    }
 
     public void setCheckBoxClickListened(CheckBoxClick checkBoxClickListened){
         this.checkBoxClickListened = checkBoxClickListened;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener{
-        TextView tvContentQuestion, tvQuestionA, tvQuestionB, tvQuestionC, tvQuestionD;
+    public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener{
+        TextView tvContentQuestion, tvQuestionA, tvQuestionB, tvQuestionC, tvQuestionD,tvNumberQuestion;
         CheckBox rdQuestionA,rdQuestionB,rdQuestionC,rdQuestionD;
+        ImageView imgExpanding,imgText;
+
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvNumberQuestion = itemView.findViewById(R.id.tvQuestion);
             tvContentQuestion =  itemView.findViewById(R.id.tvContentQuestion);
             tvQuestionA =  itemView.findViewById(R.id.tvQuestionA);
             tvQuestionB = itemView.findViewById(R.id.tvQuestionB);
@@ -72,6 +80,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             rdQuestionB = itemView.findViewById(R.id.rdQuestionB);
             rdQuestionC = itemView.findViewById(R.id.rdQuestionC);
             rdQuestionD = itemView.findViewById(R.id.rdQuestionD);
+            imgExpanding = itemView.findViewById(R.id.imgExpanding);
+            imgText = itemView.findViewById(R.id.imgText);
+            imgExpanding.setOnClickListener(this);
             rdQuestionA.setOnCheckedChangeListener(this);
             rdQuestionB.setOnCheckedChangeListener(this);
             rdQuestionC.setOnCheckedChangeListener(this);
@@ -121,6 +132,24 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                         default:
                             break;
                 }
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.imgExpanding:
+                    if (listQuestion.get(getAdapterPosition()).getExpanding()){
+                        imgText.setVisibility(View.GONE);
+                        imgText.setAnimation(end);
+                        imgExpanding.setAnimation(rotate_up);
+                        listQuestion.get(getAdapterPosition()).setIsExpanding(false);
+                        return;
+                    }
+                    imgText.setVisibility(View.VISIBLE);
+                    imgText.setAnimation(start);
+                    imgExpanding.setAnimation(rotate_down);
+                    listQuestion.get(getAdapterPosition()).setIsExpanding(true);
             }
         }
     }
