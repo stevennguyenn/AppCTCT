@@ -9,6 +9,15 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <service
+            android:name=".Component.Custom.NotificationService"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
+
         <activity android:name=".View.Test.MainActivity" />
         <activity android:name=".View.Login.Login_Activity">
             <intent-filter>

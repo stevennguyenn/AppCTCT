@@ -21,6 +21,7 @@ import com.example.administrator.appctct.Adapter.NaviAdapter.NaviApdater;
 import com.example.administrator.appctct.Adapter.SettingsApdater.ItemOffetsetDecoration;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Constant.TypeSearch;
+import com.example.administrator.appctct.Component.Custom.NotificationService;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
@@ -55,6 +56,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         setupView();
         setToolbar();
         getData();
+//        startService(new Intent(this, NotificationService.class));
     }
 
     private void setID(){

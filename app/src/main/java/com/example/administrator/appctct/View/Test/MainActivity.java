@@ -1,18 +1,19 @@
 package com.example.administrator.appctct.View.Test;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.QuestionApdater.CheckBoxClick;
 import com.example.administrator.appctct.Adapter.QuestionApdater.QuestionAdapter;
+import com.example.administrator.appctct.Component.Custom.Notification;
+import com.example.administrator.appctct.Component.Custom.NotificationService;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         setID();
         setupView();
         getData();
+//        stopService(new Intent(this, NotificationService.class));
     }
 
     private void getData(){
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
 
     @Override
     public void clickView(View v) {
+        Notification.notify(MainActivity.this);
         showResult();
     }
 
