@@ -13,21 +13,17 @@
             android:name=".Component.Custom.NotificationService"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
         <activity android:name=".View.Test.MainActivity" />
         <activity android:name=".View.Login.Login_Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".View.Setting.Register_Activity" />
-        <activity android:name=".View.Test.PDFReaderActivity" />
         <activity android:name=".View.Setting.ChangePasswordActivity" />
         <activity android:name=".View.Setting.UpdatePhoneNumberActivity" />
         <activity android:name=".View.Setting.ForgotPasswordActivity" />
@@ -35,8 +31,15 @@
         <activity android:name=".View.Main.ControllerActivity" />
         <activity android:name=".View.Profile.ProfileActitivy" />
         <activity android:name=".View.SearchView.SearchActivity" />
-        <activity android:name=".View.Main.SeeAllActivity"></activity>
-        <activity android:name=".View.CTCT.MemberCTCTActivity"></activity>
+        <activity android:name=".View.Main.SeeAllActivity" />
+        <activity android:name=".View.CTCT.MemberCTCTActivity" />
+        <activity android:name=".View.Test.PDFActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

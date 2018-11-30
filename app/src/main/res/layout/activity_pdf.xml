@@ -3,5 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Test.PDFReaderActivity">
+    tools:context=".View.Test.PDFActivity">
+
+    <WebView
+        android:id="@+id/wvPDF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
+
 </android.support.constraint.ConstraintLayout>

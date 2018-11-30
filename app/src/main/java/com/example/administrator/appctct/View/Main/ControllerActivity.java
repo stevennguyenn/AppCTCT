@@ -1,7 +1,6 @@
 package com.example.administrator.appctct.View.Main;
 
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -21,7 +20,6 @@ import com.example.administrator.appctct.Adapter.NaviAdapter.NaviApdater;
 import com.example.administrator.appctct.Adapter.SettingsApdater.ItemOffetsetDecoration;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Constant.TypeSearch;
-import com.example.administrator.appctct.Component.Custom.NotificationService;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
@@ -43,7 +41,6 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     private RecyclerView rcNavi;
     private NaviApdater adapter;
     private Toolbar toolbar;
-    private ArrayList<CellNavi> listNavi;
     private ContentHeader header = new ContentHeader();
     private FragmentListBook listBookOne,listBookTwo,listBookThree,listBookFor;
     private PresenterController present;
@@ -73,8 +70,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     private void setupView(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(ControllerActivity.this,LinearLayoutManager.VERTICAL,false);
         rcNavi.setLayoutManager(layoutManager);
-        listNavi = new ArrayList<>();
-        listNavi = Strings.lineNavi.getLineNavi();
+        ArrayList<CellNavi> listNavi = Strings.lineNavi.getLineNavi();
         adapter = new NaviApdater(this.getLayoutInflater(), listNavi,header);
         adapter.setListened(this);
         rcNavi.setAdapter(adapter);
@@ -98,8 +94,8 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.tbnavi);
         }
-        actionBar.setHomeAsUpIndicator(R.drawable.tbnavi);
     }
 
     private void getData(){
