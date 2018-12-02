@@ -24,6 +24,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private LayoutInflater layoutInflater;
     private CheckBoxClick checkBoxClickListened;
     private Animation start,end,rotate_down,rotate_up;
+    public boolean isClick = true;
 
     public QuestionAdapter(@NonNull ArrayList<ModelQuestion> listQuestion, Context context){
         this.layoutInflater = LayoutInflater.from(context);
@@ -53,6 +54,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         viewHolder.imgText.setVisibility(View.GONE);
     }
 
+
     @Override
     public int getItemCount() {
         return listQuestion.size();
@@ -61,6 +63,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public void setCheckBoxClickListened(CheckBoxClick checkBoxClickListened){
         this.checkBoxClickListened = checkBoxClickListened;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener{
         TextView tvContentQuestion, tvQuestionA, tvQuestionB, tvQuestionC, tvQuestionD,tvNumberQuestion;
@@ -91,48 +94,49 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked){
-                switch (buttonView.getId()){
-                    case R.id.rdQuestionA:
-                        rdQuestionA.setChecked(true);
-                        rdQuestionB.setChecked(false);
-                        rdQuestionC.setChecked(false);
-                        rdQuestionD.setChecked(false);
-                        if (checkBoxClickListened != null){
-                            checkBoxClickListened.checkboxListened(getAdapterPosition(), "a");
-                        }
-                        break;
-                    case R.id.rdQuestionB:
-                        rdQuestionB.setChecked(true);
-                        rdQuestionA.setChecked(false);
-                        rdQuestionC.setChecked(false);
-                        rdQuestionD.setChecked(false);
-                        if (checkBoxClickListened != null){
-                            checkBoxClickListened.checkboxListened(getAdapterPosition(),"b");
-                        }
-                        break;
-                    case R.id.rdQuestionC:
-                        rdQuestionC.setChecked(true);
-                        rdQuestionA.setChecked(false);
-                        rdQuestionB.setChecked(false);
-                        rdQuestionD.setChecked(false);
-                        if (checkBoxClickListened != null){
-                            checkBoxClickListened.checkboxListened(getAdapterPosition(),"c");
-                        }
-                        break;
-                    case R.id.rdQuestionD:
-                        rdQuestionD.setChecked(true);
-                        rdQuestionA.setChecked(false);
-                        rdQuestionC.setChecked(false);
-                        rdQuestionB.setChecked(false);
-                        if (checkBoxClickListened != null){
-                            checkBoxClickListened.checkboxListened(getAdapterPosition(),"d");
-                        }
-                        break;
+                if (isChecked) {
+                    switch (buttonView.getId()) {
+                        case R.id.rdQuestionA:
+                            rdQuestionA.setChecked(true);
+                            rdQuestionB.setChecked(false);
+                            rdQuestionC.setChecked(false);
+                            rdQuestionD.setChecked(false);
+                            if (checkBoxClickListened != null) {
+                                checkBoxClickListened.checkboxListened(getAdapterPosition(), "a");
+                            }
+                            break;
+                        case R.id.rdQuestionB:
+                            rdQuestionB.setChecked(true);
+                            rdQuestionA.setChecked(false);
+                            rdQuestionC.setChecked(false);
+                            rdQuestionD.setChecked(false);
+                            if (checkBoxClickListened != null) {
+                                checkBoxClickListened.checkboxListened(getAdapterPosition(), "b");
+                            }
+                            break;
+                        case R.id.rdQuestionC:
+                            rdQuestionC.setChecked(true);
+                            rdQuestionA.setChecked(false);
+                            rdQuestionB.setChecked(false);
+                            rdQuestionD.setChecked(false);
+                            if (checkBoxClickListened != null) {
+                                checkBoxClickListened.checkboxListened(getAdapterPosition(), "c");
+                            }
+                            break;
+                        case R.id.rdQuestionD:
+                            rdQuestionD.setChecked(true);
+                            rdQuestionA.setChecked(false);
+                            rdQuestionC.setChecked(false);
+                            rdQuestionB.setChecked(false);
+                            if (checkBoxClickListened != null) {
+                                checkBoxClickListened.checkboxListened(getAdapterPosition(), "d");
+                            }
+                            break;
                         default:
                             break;
+                    }
                 }
-            }
+
         }
 
         @Override

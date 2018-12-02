@@ -7,16 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
-
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.QuestionApdater.CheckBoxClick;
 import com.example.administrator.appctct.Adapter.QuestionApdater.QuestionAdapter;
 import com.example.administrator.appctct.Component.Custom.Notification;
-import com.example.administrator.appctct.Component.Custom.NotificationService;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
+import com.example.administrator.appctct.Fragment.FragmentButton.TimeEnd;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMain;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainGetQuestion;
@@ -27,7 +26,7 @@ import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProces
 import com.example.administrator.appctct.R;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainListened,PresenterMainGetQuestionListened,PresenterProcessResultListened{
+public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainListened,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd{
 
     RecyclerView rcQuestion;
     private ArrayList<ModelQuestion> listQuestion;
@@ -46,6 +45,12 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         setupView();
         getData();
 //        stopService(new Intent(this, NotificationService.class));
+        setTimer();
+    }
+    
+    private void setTimer(){
+        btCTCT.setTimeEndListened(this);
+        btCTCT.timeTest(10000);
     }
 
     private void getData(){
@@ -137,5 +142,13 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     @Override
     public void getResult(ArrayList<IdAndResult> list) {
         listIdandResult = list;
+    }
+
+    @Override
+    public void timeEnd() {
+        btCTCT.cancelTimer();
+        Intent in = new Intent(MainActivity.this,ShowResultActivity.class);
+        startActivity(in);
+        overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
 }

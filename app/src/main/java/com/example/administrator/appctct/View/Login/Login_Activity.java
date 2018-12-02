@@ -135,23 +135,6 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         dialog.show();
     }
 
-
-    @Override
-    public void userIsEmpty() {
-        edUserName.setError("User Name is empty");
-    }
-
-    @Override
-    public void passwordIsEmpty() {
-        edPassword.setError("Password is empty");
-    }
-
-    @Override
-    public void loginSuccess(String account, String password) {
-        viewProgress.setVisibility(View.GONE);
-        presenter.login(account,password);
-    }
-
     @Override
     public void loginSuccessed(String token) {
         startActivity(new Intent(Login_Activity.this, ControllerActivity.class));
@@ -168,6 +151,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     public void connectFailed() {
         Toast.makeText(Login_Activity.this,"Connect Failed",Toast.LENGTH_SHORT).show();
     }
+
     //delegate from fragment
     @Override
     public void clickView(View v) {
@@ -177,7 +161,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 viewProgress.setVisibility(View.VISIBLE);
                 String userName = edUserName.getText().toString();
                 String password = edPassword.getText().toString();
-                presenter.notifyodelProcessLogin(userName,password);
+                presenter.login(userName,password);
                 break;
         }
     }

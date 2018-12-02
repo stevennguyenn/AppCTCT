@@ -28,17 +28,6 @@ public class ModelLogin {
         this.callback = callback;
     }
 
-    public void handlerLogin(String userName, String password){
-        if (userName.equals("")){
-            callback.userIsEmpty();
-            return;
-        }
-        if (password.equals("")){
-            callback.passwordIsEmpty();
-            return;
-        }
-        callback.loginSuccess(userName,password);
-    }
 
     public void login(String account,String password){
         Call<Student> call = dataClient.login(account,password);

@@ -27,6 +27,5 @@ public class PDFActivity extends AppCompatActivity {
                         "document.querySelector('[role=\"toolbar\"]').remove();})()");
             }
         });
-
     }
 }

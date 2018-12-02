@@ -13,4 +13,5 @@
     <color name="color_yellow">#f4b20b</color>
     <color name="color_disable">#807d7d</color>
     <color name="color_orange_process">#f5c158</color>
+    <color name="bgShowResult">#33000000</color>
 </resources>
