@@ -57,6 +57,7 @@
     <string name="noinformation">No Information</string>
     <string name="nopermisstion">No Permission</string>
     <string name="updateemail">Update Email</string>
-
+    <string name="showresult">Result for you</string>
     <string name="title_activity_pdfreader">PDFReader</string>
+    <string name="endtime">End Time</string>
 </resources>

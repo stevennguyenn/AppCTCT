@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface PresenterProcessResultListened {
     void getResult(ArrayList<IdAndResult> list);
+    void removeList(ArrayList<IdAndResult> list);
 }

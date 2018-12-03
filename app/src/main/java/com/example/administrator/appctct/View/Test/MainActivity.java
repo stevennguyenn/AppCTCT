@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     private void setupView(){
         btCTCT.setTitleButton(getResources().getString(R.string.confirm));
         btCTCT.setRegister(this);
-        btCTCT.setButtonVisible();
         presenter = new PresenterMain(this);
         presenterGetQuestion = new PresenterMainGetQuestion(this);
         processResult = new PresenterProcessResult(this);
@@ -85,13 +84,13 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     }
 
     @Override
-    public void checkboxListened(int position, String result) {
-        Object[] objects = new Object[4];
-        objects[0] = listIdandResult;
-        objects[1] = position;
-        objects[2] = result;
-        objects[3] = listQuestion;
-        processResult.process(objects);
+    public void checkboxListenedChecked(int position, String result) {
+        processResult.process(listQuestion,listIdandResult,position,result);
+    }
+
+    @Override
+    public void checkboxListenedUnChecked(int position) {
+        processResult.processRemove(listIdandResult,listQuestion.get(position).getId());
     }
 
     private void showResult(){
@@ -145,9 +144,15 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     }
 
     @Override
+    public void removeList(ArrayList<IdAndResult> list) {
+        listIdandResult = list;
+    }
+
+    @Override
     public void timeEnd() {
         btCTCT.cancelTimer();
         Intent in = new Intent(MainActivity.this,ShowResultActivity.class);
+        in.putExtra("list_result",listIdandResult);
         startActivity(in);
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }

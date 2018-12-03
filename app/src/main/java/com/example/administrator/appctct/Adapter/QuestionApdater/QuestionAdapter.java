@@ -24,7 +24,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private LayoutInflater layoutInflater;
     private CheckBoxClick checkBoxClickListened;
     private Animation start,end,rotate_down,rotate_up;
-    public boolean isClick = true;
 
     public QuestionAdapter(@NonNull ArrayList<ModelQuestion> listQuestion, Context context){
         this.layoutInflater = LayoutInflater.from(context);
@@ -102,7 +101,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                             rdQuestionC.setChecked(false);
                             rdQuestionD.setChecked(false);
                             if (checkBoxClickListened != null) {
-                                checkBoxClickListened.checkboxListened(getAdapterPosition(), "a");
+                                checkBoxClickListened.checkboxListenedChecked(getAdapterPosition(), "a");
                             }
                             break;
                         case R.id.rdQuestionB:
@@ -111,7 +110,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                             rdQuestionC.setChecked(false);
                             rdQuestionD.setChecked(false);
                             if (checkBoxClickListened != null) {
-                                checkBoxClickListened.checkboxListened(getAdapterPosition(), "b");
+                                checkBoxClickListened.checkboxListenedChecked(getAdapterPosition(), "b");
                             }
                             break;
                         case R.id.rdQuestionC:
@@ -120,7 +119,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                             rdQuestionB.setChecked(false);
                             rdQuestionD.setChecked(false);
                             if (checkBoxClickListened != null) {
-                                checkBoxClickListened.checkboxListened(getAdapterPosition(), "c");
+                                checkBoxClickListened.checkboxListenedChecked(getAdapterPosition(), "c");
                             }
                             break;
                         case R.id.rdQuestionD:
@@ -129,14 +128,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                             rdQuestionC.setChecked(false);
                             rdQuestionB.setChecked(false);
                             if (checkBoxClickListened != null) {
-                                checkBoxClickListened.checkboxListened(getAdapterPosition(), "d");
+                                checkBoxClickListened.checkboxListenedChecked(getAdapterPosition(), "d");
                             }
                             break;
                         default:
                             break;
                     }
+                    return;
                 }
-
+                checkBoxClickListened.checkboxListenedUnChecked(getAdapterPosition());
         }
 
         @Override

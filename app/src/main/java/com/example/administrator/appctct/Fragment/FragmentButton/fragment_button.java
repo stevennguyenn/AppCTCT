@@ -85,8 +85,7 @@ public class fragment_button extends Fragment implements View.OnClickListener{
             @Override
             public void onFinish() {
                 timeEndListened.timeEnd();
-                btButton.setEnabled(true);
-                btButton.setText(getResources().getString(R.string.confirm));
+                btButton.setText(getResources().getString(R.string.endtime));
             }
         };
         timer.start();

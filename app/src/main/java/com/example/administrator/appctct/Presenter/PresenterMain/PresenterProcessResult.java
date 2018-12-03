@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.Presenter.PresenterMain;
 
 import com.example.administrator.appctct.Entity.IdAndResult;
+import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Model.ModelMain.ModelProcessResult;
 import com.example.administrator.appctct.Model.ModelMain.ModelProcessResultListened;
 
@@ -12,12 +13,21 @@ public class PresenterProcessResult implements ModelProcessResultListened {
     public PresenterProcessResult(PresenterProcessResultListened listened){
         this.listened = listened;
     }
-    public void process(Object...objects){
-        model.process(objects);
+    public void process(ArrayList<ModelQuestion> listQuestion,ArrayList<IdAndResult> listIdAndResult,int position,String result){
+        model.process(listQuestion,listIdAndResult,position,result);
+    }
+
+    public void processRemove(ArrayList<IdAndResult> listIdAndResult,String id){
+        model.processRemove(listIdAndResult,id);
     }
 
     @Override
     public void getResult(ArrayList<IdAndResult> list) {
         listened.getResult(list);
+    }
+
+    @Override
+    public void removeList(ArrayList<IdAndResult> list) {
+        listened.removeList(list);
     }
 }

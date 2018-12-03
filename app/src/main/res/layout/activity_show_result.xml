@@ -7,6 +7,7 @@
     tools:context=".View.Test.ShowResultActivity"
     android:id="@+id/bgShowResult"
     android:background="@color/bgShowResult">
+
     <android.support.constraint.ConstraintLayout
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -20,7 +21,40 @@
         android:id="@+id/viewChildren"
         android:layout_width="0dp"
         android:layout_height="0dp">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/color_red"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintRight_toRightOf="@id/viewChildren"
+            app:layout_constraintLeft_toLeftOf="@id/viewChildren"
+            app:layout_constraintTop_toTopOf="@id/viewChildren"
+            android:text="@string/showresult"
+            android:id="@+id/tvShowResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/viewChildren"
+            app:layout_constraintTop_toBottomOf="@id/tvShowResult"
+            android:id="@+id/rcShowResult"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+        </android.support.v7.widget.RecyclerView>
 
     </android.support.constraint.ConstraintLayout>
+
+    <fragment
+        android:id="@+id/btConfirmShowResult"
+        android:name="com.example.administrator.appctct.Fragment.FragmentButton.fragment_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/viewChildren"
+        app:layout_constraintStart_toStartOf="@+id/viewChildren"
+        app:layout_constraintTop_toBottomOf="@+id/viewChildren" />
+
 
 </android.support.constraint.ConstraintLayout>

@@ -43,7 +43,7 @@
         <activity android:name=".View.Test.PDFActivity" />
         <activity
             android:name=".View.Test.ShowResultActivity"
-            android:theme="@style/Theme.Transparent"></activity>
+            android:theme="@style/NoBackground"></activity>
         <activity android:name=".View.Test.ChoiceTestActivity"></activity>
     </application>
 
