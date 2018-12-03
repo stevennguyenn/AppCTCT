@@ -17,16 +17,14 @@ import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.TimeEnd;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMain;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainGetQuestion;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainGetQuestionListened;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainListened;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProcessResult;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProcessResultListened;
 import com.example.administrator.appctct.R;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainListened,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd{
+public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd{
 
     RecyclerView rcQuestion;
     private ArrayList<ModelQuestion> listQuestion;
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     private ArrayList<IdAndResult> listIdandResult;
     private RecyclerViewSkeletonScreen skeleton;
     fragment_button btCTCT;
-    private PresenterMain presenter;
     private PresenterMainGetQuestion presenterGetQuestion;
     private PresenterProcessResult processResult;
     @Override
@@ -65,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     private void setupView(){
         btCTCT.setTitleButton(getResources().getString(R.string.confirm));
         btCTCT.setRegister(this);
-        presenter = new PresenterMain(this);
         presenterGetQuestion = new PresenterMainGetQuestion(this);
         processResult = new PresenterProcessResult(this);
         rcQuestion.setHasFixedSize(true);
@@ -93,29 +89,9 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         processResult.processRemove(listIdandResult,listQuestion.get(position).getId());
     }
 
-    private void showResult(){
-        presenter.getResult(listIdandResult);
-    }
-
     @Override
     public void clickView(View v) {
         Notification.notify(MainActivity.this);
-        showResult();
-    }
-
-    @Override
-    public void noChoice() {
-        Toast.makeText(MainActivity.this,"Please Choice Question",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void getPointSuccessed(int point) {
-        Toast.makeText(MainActivity.this,point+"",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void getPointFailed() {
-        Toast.makeText(MainActivity.this,"Null",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -151,6 +127,9 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     @Override
     public void timeEnd() {
         btCTCT.cancelTimer();
+        if (btCTCT.getView() != null) {
+            btCTCT.getView().setVisibility(View.GONE);
+        }
         Intent in = new Intent(MainActivity.this,ShowResultActivity.class);
         in.putExtra("list_result",listIdandResult);
         startActivity(in);

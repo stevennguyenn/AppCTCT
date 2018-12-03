@@ -1,5 +1,6 @@
 package com.example.administrator.appctct.View.Test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -58,6 +59,9 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
 
     @Override
     public void clickView(View v) {
-
+        Intent intent = new Intent(ShowResultActivity.this,ResultActivity.class);
+        intent.putExtra("list_result",listResult);
+        startActivity(intent);
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
     }
 }

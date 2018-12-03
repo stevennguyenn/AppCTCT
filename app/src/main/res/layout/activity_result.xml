@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Test.ShowResultActivity"
+    tools:context=".View.Test.ResultActivity"
     android:background="@color/bgShowResult">
 
     <android.support.constraint.ConstraintLayout
@@ -20,33 +20,17 @@
         android:id="@+id/viewChildren"
         android:layout_width="0dp"
         android:layout_height="0dp">
-        <TextView
-            android:textStyle="bold"
-            android:textColor="@color/color_red"
-            android:textSize="15sp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintRight_toRightOf="@id/viewChildren"
-            app:layout_constraintLeft_toLeftOf="@id/viewChildren"
-            app:layout_constraintTop_toTopOf="@id/viewChildren"
-            android:text="@string/showresult"
-            android:id="@+id/tvShowResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintBottom_toBottomOf="@id/viewChildren"
-            app:layout_constraintTop_toBottomOf="@id/tvShowResult"
-            android:id="@+id/rcShowResult"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
 
-        </android.support.v7.widget.RecyclerView>
+        <fragment
+            android:id="@+id/fragmentCompletionResult"
+            android:name="com.example.administrator.appctct.Fragment.Fragment_question.fragment_completion_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </android.support.constraint.ConstraintLayout>
 
     <fragment
-        android:id="@+id/btConfirmShowResult"
+        android:id="@+id/btShowResult"
         android:name="com.example.administrator.appctct.Fragment.FragmentButton.fragment_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -54,6 +38,5 @@
         app:layout_constraintEnd_toEndOf="@+id/viewChildren"
         app:layout_constraintStart_toStartOf="@+id/viewChildren"
         app:layout_constraintTop_toBottomOf="@+id/viewChildren" />
-
 
 </android.support.constraint.ConstraintLayout>
