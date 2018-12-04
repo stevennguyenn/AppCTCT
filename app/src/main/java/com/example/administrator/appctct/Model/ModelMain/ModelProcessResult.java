@@ -7,6 +7,8 @@ import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ModelProcessResult{
     private ModelProcessResultListened listened;
@@ -36,6 +38,12 @@ public class ModelProcessResult{
                             if (result.equals("c")){
                                 listIdAndResult.get(index).setContentResult(listQuestion.get(index).getQuestion_b());
                             }
+                            Collections.sort(listIdAndResult, new Comparator<IdAndResult>() {
+                                @Override
+                                public int compare(IdAndResult o1, IdAndResult o2) {
+                                    return o1.getPosition()<o2.getPosition()?1:0;
+                                }
+                            });
                             listened.getResult(listIdAndResult);
                             return;
                         }
@@ -52,6 +60,12 @@ public class ModelProcessResult{
                     if (result.equals("d")){
                         listIdAndResult.add(new IdAndResult(listQuestion.get(position).getId(), result,listQuestion.get(position).getQuestion_d(),position));
                     }
+                    Collections.sort(listIdAndResult, new Comparator<IdAndResult>() {
+                        @Override
+                        public int compare(IdAndResult o1, IdAndResult o2) {
+                            return o1.getPosition()<o2.getPosition()?1:0;
+                        }
+                    });
                     listened.getResult(listIdAndResult);
                     return;
                 }
@@ -67,6 +81,13 @@ public class ModelProcessResult{
                 if (result.equals("d")){
                     listIdAndResult.add(new IdAndResult(listQuestion.get(position).getId(), result,listQuestion.get(position).getQuestion_d(),position));
                 }
+
+                Collections.sort(listIdAndResult, new Comparator<IdAndResult>() {
+                    @Override
+                    public int compare(IdAndResult o1, IdAndResult o2) {
+                        return o1.getPosition()<o2.getPosition()?1:0;
+                    }
+                });
                 listened.getResult(listIdAndResult);
                 return;
             }

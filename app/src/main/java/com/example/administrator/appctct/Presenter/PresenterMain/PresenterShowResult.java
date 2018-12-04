@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.Presenter.PresenterMain;
 
 import com.example.administrator.appctct.Entity.IdAndResult;
+import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Model.ModelMain.ModelShowResult;
 import com.example.administrator.appctct.Model.ModelMain.ModelShowResultListened;
 
@@ -19,8 +20,8 @@ public class PresenterShowResult implements ModelShowResultListened{
     }
 
     @Override
-    public void getPointSuccessed(int point) {
-        listened.getPointSuccessed(point);
+    public void getPointSuccessed(ResultQuestion result) {
+        listened.getPointSuccessed(result);
     }
 
     @Override

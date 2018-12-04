@@ -5,6 +5,7 @@ import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Entity.Profile;
+import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 
@@ -38,15 +39,12 @@ public interface DataClient {
     @GET("getdataquestion.php")
     Call<ArrayList<ModelQuestion>> getQuestion();
 
-    @FormUrlEncoded
-    @POST("getresultquestion.php")
-    Call<Integer> getResult(@Field("arrid[]") String[] arrID,
-                            @Field("arrresult[]") String[] arrResult);
 
     @FormUrlEncoded
-    @POST("getresultquestion.php")
-    Call<String> getResultTemp(@Field("arrid[]") String[] arrID,
-                            @Field("arrresult[]") String[] arrResult);
+    @POST("getresultquestion_giaitich1.php")
+    Call<ResultQuestion> getResult(@Field("id") String id,
+                                   @Field("arrid[]") String[] arrID,
+                                   @Field("arrresult[]") String[] arrResult);
 
     @FormUrlEncoded
     @POST("changpassword.php")

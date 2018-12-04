@@ -62,4 +62,9 @@
     <string name="endtime">End Time</string>
     <string name="loadingresultforyou">Loading result for you</string>
     <string name="congratulation">Conratulation on completing the test</string>
+    <string name="rate">Rate:</string>
+    <string name="ratio">Ratio:</string>
+    <string name="point">Point:</string>
+    <string name="clickseetop">Click to see Top Point</string>
+    <string name="gotodocument">Go to Documents</string>
 </resources>

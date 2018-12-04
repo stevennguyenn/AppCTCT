@@ -135,4 +135,13 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         startActivity(in);
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        btCTCT.cancelTimer();
+        if (btCTCT.getView() != null) {
+            btCTCT.getView().setVisibility(View.GONE);
+        }
+    }
 }

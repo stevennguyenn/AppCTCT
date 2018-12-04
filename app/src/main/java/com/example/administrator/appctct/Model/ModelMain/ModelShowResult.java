@@ -3,6 +3,7 @@ package com.example.administrator.appctct.Model.ModelMain;
 import android.support.annotation.NonNull;
 
 import com.example.administrator.appctct.Entity.IdAndResult;
+import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
 
@@ -31,10 +32,10 @@ public class ModelShowResult {
                     arrresult[i] = listResult.get(i).getResult();
                 }
 
-                Call<Integer> callback = client.getResult(arrid,arrresult);
-                callback.enqueue(new Callback<Integer>() {
+                Call<ResultQuestion> callback = client.getResult("31",arrid,arrresult);
+                callback.enqueue(new Callback<ResultQuestion>() {
                     @Override
-                    public void onResponse(@NonNull Call<Integer> call, @NonNull Response<Integer> response) {
+                    public void onResponse(@NonNull Call<ResultQuestion> call, @NonNull Response<ResultQuestion> response) {
                         if (response.body() != null){
                             listened.getPointSuccessed(response.body());
                             return;
@@ -43,7 +44,7 @@ public class ModelShowResult {
                     }
 
                     @Override
-                    public void onFailure(@NonNull  Call<Integer> call,@NonNull Throwable t) {
+                    public void onFailure(@NonNull  Call<ResultQuestion> call,@NonNull Throwable t) {
                         listened.connectFailed(t.getMessage());
                     }
                 });

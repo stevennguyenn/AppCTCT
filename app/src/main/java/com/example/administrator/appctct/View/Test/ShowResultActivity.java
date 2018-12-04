@@ -62,6 +62,6 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
         Intent intent = new Intent(ShowResultActivity.this,ResultActivity.class);
         intent.putExtra("list_result",listResult);
         startActivity(intent);
-        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+        overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
 }

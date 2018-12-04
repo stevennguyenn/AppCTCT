@@ -240,4 +240,8 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         startActivity(intent);
         overridePendingTransition(R.anim.show_view_navigation,R.anim.show_view_navigation);
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }

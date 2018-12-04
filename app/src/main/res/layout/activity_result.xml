@@ -21,11 +21,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp">
 
-        <fragment
-            android:id="@+id/fragmentCompletionResult"
-            android:name="com.example.administrator.appctct.Fragment.Fragment_question.fragment_completion_result"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </android.support.constraint.ConstraintLayout>
 
