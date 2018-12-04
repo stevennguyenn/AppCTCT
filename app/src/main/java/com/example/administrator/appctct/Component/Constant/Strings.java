@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.Component.Constant;
 
 import com.example.administrator.appctct.Entity.CellNavi;
+import com.example.administrator.appctct.Entity.Section;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ public class Strings {
     static public final String isPhone = "isPhone";
     static public final String token = "token";
     static public final String successed = "Successed";
-    static public final String failed = "Failed";
 
 
     public class Dialog {
@@ -41,6 +41,27 @@ public class Strings {
             list.add(new CellNavi(R.drawable.icvideo,"Videos"));
             list.add(new CellNavi(R.drawable.forum,"Forum"));
             list.add(new CellNavi(R.drawable.settingnavi, "Settings"));
+            return list;
+        }
+    }
+
+    public static class ListSection {
+        static public ArrayList<Section> getListSection() {
+            ArrayList<Section> list = new ArrayList<>();
+            list.add(new Section("Giai tich 1",false));
+            list.add(new Section("Giai tich 2",false));
+            list.add(new Section("Vat ly 1",false));
+            list.add(new Section("Vat ly 2",false));
+            return list;
+        }
+    }
+
+    public static class ListStatusSection{
+        static public ArrayList<String> getListStatusSection(){
+            ArrayList<String> list = new ArrayList<>();
+            list.add("Online");
+            list.add("Tested");
+            list.add("No test");
             return list;
         }
     }
