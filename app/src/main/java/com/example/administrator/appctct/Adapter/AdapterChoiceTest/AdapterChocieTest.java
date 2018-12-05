@@ -3,6 +3,7 @@ package com.example.administrator.appctct.Adapter.AdapterChoiceTest;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +79,7 @@ public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.Ho
          void bind(Section section){
              adapter.setListened(this);
              Boolean expanded = section.getExpanding();
+             Log.d("BBBB",expanded+"");
              rcStatusSection.setVisibility(expanded?View.VISIBLE:View.GONE);
              imgDown.startAnimation(expanded?animationDown:animationUp);
              tvSection.setText(section.getName());

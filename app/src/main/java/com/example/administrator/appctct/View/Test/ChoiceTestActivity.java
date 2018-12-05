@@ -57,6 +57,14 @@ public class ChoiceTestActivity extends AppCompatActivity implements ChoiceTestL
                     overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
                 }
                 break;
+            case 2:
+                if (positionTest == 0) {
+                    Intent intent = new Intent(ChoiceTestActivity.this, SectionOfflineActivity.class);
+                    intent.putExtra("type_section", TypeSection.GT1.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
+                }
+                break;
         }
     }
 }

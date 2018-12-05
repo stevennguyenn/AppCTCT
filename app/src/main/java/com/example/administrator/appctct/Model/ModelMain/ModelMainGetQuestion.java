@@ -22,11 +22,11 @@ public class ModelMainGetQuestion {
         this.listened = listened;
     }
 
-    public void getQuestion(int typeSection){
+    public void getQuestion(int typeSection,String testCode){
         Call<ArrayList<ModelQuestion>> call = null;
 
         if (typeSection == TypeSection.GT1.rawValue()){
-            call = client.getQuestionGT1();
+            call = client.getQuestionGT1(testCode);
         }
         if (typeSection == TypeSection.GT2.rawValue()){
             call = client.getQuestionGT2();

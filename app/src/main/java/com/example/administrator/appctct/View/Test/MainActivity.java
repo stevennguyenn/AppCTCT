@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     private PresenterProcessResult processResult;
     private int typeStatus = -1;
     private int typeSection = -1;
+    private String testCode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     }
 
     private void getData(){
-        presenterGetQuestion.getQuestion(typeSection);
+        presenterGetQuestion.getQuestion(typeSection,testCode);
     }
 
     private void setID(){
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         btCTCT = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btCTCT);
         typeStatus = getIntent().getIntExtra("status",-1);
         typeSection = getIntent().getIntExtra("type_section",-1);
+        testCode = getIntent().getStringExtra("testCode");
     }
 
     private void setupView(){
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         if (typeStatus ==  TypeStatus.Offline.rawVlue()){
             btCTCT.setTitleButton(getResources().getString(R.string.confirm));
             btCTCT.setRegister(this);
+            btCTCT.setButtonVisible();
         }
 
         if (typeStatus == TypeStatus.Tested.rawVlue()){

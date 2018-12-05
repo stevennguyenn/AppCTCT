@@ -68,4 +68,5 @@
     <string name="clickseetop">Click to see Top Point</string>
     <string name="gotodocument">Go to Documents</string>
     <string name="pleasechoicetest">Please choice one item</string>
+    <string name="offlinetest">Offline Test</string>
 </resources>

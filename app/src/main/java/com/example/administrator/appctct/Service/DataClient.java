@@ -9,6 +9,7 @@ import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Entity.SectionTest;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.TitleSection;
 
 import java.util.ArrayList;
 import okhttp3.MultipartBody;
@@ -37,8 +38,9 @@ public interface DataClient {
     Call<Student> login(@Field("account") String account,
                         @Field("password") String password);
 
-    @GET("question/getdataquestion_gt1.php")
-    Call<ArrayList<ModelQuestion>> getQuestionGT1();
+    @FormUrlEncoded
+    @POST("question/getdataquestion_gt1.php")
+    Call<ArrayList<ModelQuestion>> getQuestionGT1(@Field("test_code") String testCode);
 
     @GET("question/getdataquestion_gt2.php")
     Call<ArrayList<ModelQuestion>> getQuestionGT2();
@@ -135,5 +137,17 @@ public interface DataClient {
 
     @GET("getsection/getsectiontestvl2.php")
     Call<ArrayList<SectionTest>> getSectionTestVL2();
+
+    @GET("question/gettitleoffline_gt1.php")
+    Call<ArrayList<TitleSection>> getTitleOfflineGT1();
+
+    @GET("question/gettitleoffline_gt2php")
+    Call<ArrayList<TitleSection>> getTitleOfflineGT2();
+
+    @GET("question/gettitleoffline_vl1.php")
+    Call<ArrayList<TitleSection>> getTitleOfflineVL1();
+
+    @GET("question/gettitleoffline_vl2.php")
+    Call<ArrayList<TitleSection>> getTitleOfflineVL2();
 }
 

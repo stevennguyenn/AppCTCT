@@ -35,7 +35,7 @@
         <activity android:name=".View.Setting.UpdatePhoneNumberActivity" />
         <activity android:name=".View.Setting.ForgotPasswordActivity" />
         <activity android:name=".View.Setting.SettingActivity" />
-        <activity android:name=".View.Main.ControllerActivity"></activity>
+        <activity android:name=".View.Main.ControllerActivity" />
         <activity android:name=".View.Profile.ProfileActitivy" />
         <activity android:name=".View.SearchView.SearchActivity" />
         <activity android:name=".View.Main.SeeAllActivity" />
@@ -45,8 +45,10 @@
             android:name=".View.Test.ShowResultActivity"
             android:theme="@style/NoBackground" />
         <activity android:name=".View.Test.ChoiceTestActivity" />
-        <activity android:name=".View.Test.ResultActivity"
-            android:theme="@style/NoBackground"></activity>
+        <activity
+            android:name=".View.Test.ResultActivity"
+            android:theme="@style/NoBackground" />
+        <activity android:name=".View.Test.SectionOfflineActivity"></activity>
     </application>
 
 </manifest>

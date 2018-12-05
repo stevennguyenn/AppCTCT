@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="paddingPercent" value="25" />
+                                                <entry key="paddingPercent" value="5" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -59,7 +59,7 @@
                                       <entry key="imageAsset" value="C:\Users\Administrator\Desktop\checboxnocheck.png" />
                                       <entry key="outputName" value="ic_down" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="ff6d0a" />
+                                      <entry key="themeColor" value="f46911" />
                                     </map>
                                   </option>
                                 </PersistentState>
