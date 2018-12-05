@@ -23,7 +23,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private ArrayList<ModelQuestion> listQuestion;
     private LayoutInflater layoutInflater;
     private CheckBoxClick checkBoxClickListened;
-    private Animation start,end,rotate_down,rotate_up;
+    private Animation rotate_down,rotate_up;
 
     public QuestionAdapter(@NonNull ArrayList<ModelQuestion> listQuestion, Context context){
         this.layoutInflater = LayoutInflater.from(context);
@@ -34,8 +34,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)  {
         View view = layoutInflater.inflate(R.layout.layout_line_question,viewGroup,false);
-        start = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.slide_down);
-        end = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.slide_up);
         rotate_down = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.rotate_down);
         rotate_up = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.rotate_up);
         return new ViewHolder(view);
@@ -143,17 +141,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.imgExpanding:
-                    if (listQuestion.get(getAdapterPosition()).getExpanding()){
-                        imgText.setVisibility(View.GONE);
-                        imgText.setAnimation(end);
-                        imgExpanding.setAnimation(rotate_up);
-                        listQuestion.get(getAdapterPosition()).setIsExpanding(false);
-                        return;
-                    }
-                    imgText.setVisibility(View.VISIBLE);
-                    imgText.setAnimation(start);
-                    imgExpanding.setAnimation(rotate_down);
-                    listQuestion.get(getAdapterPosition()).setIsExpanding(true);
+                    Boolean expanded = listQuestion.get(getAdapterPosition()).getExpanding();
+                    imgText.setVisibility(expanded?View.GONE:View.VISIBLE);
+                    imgExpanding.startAnimation(expanded?rotate_up:rotate_down);
+                    listQuestion.get(getAdapterPosition()).setIsExpanding(!expanded);
+                    break;
             }
         }
     }

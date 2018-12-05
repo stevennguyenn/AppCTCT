@@ -15,8 +15,8 @@ public class PresenterMainGetQuestion implements ModelMainGetQuestionListened{
         this.listened = listened;
     }
 
-    public void getQuestion(){
-        model.getQuestion();
+    public void getQuestion(int typeSection){
+        model.getQuestion(typeSection);
     }
 
     @Override

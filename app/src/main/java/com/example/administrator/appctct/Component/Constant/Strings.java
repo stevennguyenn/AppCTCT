@@ -56,12 +56,12 @@ public class Strings {
         }
     }
 
-    public static class ListStatusSection{
-        static public ArrayList<String> getListStatusSection(){
+    public static class ListStatusSection {
+        static public ArrayList<String> getListStatusSection() {
             ArrayList<String> list = new ArrayList<>();
             list.add("Online");
             list.add("Tested");
-            list.add("No test");
+            list.add("Offline");
             return list;
         }
     }

@@ -11,6 +11,7 @@ import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.QuestionApdater.CheckBoxClick;
 import com.example.administrator.appctct.Adapter.QuestionApdater.QuestionAdapter;
+import com.example.administrator.appctct.Component.Constant.TypeStatus;
 import com.example.administrator.appctct.Component.Custom.Notification;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     fragment_button btCTCT;
     private PresenterMainGetQuestion presenterGetQuestion;
     private PresenterProcessResult processResult;
+    private int typeStatus = -1;
+    private int typeSection = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,26 +46,37 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         setupView();
         getData();
 //        stopService(new Intent(this, NotificationService.class));
-        setTimer();
-    }
-    
-    private void setTimer(){
-        btCTCT.setTimeEndListened(this);
-        btCTCT.timeTest(10000);
     }
 
     private void getData(){
-        presenterGetQuestion.getQuestion();
+        presenterGetQuestion.getQuestion(typeSection);
     }
 
     private void setID(){
         rcQuestion = findViewById(R.id.rcMain);
         btCTCT = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btCTCT);
+        typeStatus = getIntent().getIntExtra("status",-1);
+        typeSection = getIntent().getIntExtra("type_section",-1);
     }
 
     private void setupView(){
-        btCTCT.setTitleButton(getResources().getString(R.string.confirm));
-        btCTCT.setRegister(this);
+        //btCTCT.setTitleButton(getResources().getString(R.string.confirm));
+        //btCTCT.setRegister(this);
+
+        if (typeStatus == TypeStatus.Online.rawVlue()){
+            btCTCT.setTimeEndListened(this);
+            btCTCT.timeTest(10000);
+        }
+        if (typeStatus ==  TypeStatus.Offline.rawVlue()){
+            btCTCT.setTitleButton(getResources().getString(R.string.confirm));
+            btCTCT.setRegister(this);
+        }
+
+        if (typeStatus == TypeStatus.Tested.rawVlue()){
+            if (btCTCT.getView() != null) {
+                btCTCT.getView().setVisibility(View.GONE);
+            }
+        }
         presenterGetQuestion = new PresenterMainGetQuestion(this);
         processResult = new PresenterProcessResult(this);
         rcQuestion.setHasFixedSize(true);

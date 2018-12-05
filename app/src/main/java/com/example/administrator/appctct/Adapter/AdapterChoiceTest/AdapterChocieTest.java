@@ -6,10 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.administrator.appctct.Adapter.SettingsApdater.SettingsAdapter;
 import com.example.administrator.appctct.Entity.Section;
 import com.example.administrator.appctct.R;
 
@@ -18,9 +18,14 @@ import java.util.ArrayList;
 public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.HolderChoiceTest>{
     private LayoutInflater inflater;
     private ArrayList<Section> listSection;
-    private SettingsAdapter adapter;
+    private AdapterStatusSections adapter;
+    private ChoiceTestListened listened;
 
-    public AdapterChocieTest(LayoutInflater inflater,ArrayList<Section> listSection,SettingsAdapter adapter){
+    public void setListened(ChoiceTestListened listened){
+        this.listened = listened;
+    }
+
+    public AdapterChocieTest(LayoutInflater inflater,ArrayList<Section> listSection,AdapterStatusSections adapter){
         this.inflater = inflater;
         this.listSection = listSection;
         this.adapter = adapter;
@@ -34,8 +39,8 @@ public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.Ho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HolderChoiceTest holderChoiceTest, final int i) {
-        holderChoiceTest.bind(listSection.get(i));
+    public void onBindViewHolder(@NonNull final HolderChoiceTest holderChoiceTest, int i) {
+        holderChoiceTest.bind(listSection.get(holderChoiceTest.getAdapterPosition()));
         LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
         holderChoiceTest.rcStatusSection.setLayoutManager(manager);
         holderChoiceTest.rcStatusSection.setHasFixedSize(true);
@@ -43,9 +48,9 @@ public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.Ho
         holderChoiceTest.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean expanded = listSection.get(i).getExpanding();
-                listSection.get(i).setExpanding(!expanded);
-                notifyItemChanged(i);
+                Boolean expanded = listSection.get(holderChoiceTest.getAdapterPosition()).getExpanding();
+                listSection.get(holderChoiceTest.getAdapterPosition()).setExpanding(!expanded);
+                notifyItemChanged(holderChoiceTest.getAdapterPosition());
             }
         });
     }
@@ -56,21 +61,31 @@ public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.Ho
     }
 
 
-    public class HolderChoiceTest extends RecyclerView.ViewHolder{
-        TextView tvSection;
-        ImageView imgDown;
-        RecyclerView rcStatusSection;
-        public HolderChoiceTest(@NonNull View itemView) {
+     class HolderChoiceTest extends RecyclerView.ViewHolder implements ChoiceStatusListened{
+         TextView tvSection;
+         ImageView imgDown;
+         RecyclerView rcStatusSection;
+         Animation animationDown = AnimationUtils.loadAnimation(inflater.getContext(),R.anim.rotate_down);
+         Animation animationUp = AnimationUtils.loadAnimation(inflater.getContext(),R.anim.rotate_up);
+         HolderChoiceTest(@NonNull View itemView) {
             super(itemView);
             tvSection = itemView.findViewById(R.id.tvSection);
             imgDown = itemView.findViewById(R.id.imgDown);
             rcStatusSection = itemView.findViewById(R.id.rcStatusSection);
+            adapter.setListened(this);
         }
 
-        public void bind(Section section){
-            Boolean expanded = section.getExpanding();
-            rcStatusSection.setVisibility(expanded?View.VISIBLE:View.GONE);
-            tvSection.setText(section.getName());
-        }
-    }
+         void bind(Section section){
+             adapter.setListened(this);
+             Boolean expanded = section.getExpanding();
+             rcStatusSection.setVisibility(expanded?View.VISIBLE:View.GONE);
+             imgDown.startAnimation(expanded?animationDown:animationUp);
+             tvSection.setText(section.getName());
+         }
+
+         @Override
+         public void clickStatusSections(int postion) {
+             listened.clickTest(getAdapterPosition(),postion);
+         }
+     }
 }

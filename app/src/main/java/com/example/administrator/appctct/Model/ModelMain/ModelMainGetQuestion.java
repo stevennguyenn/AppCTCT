@@ -1,6 +1,8 @@
 package com.example.administrator.appctct.Model.ModelMain;
 
 import android.support.annotation.NonNull;
+
+import com.example.administrator.appctct.Component.Constant.TypeSection;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
@@ -20,23 +22,39 @@ public class ModelMainGetQuestion {
         this.listened = listened;
     }
 
-    public void getQuestion(){
-        Call<ArrayList<ModelQuestion>> call = client.getQuestion();
-        call.enqueue(new Callback<ArrayList<ModelQuestion>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Response<ArrayList<ModelQuestion>> response) {
-                if (response.body() != null) {
-                    listened.getQuestionSuccessed(response.body());
-                    return;
-                }
-                listened.getQuestionFailed();
-            }
+    public void getQuestion(int typeSection){
+        Call<ArrayList<ModelQuestion>> call = null;
 
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Throwable t) {
-                listened.connectFailed(t.getMessage());
-            }
-        });
+        if (typeSection == TypeSection.GT1.rawValue()){
+            call = client.getQuestionGT1();
+        }
+        if (typeSection == TypeSection.GT2.rawValue()){
+            call = client.getQuestionGT2();
+        }
+        if (typeSection == TypeSection.VL1.rawValue()){
+            call = client.getQuestionVL1();
+        }
+        if (typeSection == TypeSection.VL2.rawValue()){
+            call = client.getQuestionVL2();
+        }
+
+        if (call != null) {
+            call.enqueue(new Callback<ArrayList<ModelQuestion>>() {
+                @Override
+                public void onResponse(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Response<ArrayList<ModelQuestion>> response) {
+                    if (response.body() != null) {
+                        listened.getQuestionSuccessed(response.body());
+                        return;
+                    }
+                    listened.getQuestionFailed();
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Throwable t) {
+                    listened.connectFailed(t.getMessage());
+                }
+            });
+        }
 
     }
 }
