@@ -48,7 +48,8 @@
         <activity
             android:name=".View.Test.ResultActivity"
             android:theme="@style/NoBackground" />
-        <activity android:name=".View.Test.SectionOfflineActivity"></activity>
+        <activity android:name=".View.Test.SectionOfflineActivity" />
+        <activity android:name=".View.Test.TestedActivity"></activity>
     </application>
 
 </manifest>

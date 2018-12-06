@@ -1,6 +1,5 @@
-package com.example.administrator.appctct.Model.ModelMain;
+package com.example.administrator.appctct.Model.ModelTest;
 
-import android.os.AsyncTask;
 import android.os.Handler;
 
 import com.example.administrator.appctct.Entity.IdAndResult;

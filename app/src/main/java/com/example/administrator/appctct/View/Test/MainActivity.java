@@ -18,10 +18,10 @@ import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.TimeEnd;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainGetQuestion;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterMainGetQuestionListened;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProcessResult;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterProcessResultListened;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterMainGetQuestion;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterMainGetQuestionListened;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterProcessResult;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterProcessResultListened;
 import com.example.administrator.appctct.R;
 import java.util.ArrayList;
 

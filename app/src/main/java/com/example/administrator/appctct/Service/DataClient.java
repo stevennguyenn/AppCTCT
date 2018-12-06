@@ -9,6 +9,7 @@ import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Entity.SectionTest;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.TestTested;
 import com.example.administrator.appctct.Entity.TitleSection;
 
 import java.util.ArrayList;
@@ -149,5 +150,23 @@ public interface DataClient {
 
     @GET("question/gettitleoffline_vl2.php")
     Call<ArrayList<TitleSection>> getTitleOfflineVL2();
+
+    @FormUrlEncoded
+    @POST("question/gettesttested_gt1.php")
+    Call<ArrayList<TestTested>> getTestTestedGT1(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("question/gettesttested_gt2.php")
+    Call<ArrayList<TestTested>> getTestTestedGT2(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("question/gettesttested_vl1.php")
+    Call<ArrayList<TestTested>> getTestTestedVL1(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("question/gettesttested_vl2.php")
+    Call<ArrayList<TestTested>> getTestTestedVL2(@Field("id") int id);
+
+
 }
 

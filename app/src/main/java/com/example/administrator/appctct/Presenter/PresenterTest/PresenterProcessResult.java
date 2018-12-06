@@ -1,9 +1,9 @@
-package com.example.administrator.appctct.Presenter.PresenterMain;
+package com.example.administrator.appctct.Presenter.PresenterTest;
 
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
-import com.example.administrator.appctct.Model.ModelMain.ModelProcessResult;
-import com.example.administrator.appctct.Model.ModelMain.ModelProcessResultListened;
+import com.example.administrator.appctct.Model.ModelTest.ModelProcessResult;
+import com.example.administrator.appctct.Model.ModelTest.ModelProcessResultListened;
 
 import java.util.ArrayList;
 

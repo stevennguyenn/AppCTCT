@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Model.ModelMain;
+package com.example.administrator.appctct.Model.ModelTest;
 
 import com.example.administrator.appctct.Entity.IdAndResult;
 

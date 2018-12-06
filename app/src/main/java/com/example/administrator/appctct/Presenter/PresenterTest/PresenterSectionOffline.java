@@ -1,8 +1,8 @@
-package com.example.administrator.appctct.Presenter.PresenterMain;
+package com.example.administrator.appctct.Presenter.PresenterTest;
 
 import com.example.administrator.appctct.Entity.TitleSection;
-import com.example.administrator.appctct.Model.ModelMain.ModelSectionOffline;
-import com.example.administrator.appctct.Model.ModelMain.ModelSectionOfflineListened;
+import com.example.administrator.appctct.Model.ModelTest.ModelSectionOffline;
+import com.example.administrator.appctct.Model.ModelTest.ModelSectionOfflineListened;
 
 import java.util.ArrayList;
 

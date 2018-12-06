@@ -1,6 +1,5 @@
-package com.example.administrator.appctct.Model.ModelMain;
+package com.example.administrator.appctct.Model.ModelTest;
 
-import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 
 import java.util.ArrayList;

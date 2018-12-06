@@ -13,8 +13,8 @@ import com.example.administrator.appctct.Adapter.AdapterChoiceTest.AdapterOfflin
 import com.example.administrator.appctct.Adapter.AdapterChoiceTest.ClickRecyeOfflineTest;
 import com.example.administrator.appctct.Component.Constant.TypeStatus;
 import com.example.administrator.appctct.Entity.TitleSection;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterSectionOffline;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterSectionOfflineListened;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterSectionOffline;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterSectionOfflineListened;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
 package com.example.administrator.appctct.View.Test;
 
 import android.content.Intent;
-import android.graphics.Point;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,8 +15,8 @@ import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button
 import com.example.administrator.appctct.Fragment.Fragment_question.ClickTVSeeTop;
 import com.example.administrator.appctct.Fragment.Fragment_question.fragment_completion_result;
 import com.example.administrator.appctct.Fragment.Fragment_question.fragment_load_data;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterShowResult;
-import com.example.administrator.appctct.Presenter.PresenterMain.PresenterShowResultListened;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterShowResult;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterShowResultListened;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.View.Main.ControllerActivity;
 
