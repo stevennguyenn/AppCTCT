@@ -56,6 +56,27 @@ public class ChoiceTestActivity extends AppCompatActivity implements ChoiceTestL
                     startActivity(intent);
                     overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
                 }
+                if (positionTest == 1){
+                    Intent intent = new Intent(ChoiceTestActivity.this,MainActivity.class);
+                    intent.putExtra("status",TypeStatus.Online.rawVlue());
+                    intent.putExtra("type_section",TypeSection.GT2.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+                }
+                if (positionTest == 2){
+                    Intent intent = new Intent(ChoiceTestActivity.this,MainActivity.class);
+                    intent.putExtra("status",TypeStatus.Online.rawVlue());
+                    intent.putExtra("type_section",TypeSection.VL1.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+                }
+                if (positionTest == 3){
+                    Intent intent = new Intent(ChoiceTestActivity.this,MainActivity.class);
+                    intent.putExtra("status",TypeStatus.Online.rawVlue());
+                    intent.putExtra("type_section",TypeSection.VL2.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+                }
                 break;
             case 2:
                 if (positionTest == 0) {
@@ -64,11 +85,47 @@ public class ChoiceTestActivity extends AppCompatActivity implements ChoiceTestL
                     startActivity(intent);
                     overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
                 }
+                if (positionTest == 1) {
+                    Intent intent = new Intent(ChoiceTestActivity.this, SectionOfflineActivity.class);
+                    intent.putExtra("type_section", TypeSection.GT2.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
+                }
+                if (positionTest == 2) {
+                    Intent intent = new Intent(ChoiceTestActivity.this, SectionOfflineActivity.class);
+                    intent.putExtra("type_section", TypeSection.VL1.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
+                }
+                if (positionTest == 3) {
+                    Intent intent = new Intent(ChoiceTestActivity.this, SectionOfflineActivity.class);
+                    intent.putExtra("type_section", TypeSection.VL2.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
+                }
                 break;
             case 1:
                 if (positionTest == 0) {
                     Intent intent = new Intent(ChoiceTestActivity.this, TestedActivity.class);
                     intent.putExtra("type_section", TypeSection.GT1.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
+                }
+                if (positionTest == 1) {
+                    Intent intent = new Intent(ChoiceTestActivity.this, TestedActivity.class);
+                    intent.putExtra("type_section", TypeSection.GT2.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
+                }
+                if (positionTest == 2) {
+                    Intent intent = new Intent(ChoiceTestActivity.this, TestedActivity.class);
+                    intent.putExtra("type_section", TypeSection.VL1.rawValue());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
+                }
+                if (positionTest == 3) {
+                    Intent intent = new Intent(ChoiceTestActivity.this, TestedActivity.class);
+                    intent.putExtra("type_section", TypeSection.VL2.rawValue());
                     startActivity(intent);
                     overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
                 }

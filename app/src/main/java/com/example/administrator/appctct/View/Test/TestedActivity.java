@@ -73,4 +73,10 @@ public class TestedActivity extends AppCompatActivity implements PresenterTestTe
     private String getToken(){
         return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+    }
 }

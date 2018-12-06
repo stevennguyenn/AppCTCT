@@ -87,4 +87,10 @@ public class SectionOfflineActivity extends AppCompatActivity implements Present
         startActivity(in);
         overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+    }
 }

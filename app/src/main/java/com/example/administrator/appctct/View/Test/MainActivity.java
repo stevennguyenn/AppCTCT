@@ -162,4 +162,13 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
             btCTCT.getView().setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+       if (typeStatus == TypeStatus.Online.rawVlue()){ }
+       else{
+           super.onBackPressed();
+           overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+       }
+    }
 }
