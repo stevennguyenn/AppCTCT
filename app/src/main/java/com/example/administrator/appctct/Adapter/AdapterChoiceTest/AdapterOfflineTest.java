@@ -33,7 +33,6 @@ public class AdapterOfflineTest extends RecyclerView.Adapter<AdapterOfflineTest.
         notifyDataSetChanged();
     }
 
-
     @NonNull
     @Override
     public HolderOfflineTest onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -43,9 +42,7 @@ public class AdapterOfflineTest extends RecyclerView.Adapter<AdapterOfflineTest.
 
     @Override
     public void onBindViewHolder(@NonNull HolderOfflineTest holderOfflineTest, int i) {
-        holderOfflineTest.tvNumberUser.setText(String.valueOf(holderOfflineTest.getAdapterPosition()));
-        holderOfflineTest.tvNameOfflineTest.setText(listSection.get(i).getName());
-        holderOfflineTest.tvNumberOfflineTest.setText(String.valueOf(listSection.get(i).getNumberTest()));
+        holderOfflineTest.bind(listSection.get(i));
     }
 
     @Override
@@ -63,6 +60,12 @@ public class AdapterOfflineTest extends RecyclerView.Adapter<AdapterOfflineTest.
             tvNumberOfflineTest = itemView.findViewById(R.id.tvNumberOfflineTest);
             tvNumberUser = itemView.findViewById(R.id.tvNumberUser);
             itemView.setOnClickListener(this);
+        }
+
+        void bind(TitleSection title){
+            tvNumberUser.setText(String.valueOf(title.getNumberTest()));
+            tvNameOfflineTest.setText(title.getName());
+            tvNumberOfflineTest.setText(String.valueOf((getAdapterPosition()+1)+"."));
         }
 
         @Override

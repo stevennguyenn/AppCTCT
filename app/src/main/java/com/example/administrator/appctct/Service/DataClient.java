@@ -127,17 +127,21 @@ public interface DataClient {
     @POST("book/search/searchvatly2.php")
     Call<ArrayList<Book>> searchVatLy2(@Field("key") String key);
 
-    @GET("question/gettitleoffline_gt1.php")
-    Call<ArrayList<TitleSection>> getTitleOfflineGT1();
+    @FormUrlEncoded
+    @POST("question/gettitleoffline_gt1.php")
+    Call<ArrayList<TitleSection>> getTitleOfflineGT1(@Field("id") String token);
 
-    @GET("question/gettitleoffline_gt2php")
-    Call<ArrayList<TitleSection>> getTitleOfflineGT2();
+    @FormUrlEncoded
+    @POST("question/gettitleoffline_gt2.php")
+    Call<ArrayList<TitleSection>> getTitleOfflineGT2(@Field("id") String token);
 
-    @GET("question/gettitleoffline_vl1.php")
-    Call<ArrayList<TitleSection>> getTitleOfflineVL1();
+    @FormUrlEncoded
+    @POST("question/gettitleoffline_vl1.php")
+    Call<ArrayList<TitleSection>> getTitleOfflineVL1(@Field("id") String token);
 
-    @GET("question/gettitleoffline_vl2.php")
-    Call<ArrayList<TitleSection>> getTitleOfflineVL2();
+    @FormUrlEncoded
+    @POST("question/gettitleoffline_vl2.php")
+    Call<ArrayList<TitleSection>> getTitleOfflineVL2(@Field("id") String token);
 
     @FormUrlEncoded
     @POST("question/gettesttested_gt1.php")

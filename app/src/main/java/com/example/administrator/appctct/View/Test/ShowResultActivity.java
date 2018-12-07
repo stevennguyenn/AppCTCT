@@ -66,5 +66,4 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
 
-
 }

@@ -152,7 +152,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (listTestTested.size() == 0) {
+            if (listTestTested == null) {
                 if (isChecked) {
                     switch (buttonView.getId()) {
                         case R.id.rdQuestionA:

@@ -11,6 +11,7 @@ import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.AdapterChoiceTest.AdapterOfflineTest;
 import com.example.administrator.appctct.Adapter.AdapterChoiceTest.ClickRecyeOfflineTest;
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Constant.TypeStatus;
 import com.example.administrator.appctct.Entity.TitleSection;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterSectionOffline;
@@ -24,7 +25,7 @@ public class SectionOfflineActivity extends AppCompatActivity implements Present
     private RecyclerView rcOfflineTest;
     private Integer typeSection = -1;
     private RecyclerViewSkeletonScreen skeleton;
-    AdapterOfflineTest adapter;
+    private AdapterOfflineTest adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class SectionOfflineActivity extends AppCompatActivity implements Present
 
     private void getData(){
         PresenterSectionOffline presenter = new PresenterSectionOffline(this);
-        presenter.getData(typeSection);
+        presenter.getData(typeSection,getToken());
     }
 
     @Override
@@ -92,5 +93,9 @@ public class SectionOfflineActivity extends AppCompatActivity implements Present
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+    }
+
+    private String getToken(){
+        return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
     }
 }

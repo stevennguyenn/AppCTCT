@@ -22,19 +22,19 @@ public class ModelSectionOffline  {
         this.listened = listened;
     }
 
-    public void getData(Integer typeSection){
+    public void getData(Integer typeSection,String token){
         Call<ArrayList<TitleSection>> call = null;
         if (typeSection == TypeSection.GT1.rawValue()){
-            call = client.getTitleOfflineGT1();
+            call = client.getTitleOfflineGT1(token);
         }
         if (typeSection == TypeSection.GT2.rawValue()){
-            call = client.getTitleOfflineGT2();
+            call = client.getTitleOfflineGT2(token);
         }
         if (typeSection == TypeSection.VL1.rawValue()){
-            call = client.getTitleOfflineVL1();
+            call = client.getTitleOfflineVL1(token);
         }
         if (typeSection == TypeSection.VL2.rawValue()){
-            call = client.getTitleOfflineVL2();
+            call = client.getTitleOfflineVL2(token);
         }
         if (call != null){
             call.enqueue(new Callback<ArrayList<TitleSection>>() {

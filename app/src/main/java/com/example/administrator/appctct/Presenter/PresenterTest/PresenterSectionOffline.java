@@ -15,8 +15,8 @@ public class PresenterSectionOffline implements ModelSectionOfflineListened {
         this.listened = listened;
     }
 
-    public void getData(Integer typeSection){
-        model.getData(typeSection);
+    public void getData(Integer typeSection,String token){
+        model.getData(typeSection,token);
     }
 
     @Override
