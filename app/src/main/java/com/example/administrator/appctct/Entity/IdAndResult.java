@@ -9,6 +9,13 @@ public class IdAndResult implements Serializable {
     private String contentResult;
     private int position;
 
+    public IdAndResult(String id){
+        this.id = id;
+        this.result = "";
+        this.contentResult = "";
+        this.position = -1;
+    }
+
     public IdAndResult(String id, String result,String contentResult,int position) {
         this.id = id;
         this.result = result;

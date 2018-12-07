@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
@@ -52,7 +53,7 @@ public class ResultActivity extends AppCompatActivity implements PresenterShowRe
         transaction.add(R.id.viewChildren,viewLoadData);
         transaction.commit();
         presenter = new PresenterShowResult(this);
-        presenter.getResult(listResult);
+        presenter.getResult(listResult,getToken());
     }
 
     @Override
@@ -75,7 +76,7 @@ public class ResultActivity extends AppCompatActivity implements PresenterShowRe
 
     @Override
     public void connectFailed(String message) {
-        Toast.makeText(ResultActivity.this,"Nextwork Failed",Toast.LENGTH_SHORT).show();
+        Toast.makeText(ResultActivity.this,message,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -98,4 +99,9 @@ public class ResultActivity extends AppCompatActivity implements PresenterShowRe
     public void click() {
         Log.d("AAAAA","click");
     }
+
+    private String getToken(){
+        return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
+    }
+
 }

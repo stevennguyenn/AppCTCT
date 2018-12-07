@@ -24,10 +24,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private LayoutInflater layoutInflater;
     private CheckBoxClick checkBoxClickListened;
     private Animation rotate_down,rotate_up;
+    private Boolean istested = true;
 
     public QuestionAdapter(@NonNull ArrayList<ModelQuestion> listQuestion, Context context){
         this.layoutInflater = LayoutInflater.from(context);
         this.listQuestion = listQuestion;
+    }
+
+    public void setIsTest(){
+        this.istested = false;
     }
 
     @NonNull
@@ -49,6 +54,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         viewHolder.tvQuestionC.setText(modelQuestion.getQuestion_c());
         viewHolder.tvQuestionD.setText(modelQuestion.getQuestion_d());
         viewHolder.imgText.setVisibility(View.GONE);
+        if (!istested){
+            viewHolder.imgExpanding.setVisibility(View.GONE);
+        }
     }
 
 

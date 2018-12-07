@@ -20,7 +20,7 @@ public class ModelShowResult {
         this.listened = listened;
     }
 
-    public void getResult(final ArrayList<IdAndResult> listResult){
+    public void getResult(final ArrayList<IdAndResult> listResult, final String token){
         new android.os.Handler().post(new Runnable() {
             @Override
             public void run() {
@@ -32,7 +32,7 @@ public class ModelShowResult {
                     arrresult[i] = listResult.get(i).getResult();
                 }
 
-                Call<ResultQuestion> callback = client.getResult("31",arrid,arrresult);
+                Call<ResultQuestion> callback = client.getResult(token,arrid,arrresult);
                 callback.enqueue(new Callback<ResultQuestion>() {
                     @Override
                     public void onResponse(@NonNull Call<ResultQuestion> call, @NonNull Response<ResultQuestion> response) {

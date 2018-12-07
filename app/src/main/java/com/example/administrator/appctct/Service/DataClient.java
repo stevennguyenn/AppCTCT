@@ -6,7 +6,6 @@ import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.ResultQuestion;
-import com.example.administrator.appctct.Entity.SectionTest;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Entity.TestTested;
@@ -54,7 +53,7 @@ public interface DataClient {
 
 
     @FormUrlEncoded
-    @POST("getresultquestion_giaitich1.php")
+    @POST("result/getresultquestion_gt1.php")
     Call<ResultQuestion> getResult(@Field("id") String id,
                                    @Field("arrid[]") String[] arrID,
                                    @Field("arrresult[]") String[] arrResult);
@@ -127,18 +126,6 @@ public interface DataClient {
     @POST("book/search/searchvatly2.php")
     Call<ArrayList<Book>> searchVatLy2(@Field("key") String key);
 
-    @GET("getsection/getsectiontestgt1.php")
-    Call<ArrayList<SectionTest>> getSectionTestGT1();
-
-    @GET("getsection/getsectiontestgt2.php")
-    Call<ArrayList<SectionTest>> getSectionTestGT2();
-
-    @GET("getsection/getsectiontestvl1.php")
-    Call<ArrayList<SectionTest>> getSectionTestVL1();
-
-    @GET("getsection/getsectiontestvl2.php")
-    Call<ArrayList<SectionTest>> getSectionTestVL2();
-
     @GET("question/gettitleoffline_gt1.php")
     Call<ArrayList<TitleSection>> getTitleOfflineGT1();
 
@@ -166,7 +153,5 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("question/gettesttested_vl2.php")
     Call<ArrayList<TestTested>> getTestTestedVL2(@Field("id") int id);
-
-
 }
 

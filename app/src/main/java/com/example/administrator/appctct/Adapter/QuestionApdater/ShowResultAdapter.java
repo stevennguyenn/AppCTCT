@@ -28,9 +28,13 @@ public class ShowResultAdapter extends RecyclerView.Adapter<ShowResultAdapter.Ho
 
     @Override
     public void onBindViewHolder(@NonNull HolderShowResult holderShowResult, int i) {
-        holderShowResult.tvNumberResult.setText(String.valueOf(listResult.get(i).getPosition()+1));
-        holderShowResult.tvResult.setText(listResult.get(i).getResult().toUpperCase());
-        holderShowResult.tvContentResult.setText(listResult.get(i).getContentResult());
+        holderShowResult.tvNumberResult.setText(String.valueOf((holderShowResult.getAdapterPosition()+1)+"/"));
+        if (!listResult.get(i).getResult().equals("") && !listResult.get(i).getContentResult().equals("")) {
+            holderShowResult.tvResult.setText(String.valueOf(listResult.get(i).getResult().toUpperCase()+"."));
+            holderShowResult.tvContentResult.setText(listResult.get(i).getContentResult());
+            return;
+        }
+        holderShowResult.tvResult.setText(inflater.getContext().getResources().getString(R.string.nochoice));
     }
 
     @Override

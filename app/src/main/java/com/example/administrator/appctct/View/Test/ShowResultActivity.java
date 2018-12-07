@@ -9,6 +9,7 @@ import android.view.View;
 import android.support.v4.app.Fragment;
 
 import com.example.administrator.appctct.Adapter.QuestionApdater.ShowResultAdapter;
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
@@ -64,4 +65,6 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
         startActivity(intent);
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
+
+
 }

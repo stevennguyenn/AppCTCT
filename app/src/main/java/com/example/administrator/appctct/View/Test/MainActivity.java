@@ -18,6 +18,8 @@ import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.TimeEnd;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterInitList;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterInitListened;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterMainGetQuestion;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterMainGetQuestionListened;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterProcessResult;
@@ -25,7 +27,7 @@ import com.example.administrator.appctct.Presenter.PresenterTest.PresenterProces
 import com.example.administrator.appctct.R;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd{
+public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd,PresenterInitListened{
 
     RecyclerView rcQuestion;
     private ArrayList<ModelQuestion> listQuestion;
@@ -65,11 +67,16 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         //btCTCT.setTitleButton(getResources().getString(R.string.confirm));
         //btCTCT.setRegister(this);
 
+        listQuestion = new ArrayList<>();
+        adapter = new QuestionAdapter(listQuestion,MainActivity.this);
+
         if (typeStatus == TypeStatus.Online.rawVlue()){
+            adapter.setIsTest();
             btCTCT.setTimeEndListened(this);
             btCTCT.timeTest(10000);
         }
         if (typeStatus ==  TypeStatus.Offline.rawVlue()){
+            adapter.setIsTest();
             btCTCT.setTitleButton(getResources().getString(R.string.confirm));
             btCTCT.setRegister(this);
             btCTCT.setButtonVisible();
@@ -85,8 +92,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         rcQuestion.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         rcQuestion.setLayoutManager(layoutManager);
-        listQuestion = new ArrayList<>();
-        adapter = new QuestionAdapter(listQuestion,MainActivity.this);
+
         adapter.setCheckBoxClickListened(this);
         rcQuestion.setAdapter(adapter);
         skeleton = Skeleton.bind(rcQuestion)
@@ -94,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
                             .load(R.layout.layout_default_item_skeleton)
                             .angle(0)
                             .show();
-        listIdandResult = new ArrayList<>();
     }
 
     @Override
@@ -109,12 +114,18 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
 
     @Override
     public void clickView(View v) {
-        Notification.notify(MainActivity.this);
+//        Notification.notify(MainActivity.this);
+        Intent in = new Intent(MainActivity.this,ShowResultActivity.class);
+        in.putExtra("list_result",listIdandResult);
+        startActivity(in);
+        overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
 
     @Override
     public void getQuestionSuccessed(ArrayList<ModelQuestion> listQuestion) {
         this.listQuestion.addAll(listQuestion);
+        PresenterInitList presenterInitList = new PresenterInitList(this);
+        presenterInitList.process(listQuestion);
         adapter.notifyDataSetChanged();
         if (skeleton != null){
             skeleton.hide();
@@ -158,17 +169,19 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     protected void onPause() {
         super.onPause();
         btCTCT.cancelTimer();
-        if (btCTCT.getView() != null) {
-            btCTCT.getView().setVisibility(View.GONE);
-        }
+        if (btCTCT.getView() != null) btCTCT.getView().setVisibility(View.GONE);
     }
 
     @Override
     public void onBackPressed() {
-       if (typeStatus == TypeStatus.Online.rawVlue()){ }
-       else{
-           super.onBackPressed();
-           overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
-       }
+        if (typeStatus != TypeStatus.Online.rawVlue()) {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+        }
+    }
+
+    @Override
+    public void processSuccessed(ArrayList<IdAndResult> listResult) {
+        listIdandResult = listResult;
     }
 }

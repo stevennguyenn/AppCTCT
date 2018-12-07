@@ -15,8 +15,8 @@ public class PresenterShowResult implements ModelShowResultListened{
         this.listened = listened;
     }
 
-    public void getResult(ArrayList<IdAndResult> list){
-        model.getResult(list);
+    public void getResult(ArrayList<IdAndResult> list,String token){
+        model.getResult(list,token);
     }
 
     @Override

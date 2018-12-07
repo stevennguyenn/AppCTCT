@@ -70,4 +70,5 @@
     <string name="pleasechoicetest">Please choice one item</string>
     <string name="offlinetest">Offline Test</string>
     <string name="tested">Tested</string>
+    <string name="nochoice">No Choice</string>
 </resources>
