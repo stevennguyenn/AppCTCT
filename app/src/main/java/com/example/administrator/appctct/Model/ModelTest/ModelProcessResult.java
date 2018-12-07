@@ -20,26 +20,28 @@ public class ModelProcessResult{
         new Handler().post(new Runnable() {
             @Override
                 public void run() {
+                if(listIdAndResult != null) {
                     for (IdAndResult x : listIdAndResult) {
                         if (x.getId().equals(listQuestion.get(position).getId())) {
                             Integer index = listIdAndResult.indexOf(x);
                             listIdAndResult.get(index).setResult(result);
-                            if (result.equals("a")){
+                            if (result.equals("a")) {
                                 listIdAndResult.get(index).setContentResult(listQuestion.get(index).getQuestion_a());
                             }
-                            if (result.equals("b")){
+                            if (result.equals("b")) {
                                 listIdAndResult.get(index).setContentResult(listQuestion.get(index).getQuestion_b());
                             }
-                            if (result.equals("c")){
+                            if (result.equals("c")) {
                                 listIdAndResult.get(index).setContentResult(listQuestion.get(index).getQuestion_c());
                             }
-                            if (result.equals("c")){
+                            if (result.equals("c")) {
                                 listIdAndResult.get(index).setContentResult(listQuestion.get(index).getQuestion_b());
                             }
                             listened.getResult(listIdAndResult);
                             return;
                         }
                     }
+                }
             }
         });
     }

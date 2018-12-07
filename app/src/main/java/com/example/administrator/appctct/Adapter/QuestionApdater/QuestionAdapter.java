@@ -2,6 +2,7 @@ package com.example.administrator.appctct.Adapter.QuestionApdater;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private ArrayList<ModelQuestion> listQuestion;
     private LayoutInflater layoutInflater;
     private CheckBoxClick checkBoxClickListened;
-    private Animation rotate_down,rotate_up;
 //    private Boolean choicePermission = true;
     private ArrayList<QuestionTestTested> listTestTested;
 
@@ -47,8 +47,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)  {
         View view = layoutInflater.inflate(R.layout.layout_line_question,viewGroup,false);
-        rotate_down = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.rotate_down);
-        rotate_up = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.rotate_up);
         return new ViewHolder(view);
     }
 
@@ -75,11 +73,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener{
-        TextView tvContentQuestion, tvQuestionA, tvQuestionB, tvQuestionC, tvQuestionD,tvNumberQuestion;
+    public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener{
+        TextView tvContentQuestion, tvQuestionA, tvQuestionB, tvQuestionC, tvQuestionD,tvNumberQuestion,tvResultTestTested;
         CheckBox rdQuestionA,rdQuestionB,rdQuestionC,rdQuestionD;
-        ImageView imgExpanding,imgText;
-
+        ImageView imgText;
+        Animation anim = AnimationUtils.loadAnimation(layoutInflater.getContext(),R.anim.slide_down);
+        ConstraintLayout cvResult;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,8 +92,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             rdQuestionB = itemView.findViewById(R.id.rdQuestionB);
             rdQuestionC = itemView.findViewById(R.id.rdQuestionC);
             rdQuestionD = itemView.findViewById(R.id.rdQuestionD);
-            imgExpanding = itemView.findViewById(R.id.imgExpanding);
+            cvResult = itemView.findViewById(R.id.cvResult);
+            tvResultTestTested = itemView.findViewById(R.id.tvResultTestTested);
             imgText = itemView.findViewById(R.id.imgText);
+            rdQuestionA.setOnCheckedChangeListener(this);
+            rdQuestionB.setOnCheckedChangeListener(this);
+            rdQuestionC.setOnCheckedChangeListener(this);
+            rdQuestionD.setOnCheckedChangeListener(this);
         }
 
         void bindTested(QuestionTestTested questionTestTested){
@@ -112,18 +116,28 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             rdQuestionB.setChecked(false);
             rdQuestionC.setChecked(false);
             rdQuestionD.setChecked(false);
+            cvResult.setVisibility(View.VISIBLE);
             if (questionTestTested.getValueUserChocie().equals("a")){
                 rdQuestionA.setChecked(true);
+                return;
             }
             if(questionTestTested.getValueUserChocie().equals("b")){
                 rdQuestionB.setChecked(true);
+                return;
             }
             if(questionTestTested.getValueUserChocie().equals("c")){
                 rdQuestionC.setChecked(true);
+                return;
             }
             if(questionTestTested.getValueUserChocie().equals("d")){
                 rdQuestionD.setChecked(true);
+                return;
             }
+            cvResult.setVisibility(View.GONE);
+            rdQuestionA.setEnabled(true);
+            rdQuestionB.setEnabled(true);
+            rdQuestionC.setEnabled(true);
+            rdQuestionD.setEnabled(true);
         }
 
         void bindOnlineorOffline(ModelQuestion modelQuestion){
@@ -133,18 +147,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             tvQuestionB.setText(modelQuestion.getQuestion_b());
             tvQuestionC.setText(modelQuestion.getQuestion_c());
             tvQuestionD.setText(modelQuestion.getQuestion_d());
-            imgText.setVisibility(View.GONE);
-            imgExpanding.setVisibility(View.GONE);
-            imgExpanding.setOnClickListener(this);
-            rdQuestionA.setOnCheckedChangeListener(this);
-            rdQuestionB.setOnCheckedChangeListener(this);
-            rdQuestionC.setOnCheckedChangeListener(this);
-            rdQuestionD.setOnCheckedChangeListener(this);
-
+            cvResult.setVisibility(View.GONE);
         }
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (listTestTested.size() == 0) {
                 if (isChecked) {
                     switch (buttonView.getId()) {
                         case R.id.rdQuestionA:
@@ -189,17 +197,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
                     return;
                 }
                 checkBoxClickListened.checkboxListenedUnChecked(getAdapterPosition());
-        }
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.imgExpanding:
-                    Boolean expanded = listQuestion.get(getAdapterPosition()).getExpanding();
-                    imgText.setVisibility(expanded?View.GONE:View.VISIBLE);
-                    imgExpanding.startAnimation(expanded?rotate_up:rotate_down);
-                    listQuestion.get(getAdapterPosition()).setIsExpanding(!expanded);
-                    break;
+            } else {
+                rdQuestionA.setEnabled(false);
+                rdQuestionB.setEnabled(false);
+                rdQuestionC.setEnabled(false);
+                rdQuestionD.setEnabled(false);
+                tvResultTestTested.setText(String.valueOf("Result: " + listTestTested.get(getAdapterPosition()).getResult()));
+                cvResult.setVisibility(View.VISIBLE);
+                cvResult.startAnimation(anim);
             }
         }
     }

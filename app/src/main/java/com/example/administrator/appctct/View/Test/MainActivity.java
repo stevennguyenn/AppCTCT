@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
             }
         }
 
-
         processResult = new PresenterProcessResult(this);
         rcQuestion.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
