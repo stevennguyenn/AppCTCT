@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class AdapterTestTested extends RecyclerView.Adapter<AdapterTestTested.HolderTestTested> {
     private LayoutInflater inflater;
     private ArrayList<TestTested> listTest;
+    private ClickItemTestTested listenedClick;
+
+    public void setListenedClick(ClickItemTestTested listenedClick){
+        this.listenedClick = listenedClick;
+    }
 
     public AdapterTestTested(LayoutInflater inflater,ArrayList<TestTested> listTest){
         this.inflater = inflater;
@@ -46,7 +51,7 @@ public class AdapterTestTested extends RecyclerView.Adapter<AdapterTestTested.Ho
         return listTest.size();
     }
 
-    class HolderTestTested extends RecyclerView.ViewHolder{
+    class HolderTestTested extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tvNumberTestTested,tvNameTestTested,tvPointTestTested,tvRateTestTested,tvNumberUserTestTested;
          HolderTestTested(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +60,12 @@ public class AdapterTestTested extends RecyclerView.Adapter<AdapterTestTested.Ho
             tvPointTestTested = itemView.findViewById(R.id.tvPointTestTested);
             tvRateTestTested = itemView.findViewById(R.id.tvRateTestTested);
             tvNumberUserTestTested = itemView.findViewById(R.id.tvNumberUserTestTested);
+            itemView.setOnClickListener(this);
          }
+
+        @Override
+        public void onClick(View v) {
+             listenedClick.clickItem(listTest.get(getAdapterPosition()).getTestCode());
+        }
     }
 }

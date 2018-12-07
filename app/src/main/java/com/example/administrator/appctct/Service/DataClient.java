@@ -5,6 +5,7 @@ import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Entity.Profile;
+import com.example.administrator.appctct.Entity.QuestionTestTested;
 import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Entity.Student;
 import com.example.administrator.appctct.Entity.ModelQuestion;
@@ -153,5 +154,25 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("question/gettesttested_vl2.php")
     Call<ArrayList<TestTested>> getTestTestedVL2(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("question/getquestiontesttested_gt1.php")
+    Call<ArrayList<QuestionTestTested>> getQuestionTestTestedGT1(@Field("id_user") String token,
+                                                                 @Field("id_test") String idTest);
+
+    @FormUrlEncoded
+    @POST("question/getquestiontesttested_gt2.php")
+    Call<ArrayList<QuestionTestTested>> getQuestionTestTestedGT2(@Field("id_user") String token,
+                                                                 @Field("id_test") String idTest);
+
+    @FormUrlEncoded
+    @POST("question/getquestiontesttested_vl1.php")
+    Call<ArrayList<QuestionTestTested>> getQuestionTestTestedVL1(@Field("id_user") String token,
+                                                                 @Field("id_test") String idTest);
+
+    @FormUrlEncoded
+    @POST("question/getquestiontesttested_vl2.php")
+    Call<ArrayList<QuestionTestTested>> getQuestionTestTestedVL2 (@Field("id_user") String token,
+                                                                 @Field("id_test") String idTest);
 }
 

@@ -11,13 +11,17 @@ import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.QuestionApdater.CheckBoxClick;
 import com.example.administrator.appctct.Adapter.QuestionApdater.QuestionAdapter;
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Constant.TypeStatus;
 import com.example.administrator.appctct.Component.Custom.Notification;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.QuestionTestTested;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.TimeEnd;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionTestTested;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionTestTestedListened;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterInitList;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterInitListened;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterMainGetQuestion;
@@ -27,15 +31,14 @@ import com.example.administrator.appctct.Presenter.PresenterTest.PresenterProces
 import com.example.administrator.appctct.R;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd,PresenterInitListened{
+public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd,PresenterInitListened,PresenterGetQuestionTestTestedListened{
 
     RecyclerView rcQuestion;
     private ArrayList<ModelQuestion> listQuestion;
     private QuestionAdapter adapter;
     private ArrayList<IdAndResult> listIdandResult;
     private RecyclerViewSkeletonScreen skeleton;
-    fragment_button btCTCT;
-    private PresenterMainGetQuestion presenterGetQuestion;
+    private fragment_button btCTCT;
     private PresenterProcessResult processResult;
     private int typeStatus = -1;
     private int typeSection = -1;
@@ -52,6 +55,12 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     }
 
     private void getData(){
+        if (typeStatus == TypeStatus.Tested.rawVlue()){
+            PresenterGetQuestionTestTested presenterGetQuestionTestTested = new PresenterGetQuestionTestTested(this);
+            presenterGetQuestionTestTested.getQuestion(typeSection,getToken(),testCode);
+            return;
+        }
+        PresenterMainGetQuestion presenterGetQuestion = new PresenterMainGetQuestion(this);
         presenterGetQuestion.getQuestion(typeSection,testCode);
     }
 
@@ -71,12 +80,10 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         adapter = new QuestionAdapter(listQuestion,MainActivity.this);
 
         if (typeStatus == TypeStatus.Online.rawVlue()){
-            adapter.setIsTest();
             btCTCT.setTimeEndListened(this);
             btCTCT.timeTest(10000);
         }
         if (typeStatus ==  TypeStatus.Offline.rawVlue()){
-            adapter.setIsTest();
             btCTCT.setTitleButton(getResources().getString(R.string.confirm));
             btCTCT.setRegister(this);
             btCTCT.setButtonVisible();
@@ -87,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
                 btCTCT.getView().setVisibility(View.GONE);
             }
         }
-        presenterGetQuestion = new PresenterMainGetQuestion(this);
+
+
         processResult = new PresenterProcessResult(this);
         rcQuestion.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -139,6 +147,15 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     }
 
     @Override
+    public void getQuestionSuccessedTestTested(ArrayList<QuestionTestTested> listQuestion) {
+        adapter.setListTestTested(listQuestion);
+        if (skeleton != null){
+            skeleton.hide();
+            skeleton = null;
+        }
+    }
+
+    @Override
     public void connectFailed(String message) {
         Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
     }
@@ -183,5 +200,9 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     @Override
     public void processSuccessed(ArrayList<IdAndResult> listResult) {
         listIdandResult = listResult;
+    }
+
+    private String getToken(){
+        return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
     }
 }

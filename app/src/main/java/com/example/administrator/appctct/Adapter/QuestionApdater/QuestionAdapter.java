@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.QuestionTestTested;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
@@ -24,16 +25,23 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private LayoutInflater layoutInflater;
     private CheckBoxClick checkBoxClickListened;
     private Animation rotate_down,rotate_up;
-    private Boolean istested = true;
+//    private Boolean choicePermission = true;
+    private ArrayList<QuestionTestTested> listTestTested;
 
     public QuestionAdapter(@NonNull ArrayList<ModelQuestion> listQuestion, Context context){
         this.layoutInflater = LayoutInflater.from(context);
         this.listQuestion = listQuestion;
     }
 
-    public void setIsTest(){
-        this.istested = false;
+    public void setListTestTested(ArrayList<QuestionTestTested> listTestTested){
+        this.listTestTested = listTestTested;
+        notifyDataSetChanged();
     }
+
+
+//    public void setDontChoicePermission(){
+//        choicePermission = false;
+//    }
 
     @NonNull
     @Override
@@ -44,25 +52,22 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    //should move into viewholder
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-        ModelQuestion modelQuestion = listQuestion.get(i);
-        viewHolder.tvNumberQuestion.setText(String.valueOf("Question "+(i+1)+":"));
-        viewHolder.tvContentQuestion.setText(modelQuestion.getContent_question());
-        viewHolder.tvQuestionA.setText(modelQuestion.getQuestion_a());
-        viewHolder.tvQuestionB.setText(modelQuestion.getQuestion_b());
-        viewHolder.tvQuestionC.setText(modelQuestion.getQuestion_c());
-        viewHolder.tvQuestionD.setText(modelQuestion.getQuestion_d());
-        viewHolder.imgText.setVisibility(View.GONE);
-        if (!istested){
-            viewHolder.imgExpanding.setVisibility(View.GONE);
+        if (listTestTested != null){
+            QuestionTestTested questionTestTested = listTestTested.get(i);
+            viewHolder.bindTested(questionTestTested);
+            return;
         }
+        ModelQuestion modelQuestion = listQuestion.get(i);
+        viewHolder.bindOnlineorOffline(modelQuestion);
     }
 
 
     @Override
     public int getItemCount() {
-        return listQuestion.size();
+        return listTestTested != null? listTestTested.size():listQuestion.size();
     }
 
     public void setCheckBoxClickListened(CheckBoxClick checkBoxClickListened){
@@ -90,11 +95,52 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             rdQuestionD = itemView.findViewById(R.id.rdQuestionD);
             imgExpanding = itemView.findViewById(R.id.imgExpanding);
             imgText = itemView.findViewById(R.id.imgText);
+        }
+
+        void bindTested(QuestionTestTested questionTestTested){
+            tvNumberQuestion.setText(String.valueOf("Question "+(getAdapterPosition()+1)+":"));
+            tvContentQuestion.setText(questionTestTested.getContentQuestion());
+            tvQuestionA.setText(questionTestTested.getQuestionA());
+            tvQuestionB.setText(questionTestTested.getQuestionB());
+            tvQuestionC.setText(questionTestTested.getQuestionC());
+            tvQuestionD.setText(questionTestTested.getQuestionD());
+            rdQuestionA.setEnabled(false);
+            rdQuestionB.setEnabled(false);
+            rdQuestionC.setEnabled(false);
+            rdQuestionD.setEnabled(false);
+            rdQuestionA.setChecked(false);
+            rdQuestionB.setChecked(false);
+            rdQuestionC.setChecked(false);
+            rdQuestionD.setChecked(false);
+            if (questionTestTested.getValueUserChocie().equals("a")){
+                rdQuestionA.setChecked(true);
+            }
+            if(questionTestTested.getValueUserChocie().equals("b")){
+                rdQuestionB.setChecked(true);
+            }
+            if(questionTestTested.getValueUserChocie().equals("c")){
+                rdQuestionC.setChecked(true);
+            }
+            if(questionTestTested.getValueUserChocie().equals("d")){
+                rdQuestionD.setChecked(true);
+            }
+        }
+
+        void bindOnlineorOffline(ModelQuestion modelQuestion){
+            tvNumberQuestion.setText(String.valueOf("Question "+(getAdapterPosition()+1)+":"));
+            tvContentQuestion.setText(modelQuestion.getContent_question());
+            tvQuestionA.setText(modelQuestion.getQuestion_a());
+            tvQuestionB.setText(modelQuestion.getQuestion_b());
+            tvQuestionC.setText(modelQuestion.getQuestion_c());
+            tvQuestionD.setText(modelQuestion.getQuestion_d());
+            imgText.setVisibility(View.GONE);
+            imgExpanding.setVisibility(View.GONE);
             imgExpanding.setOnClickListener(this);
             rdQuestionA.setOnCheckedChangeListener(this);
             rdQuestionB.setOnCheckedChangeListener(this);
             rdQuestionC.setOnCheckedChangeListener(this);
             rdQuestionD.setOnCheckedChangeListener(this);
+
         }
 
         @Override
