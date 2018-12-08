@@ -28,5 +28,33 @@
         android:layout_height="0dp">
 
     </android.support.v7.widget.RecyclerView>
+    <android.support.constraint.ConstraintLayout
+        android:background="@color/colorWhite"
+        android:visibility="gone"
+        android:id="@+id/viewChildren"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:contentDescription="@string/notestonline"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@id/tvNoQuestion"
+            app:layout_constraintLeft_toLeftOf="@id/viewChildren"
+            app:layout_constraintRight_toRightOf="@id/viewChildren"
+            android:src="@drawable/ic_test"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        <TextView
+            android:textStyle="italic"
+            android:textSize="14sp"
+            android:textColor="@color/black_overlay"
+            android:text="@string/notesttested"
+            app:layout_constraintBottom_toBottomOf="@id/viewChildren"
+            app:layout_constraintTop_toTopOf="@id/viewChildren"
+            app:layout_constraintRight_toRightOf="@id/viewChildren"
+            app:layout_constraintLeft_toLeftOf="@id/viewChildren"
+            android:id="@+id/tvNoQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

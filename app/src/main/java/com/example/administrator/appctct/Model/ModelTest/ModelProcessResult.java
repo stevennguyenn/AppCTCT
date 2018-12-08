@@ -34,8 +34,8 @@ public class ModelProcessResult{
                             if (result.equals("c")) {
                                 listIdAndResult.get(index).setContentResult(listQuestion.get(index).getQuestion_c());
                             }
-                            if (result.equals("c")) {
-                                listIdAndResult.get(index).setContentResult(listQuestion.get(index).getQuestion_b());
+                            if (result.equals("d")) {
+                                listIdAndResult.get(index).setContentResult(listQuestion.get(index).getQuestion_d());
                             }
                             listened.getResult(listIdAndResult);
                             return;

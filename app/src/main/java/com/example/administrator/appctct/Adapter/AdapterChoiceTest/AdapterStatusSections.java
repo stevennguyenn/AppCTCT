@@ -36,7 +36,8 @@ public class AdapterStatusSections extends RecyclerView.Adapter<AdapterStatusSec
 
     @Override
     public void onBindViewHolder(@NonNull HolderStatusSections holderStatusSections, int i) {
-        holderStatusSections.tvLineSetting.setText(listStatus.get(i));
+        holderStatusSections.bind(listStatus.get(i));
+
     }
 
     @Override
@@ -50,6 +51,9 @@ public class AdapterStatusSections extends RecyclerView.Adapter<AdapterStatusSec
             super(itemView);
             tvLineSetting = itemView.findViewById(R.id.tvLineSetting);
             itemView.setOnClickListener(this);
+        }
+        void bind(String text){
+            tvLineSetting.setText(text);
         }
 
         @Override

@@ -3,7 +3,6 @@ package com.example.administrator.appctct.Model.ModelTest;
 import android.support.annotation.NonNull;
 
 import com.example.administrator.appctct.Component.Constant.TypeSection;
-import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Entity.TestTested;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
@@ -43,12 +42,13 @@ public class ModelTestTested {
                 @Override
                 public void onResponse(@NonNull Call<ArrayList<TestTested>> call, @NonNull Response<ArrayList<TestTested>> response) {
                     if (response.body() != null) {
-                        listened.getTestTestedSuccessed(response.body());
-                        return;
+                        if (response.body().size()>0) {
+                            listened.getTestTestedSuccessed(response.body());
+                            return;
+                        }
+                        listened.noTestTested();
                     }
-                    listened.getTestTestedFailed();
                 }
-
                 @Override
                 public void onFailure(@NonNull Call<ArrayList<TestTested>> call, @NonNull Throwable t) {
                     listened.connectFailed(t.getMessage());

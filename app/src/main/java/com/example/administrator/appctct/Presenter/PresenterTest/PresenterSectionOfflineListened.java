@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface PresenterSectionOfflineListened {
     void getTitleSectionSuccessed(ArrayList<TitleSection> listSection);
-    void getTitleSectionFailed();
+    void noTestOffline();
     void connectFailed(String message);
 }

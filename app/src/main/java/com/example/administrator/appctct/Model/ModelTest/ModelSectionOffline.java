@@ -41,10 +41,12 @@ public class ModelSectionOffline  {
                 @Override
                 public void onResponse(@NonNull  Call<ArrayList<TitleSection>> call,@NonNull Response<ArrayList<TitleSection>> response) {
                     if (response.body() != null){
-                        listened.getTitleSectionSuccessed(response.body());
-                        return;
+                        if (response.body().size()>0) {
+                            listened.getTitleSectionSuccessed(response.body());
+                            return;
+                        }
+                        listened.noTestOffline();
                     }
-                    listened.getTitleSectionFailed();
                 }
 
                 @Override

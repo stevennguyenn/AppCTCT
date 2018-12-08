@@ -41,16 +41,19 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("question/getdataquestion_gt1.php")
-    Call<ArrayList<ModelQuestion>> getQuestionGT1(@Field("test_code") String testCode);
+    Call<ArrayList<ModelQuestion>> getQuestionGT1(@Field("id") String token);
 
-    @GET("question/getdataquestion_gt2.php")
-    Call<ArrayList<ModelQuestion>> getQuestionGT2();
+    @FormUrlEncoded
+    @POST("question/getdataquestion_gt2.php")
+    Call<ArrayList<ModelQuestion>> getQuestionGT2(@Field("id") String token);
 
-    @GET("question/getdataquestion_vl1.php")
-    Call<ArrayList<ModelQuestion>> getQuestionVL1();
+    @FormUrlEncoded
+    @POST("question/getdataquestion_vl1.php")
+    Call<ArrayList<ModelQuestion>> getQuestionVL1(@Field("id") String token);
 
-    @GET("question/getdataquestion_vl2.php")
-    Call<ArrayList<ModelQuestion>> getQuestionVL2();
+    @FormUrlEncoded
+    @POST("question/getdataquestion_vl2.php")
+    Call<ArrayList<ModelQuestion>> getQuestionVL2(@Field("id") String token);
 
 
     @FormUrlEncoded
@@ -178,5 +181,22 @@ public interface DataClient {
     @POST("question/getquestiontesttested_vl2.php")
     Call<ArrayList<QuestionTestTested>> getQuestionTestTestedVL2 (@Field("id_user") String token,
                                                                  @Field("id_test") String idTest);
+
+    @FormUrlEncoded
+    @POST("question/getdataquestionoffline_gt1.php")
+    Call<ArrayList<ModelQuestion>> getQuestionOfflineGT1(@Field("test_code") String testCode);
+
+    @FormUrlEncoded
+    @POST("question/getdataquestionoffline_gt2.php")
+    Call<ArrayList<ModelQuestion>> getQuestionOfflineGT2(@Field("test_code") String testCode);
+
+    @FormUrlEncoded
+    @POST("question/getdataquestionoffline_vl1.php")
+    Call<ArrayList<ModelQuestion>> getQuestionOfflineVL1(@Field("test_code") String testCode);
+
+    @FormUrlEncoded
+    @POST("question/getdataquestionoffline_vl2.php")
+    Call<ArrayList<ModelQuestion>> getQuestionOfflineVL2(@Field("test_code") String testCode);
+
 }
 

@@ -1,10 +1,12 @@
 package com.example.administrator.appctct.View.Test;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
@@ -26,6 +28,7 @@ public class SectionOfflineActivity extends AppCompatActivity implements Present
     private Integer typeSection = -1;
     private RecyclerViewSkeletonScreen skeleton;
     private AdapterOfflineTest adapter;
+    private ConstraintLayout layoutNoTestOffline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class SectionOfflineActivity extends AppCompatActivity implements Present
 
     private void setID(){
         rcOfflineTest = findViewById(R.id.rcOfflineTest);
+        layoutNoTestOffline = findViewById(R.id.viewChildren);
     }
 
     private void setupView(){
@@ -70,8 +74,8 @@ public class SectionOfflineActivity extends AppCompatActivity implements Present
     }
 
     @Override
-    public void getTitleSectionFailed() {
-        Toast.makeText(this,"No Courser",Toast.LENGTH_SHORT).show();
+    public void noTestOffline() {
+        layoutNoTestOffline.setVisibility(View.VISIBLE);
     }
 
     @Override

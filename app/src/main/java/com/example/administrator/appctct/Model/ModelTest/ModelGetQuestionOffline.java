@@ -13,29 +13,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ModelMainGetQuestion {
-
+public class ModelGetQuestionOffline {
     private ModelMainGetQuestionListened listened;
     private DataClient client = APIUtils.getData();
 
-    public ModelMainGetQuestion(ModelMainGetQuestionListened listened){
+    public ModelGetQuestionOffline(ModelMainGetQuestionListened listened){
         this.listened = listened;
     }
 
-    public void  getQuestion(int typeSection,String token){
+    public void  getQuestion(int typeSection,String testCode){
         Call<ArrayList<ModelQuestion>> call = null;
 
         if (typeSection == TypeSection.GT1.rawValue()){
-            call = client.getQuestionGT1(token);
+            call = client.getQuestionOfflineGT1(testCode);
         }
         if (typeSection == TypeSection.GT2.rawValue()){
-            call = client.getQuestionGT2(token);
+            call = client.getQuestionOfflineGT2(testCode);
         }
         if (typeSection == TypeSection.VL1.rawValue()){
-            call = client.getQuestionVL1(token);
+            call = client.getQuestionOfflineVL1(testCode);
         }
         if (typeSection == TypeSection.VL2.rawValue()){
-            call = client.getQuestionVL2(token);
+            call = client.getQuestionOfflineVL2(testCode);
         }
 
         if (call != null) {

@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface PresenterTestTestedListened {
     void getTestTestedSuccessed(ArrayList<TestTested> listResult);
-    void  getTestTestedFailed();
+    void noTestTested();
     void connectFailed(String message);
 }

@@ -1,10 +1,12 @@
 package com.example.administrator.appctct.View.Test;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
@@ -26,7 +28,7 @@ public class TestedActivity extends AppCompatActivity implements PresenterTestTe
     private RecyclerViewSkeletonScreen skeleton;
     private AdapterTestTested adapter;
     private int typeSection = -1;
-
+    private ConstraintLayout layoutNoTestTested;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class TestedActivity extends AppCompatActivity implements PresenterTestTe
         rcTestTested = findViewById(R.id.rcTestTested);
         presenter = new PresenterTestTested(this);
         typeSection = getIntent().getIntExtra("type_section",-1);
+        layoutNoTestTested = findViewById(R.id.viewChildren);
     }
 
     private void setupView(){
@@ -67,8 +70,8 @@ public class TestedActivity extends AppCompatActivity implements PresenterTestTe
     }
 
     @Override
-    public void getTestTestedFailed() {
-        Toast.makeText(TestedActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    public void noTestTested() {
+        layoutNoTestTested.setVisibility(View.VISIBLE);
     }
 
     @Override

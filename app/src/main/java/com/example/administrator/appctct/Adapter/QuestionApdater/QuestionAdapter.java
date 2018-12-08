@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public QuestionAdapter(@NonNull ArrayList<ModelQuestion> listQuestion, Context context){
         this.layoutInflater = LayoutInflater.from(context);
         this.listQuestion = listQuestion;
+    }
+
+    public void setListQuestion(ArrayList<ModelQuestion> listQuestion){
+        this.listQuestion = listQuestion;
+        notifyDataSetChanged();
     }
 
     public void setListTestTested(ArrayList<QuestionTestTested> listTestTested){

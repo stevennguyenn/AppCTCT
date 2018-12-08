@@ -71,4 +71,7 @@
     <string name="offlinetest">Offline Test</string>
     <string name="tested">Tested</string>
     <string name="nochoice">No Choice</string>
+    <string name="notestonline">No Test Online</string>
+    <string name="notestoffline">No Test Offline</string>
+    <string name="notesttested">No Test Tested</string>
 </resources>

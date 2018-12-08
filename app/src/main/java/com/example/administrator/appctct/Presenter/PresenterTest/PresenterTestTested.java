@@ -23,8 +23,8 @@ public class PresenterTestTested implements ModelTestTestedListened{
     }
 
     @Override
-    public void getTestTestedFailed() {
-        listened.getTestTestedFailed();
+    public void noTestTested() {
+        listened.noTestTested();
     }
 
     @Override

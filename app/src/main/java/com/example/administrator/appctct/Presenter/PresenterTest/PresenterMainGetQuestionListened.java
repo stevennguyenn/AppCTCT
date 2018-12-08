@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface PresenterMainGetQuestionListened {
     void getQuestionSuccessed(ArrayList<ModelQuestion> listQuestion);
-    void getQuestionFailed();
+    void noQuestion();
     void connectFailed(String message);
 }

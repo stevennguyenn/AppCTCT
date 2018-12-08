@@ -11,6 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.Section;
 import com.example.administrator.appctct.R;
 
@@ -19,17 +21,15 @@ import java.util.ArrayList;
 public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.HolderChoiceTest>{
     private LayoutInflater inflater;
     private ArrayList<Section> listSection;
-    private AdapterStatusSections adapter;
     private ChoiceTestListened listened;
 
     public void setListened(ChoiceTestListened listened){
         this.listened = listened;
     }
 
-    public AdapterChocieTest(LayoutInflater inflater,ArrayList<Section> listSection,AdapterStatusSections adapter){
+    public AdapterChocieTest(LayoutInflater inflater,ArrayList<Section> listSection){
         this.inflater = inflater;
         this.listSection = listSection;
-        this.adapter = adapter;
     }
 
     @NonNull
@@ -42,19 +42,9 @@ public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.Ho
     @Override
     public void onBindViewHolder(@NonNull final HolderChoiceTest holderChoiceTest, int i) {
         holderChoiceTest.bind(listSection.get(holderChoiceTest.getAdapterPosition()));
-        LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
-        holderChoiceTest.rcStatusSection.setLayoutManager(manager);
-        holderChoiceTest.rcStatusSection.setHasFixedSize(true);
-        holderChoiceTest.rcStatusSection.setAdapter(adapter);
-        holderChoiceTest.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Boolean expanded = listSection.get(holderChoiceTest.getAdapterPosition()).getExpanding();
-                listSection.get(holderChoiceTest.getAdapterPosition()).setExpanding(!expanded);
-                notifyItemChanged(holderChoiceTest.getAdapterPosition());
-            }
-        });
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -68,18 +58,31 @@ public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.Ho
          RecyclerView rcStatusSection;
          Animation animationDown = AnimationUtils.loadAnimation(inflater.getContext(),R.anim.rotate_down);
          Animation animationUp = AnimationUtils.loadAnimation(inflater.getContext(),R.anim.rotate_up);
+         AdapterStatusSections adapter;
+
+
          HolderChoiceTest(@NonNull View itemView) {
             super(itemView);
             tvSection = itemView.findViewById(R.id.tvSection);
+            adapter = new AdapterStatusSections(inflater,Strings.ListStatusSection.getListStatusSection());
             imgDown = itemView.findViewById(R.id.imgDown);
             rcStatusSection = itemView.findViewById(R.id.rcStatusSection);
-            adapter.setListened(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     Boolean expanded = listSection.get(getAdapterPosition()).getExpanding();
+                     listSection.get(getAdapterPosition()).setExpanding(!expanded);
+                     notifyItemChanged(getAdapterPosition());
+                 }
+            });
         }
 
          void bind(Section section){
+             LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
+             rcStatusSection.setLayoutManager(manager);
              adapter.setListened(this);
+             rcStatusSection.setAdapter(adapter);
              Boolean expanded = section.getExpanding();
-             Log.d("BBBB",expanded+"");
              rcStatusSection.setVisibility(expanded?View.VISIBLE:View.GONE);
              imgDown.startAnimation(expanded?animationDown:animationUp);
              tvSection.setText(section.getName());

@@ -38,8 +38,8 @@ public class ChoiceTestActivity extends AppCompatActivity implements ChoiceTestL
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         rcChocieSection.setLayoutManager(manager);
         rcChocieSection.setHasFixedSize(true);
-        AdapterStatusSections adapterSettings = new AdapterStatusSections(getLayoutInflater(),Strings.ListStatusSection.getListStatusSection());
-        AdapterChocieTest adapter = new AdapterChocieTest(getLayoutInflater(), Strings.ListSection.getListSection(),adapterSettings);
+
+        AdapterChocieTest adapter = new AdapterChocieTest(getLayoutInflater(), Strings.ListSection.getListSection());
         adapter.setListened(this);
         rcChocieSection.setAdapter(adapter);
     }
@@ -130,7 +130,6 @@ public class ChoiceTestActivity extends AppCompatActivity implements ChoiceTestL
                     overridePendingTransition(R.anim.show_view_navigation, R.anim.hide_view_navigation);
                 }
                 break;
-
         }
     }
 }

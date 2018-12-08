@@ -1,22 +1,21 @@
 package com.example.administrator.appctct.Presenter.PresenterTest;
 
 import com.example.administrator.appctct.Entity.ModelQuestion;
-import com.example.administrator.appctct.Model.ModelTest.ModelMainGetQuestion;
+import com.example.administrator.appctct.Model.ModelTest.ModelGetQuestionOffline;
 import com.example.administrator.appctct.Model.ModelTest.ModelMainGetQuestionListened;
 
 import java.util.ArrayList;
 
-public class PresenterMainGetQuestion implements ModelMainGetQuestionListened{
-
-    private ModelMainGetQuestion model = new ModelMainGetQuestion(this);
+public class PresenterGetQuestionOffline implements ModelMainGetQuestionListened {
+    private ModelGetQuestionOffline model = new ModelGetQuestionOffline(this);
     private PresenterMainGetQuestionListened listened;
 
-    public PresenterMainGetQuestion(PresenterMainGetQuestionListened listened){
+    public PresenterGetQuestionOffline(PresenterMainGetQuestionListened listened) {
         this.listened = listened;
     }
 
-    public void getQuestion(int typeSection,String token){
-        model.getQuestion(typeSection,token);
+    public void getQuestion(int typeSection, String testCode) {
+        model.getQuestion(typeSection, testCode);
     }
 
     @Override

@@ -25,8 +25,8 @@ public class PresenterSectionOffline implements ModelSectionOfflineListened {
     }
 
     @Override
-    public void getTitleSectionFailed() {
-        listened.getTitleSectionFailed();
+    public void noTestOffline() {
+        listened.noTestOffline();
     }
 
     @Override

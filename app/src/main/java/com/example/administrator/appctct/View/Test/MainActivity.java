@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.View.Test;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,13 +14,13 @@ import com.example.administrator.appctct.Adapter.QuestionApdater.CheckBoxClick;
 import com.example.administrator.appctct.Adapter.QuestionApdater.QuestionAdapter;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Constant.TypeStatus;
-import com.example.administrator.appctct.Component.Custom.Notification;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.TimeEnd;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionOffline;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionTestTested;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionTestTestedListened;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterInitList;
@@ -31,10 +32,11 @@ import com.example.administrator.appctct.Presenter.PresenterTest.PresenterProces
 import com.example.administrator.appctct.R;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd,PresenterInitListened,PresenterGetQuestionTestTestedListened{
+public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd,PresenterInitListened,PresenterGetQuestionTestTestedListened {
 
     RecyclerView rcQuestion;
     private ArrayList<ModelQuestion> listQuestion;
+    private ConstraintLayout layoutNoQuestion;
     private QuestionAdapter adapter;
     private ArrayList<IdAndResult> listIdandResult;
     private RecyclerViewSkeletonScreen skeleton;
@@ -50,22 +52,12 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         setContentView(R.layout.activity_main);
         setID();
         setupView();
-        getData();
 //        stopService(new Intent(this, NotificationService.class));
-    }
-
-    private void getData(){
-        if (typeStatus == TypeStatus.Tested.rawVlue()){
-            PresenterGetQuestionTestTested presenterGetQuestionTestTested = new PresenterGetQuestionTestTested(this);
-            presenterGetQuestionTestTested.getQuestion(typeSection,getToken(),testCode);
-            return;
-        }
-        PresenterMainGetQuestion presenterGetQuestion = new PresenterMainGetQuestion(this);
-        presenterGetQuestion.getQuestion(typeSection,testCode);
     }
 
     private void setID(){
         rcQuestion = findViewById(R.id.rcMain);
+        layoutNoQuestion = findViewById(R.id.viewChildren);
         btCTCT = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btCTCT);
         typeStatus = getIntent().getIntExtra("status",-1);
         typeSection = getIntent().getIntExtra("type_section",-1);
@@ -82,16 +74,22 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
         if (typeStatus == TypeStatus.Online.rawVlue()){
             btCTCT.setTimeEndListened(this);
             btCTCT.timeTest(10000);
+            PresenterMainGetQuestion presenterGetQuestion = new PresenterMainGetQuestion(this);
+            presenterGetQuestion.getQuestion(typeSection,getToken());
         }
         if (typeStatus ==  TypeStatus.Offline.rawVlue()){
             btCTCT.setTitleButton(getResources().getString(R.string.confirm));
             btCTCT.setRegister(this);
             btCTCT.setButtonVisible();
+            PresenterGetQuestionOffline presenterGetQuestionOffline = new PresenterGetQuestionOffline(this);
+            presenterGetQuestionOffline.getQuestion(typeSection,testCode);
         }
 
         if (typeStatus == TypeStatus.Tested.rawVlue()){
             if (btCTCT.getView() != null) {
                 btCTCT.getView().setVisibility(View.GONE);
+                PresenterGetQuestionTestTested presenterGetQuestionTestTested = new PresenterGetQuestionTestTested(this);
+                presenterGetQuestionTestTested.getQuestion(typeSection,getToken(),testCode);
             }
         }
 
@@ -130,10 +128,9 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
 
     @Override
     public void getQuestionSuccessed(ArrayList<ModelQuestion> listQuestion) {
-        this.listQuestion.addAll(listQuestion);
         PresenterInitList presenterInitList = new PresenterInitList(this);
         presenterInitList.process(listQuestion);
-        adapter.notifyDataSetChanged();
+        adapter.setListQuestion(listQuestion);
         if (skeleton != null){
             skeleton.hide();
             skeleton = null;
@@ -141,8 +138,9 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     }
 
     @Override
-    public void getQuestionFailed() {
-        Toast.makeText(MainActivity.this,"Null",Toast.LENGTH_SHORT).show();
+    public void noQuestion() {
+        layoutNoQuestion.setVisibility(View.VISIBLE);
+        btCTCT.cancelTimer();
     }
 
     @Override
