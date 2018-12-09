@@ -4,6 +4,7 @@ package com.example.administrator.appctct.Service;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.FullBook;
+import com.example.administrator.appctct.Entity.PointRank;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
 import com.example.administrator.appctct.Entity.ResultQuestion;
@@ -197,6 +198,10 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("question/getdataquestionoffline_vl2.php")
     Call<ArrayList<ModelQuestion>> getQuestionOfflineVL2(@Field("test_code") String testCode);
+
+    @FormUrlEncoded
+    @POST("toptest/gettoptest.php")
+    Call<ArrayList<PointRank>> getTopRaking(@Field("test_code") String testCode);
 
 }
 

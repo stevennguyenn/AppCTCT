@@ -5,18 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.example.administrator.appctct.Adapter.AdapterChoiceTest.AdapterChocieTest;
-import com.example.administrator.appctct.Adapter.AdapterChoiceTest.AdapterStatusSections;
 import com.example.administrator.appctct.Adapter.AdapterChoiceTest.ChoiceTestListened;
-import com.example.administrator.appctct.Adapter.SettingsApdater.SettingsAdapter;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Constant.TypeSection;
 import com.example.administrator.appctct.Component.Constant.TypeStatus;
 import com.example.administrator.appctct.R;
-
-import java.net.Proxy;
 
 public class ChoiceTestActivity extends AppCompatActivity implements ChoiceTestListened {
 
@@ -37,8 +32,6 @@ public class ChoiceTestActivity extends AppCompatActivity implements ChoiceTestL
     private void setupView(){
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         rcChocieSection.setLayoutManager(manager);
-        rcChocieSection.setHasFixedSize(true);
-
         AdapterChocieTest adapter = new AdapterChocieTest(getLayoutInflater(), Strings.ListSection.getListSection());
         adapter.setListened(this);
         rcChocieSection.setAdapter(adapter);

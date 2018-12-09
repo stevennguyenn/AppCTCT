@@ -3,7 +3,6 @@ package com.example.administrator.appctct.Adapter.AdapterChoiceTest;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,32 +58,32 @@ public class AdapterChocieTest extends RecyclerView.Adapter<AdapterChocieTest.Ho
          Animation animationDown = AnimationUtils.loadAnimation(inflater.getContext(),R.anim.rotate_down);
          Animation animationUp = AnimationUtils.loadAnimation(inflater.getContext(),R.anim.rotate_up);
          AdapterStatusSections adapter;
-
+         LinearLayoutManager manager;
 
          HolderChoiceTest(@NonNull View itemView) {
             super(itemView);
             tvSection = itemView.findViewById(R.id.tvSection);
-            adapter = new AdapterStatusSections(inflater,Strings.ListStatusSection.getListStatusSection());
             imgDown = itemView.findViewById(R.id.imgDown);
+            adapter = new AdapterStatusSections(inflater,Strings.ListStatusSection.getListStatusSection());
             rcStatusSection = itemView.findViewById(R.id.rcStatusSection);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
+            rcStatusSection.setLayoutManager(manager);
+            adapter.setListened(this);
+            rcStatusSection.setAdapter(adapter);
+             itemView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
                      Boolean expanded = listSection.get(getAdapterPosition()).getExpanding();
                      listSection.get(getAdapterPosition()).setExpanding(!expanded);
                      notifyItemChanged(getAdapterPosition());
                  }
-            });
+             });
         }
 
          void bind(Section section){
-             LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
-             rcStatusSection.setLayoutManager(manager);
-             adapter.setListened(this);
-             rcStatusSection.setAdapter(adapter);
              Boolean expanded = section.getExpanding();
-             rcStatusSection.setVisibility(expanded?View.VISIBLE:View.GONE);
              imgDown.startAnimation(expanded?animationDown:animationUp);
+             rcStatusSection.setVisibility(expanded?View.VISIBLE:View.GONE);
              tvSection.setText(section.getName());
          }
 

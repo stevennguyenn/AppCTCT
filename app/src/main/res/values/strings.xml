@@ -73,5 +73,6 @@
     <string name="nochoice">No Choice</string>
     <string name="notestonline">No Test Online</string>
     <string name="notestoffline">No Test Offline</string>
-    <string name="notesttested">No Test Tested</string>
+    <string name="notesttested">No Test Tested</string>\
+    <string name="pointrank">Point Ranking</string>
 </resources>
