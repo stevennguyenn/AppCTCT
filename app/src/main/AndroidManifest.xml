@@ -50,7 +50,8 @@
             android:theme="@style/NoBackground" />
         <activity android:name=".View.Test.SectionOfflineActivity" />
         <activity android:name=".View.Test.TestedActivity" />
-        <activity android:name=".View.Test.SeeTopActivity"></activity>
+        <activity android:name=".View.Test.SeeTopActivity" />
+        <activity android:name=".View.Profile.IndividualActivity"></activity>
     </application>
 
 </manifest>

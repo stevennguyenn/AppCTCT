@@ -4,6 +4,7 @@ package com.example.administrator.appctct.Service;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.FullBook;
+import com.example.administrator.appctct.Entity.InformationIndividual;
 import com.example.administrator.appctct.Entity.PointRank;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
@@ -203,5 +204,8 @@ public interface DataClient {
     @POST("toptest/gettoptest.php")
     Call<ArrayList<PointRank>> getTopRaking(@Field("test_code") String testCode);
 
+    @FormUrlEncoded
+    @POST("individual/get_information_individual.php")
+    Call<InformationIndividual> getInformationIndividual(@Field("id") String id);
 }
 

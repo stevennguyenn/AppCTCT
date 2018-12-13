@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -97,7 +96,9 @@ public class ResultActivity extends AppCompatActivity implements PresenterShowRe
 
     @Override
     public void click() {
-        Log.d("AAAAA","click");
+        Intent intent = new Intent(ResultActivity.this,SeeTopActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
     }
 
     private String getToken(){
