@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.administrator.appctct.Adapter.Profile.AdapterInformationIndividual;
-import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.InformationIndividual;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationIndividual;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationIndividualListened;
@@ -18,6 +17,7 @@ public class IndividualActivity extends AppCompatActivity implements PresenterGe
     RecyclerView rcViewInformationIndividual;
     PresenterGetInformationIndividual presenter;
     private AdapterInformationIndividual adapter;
+    private String id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class IndividualActivity extends AppCompatActivity implements PresenterGe
 
     public void setID(){
         rcViewInformationIndividual = findViewById(R.id.rcViewInformationIndividual);
+        id = getIntent().getStringExtra("id");
     }
 
     public void setupView(){
@@ -37,7 +38,7 @@ public class IndividualActivity extends AppCompatActivity implements PresenterGe
         adapter = new AdapterInformationIndividual(getLayoutInflater(),new InformationIndividual());
         rcViewInformationIndividual.setAdapter(adapter);
         presenter = new PresenterGetInformationIndividual(this);
-        presenter.process(getToken());
+        presenter.process(id);
     }
 
     @Override
@@ -53,9 +54,5 @@ public class IndividualActivity extends AppCompatActivity implements PresenterGe
     @Override
     public void connectFailed(String message) {
         Log.d("AAA",message);
-    }
-
-    private String getToken(){
-        return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
     }
 }

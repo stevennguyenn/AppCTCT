@@ -24,12 +24,12 @@ import java.util.ArrayList;
 
 public class ResultActivity extends AppCompatActivity implements PresenterShowResultListened,ClickButton,ClickTVSeeTop{
 
-    private ArrayList<IdAndResult> listResult = new ArrayList<>();
     private PresenterShowResult presenter;
     private fragment_button btShowResult;
     private fragment_load_data viewLoadData = new fragment_load_data();
     private fragment_completion_result viewConpletion = new fragment_completion_result();
     private Boolean isCancelLoad = true;
+    private String testCode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,11 @@ public class ResultActivity extends AppCompatActivity implements PresenterShowRe
     }
 
     private void setupView(){
-        listResult = (ArrayList<IdAndResult>) getIntent().getSerializableExtra("list_result");
+        ArrayList<IdAndResult> listResult = getIntent().getParcelableArrayListExtra("list_result");
+        testCode = getIntent().getStringExtra("test_code");
+        if (listResult.size() > 0){
+            listResult.get(0).getId();
+        }
         btShowResult.setButtonVisible();
         btShowResult.setRegister(this);
         btShowResult.setTitleButton(getResources().getString(R.string.cancel));
@@ -62,7 +66,7 @@ public class ResultActivity extends AppCompatActivity implements PresenterShowRe
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         viewConpletion.setListened(this);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("data",result);
+        bundle.putParcelable("data",result);
         viewConpletion.setArguments(bundle);
         transaction.replace(R.id.viewChildren,viewConpletion);
         transaction.commit();
@@ -97,6 +101,7 @@ public class ResultActivity extends AppCompatActivity implements PresenterShowRe
     @Override
     public void click() {
         Intent intent = new Intent(ResultActivity.this,SeeTopActivity.class);
+        intent.putExtra("test_code",testCode);
         startActivity(intent);
         overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
     }

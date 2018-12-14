@@ -6,10 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.support.v4.app.Fragment;
 
 import com.example.administrator.appctct.Adapter.QuestionApdater.ShowResultAdapter;
-import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
@@ -23,6 +21,7 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
     private RecyclerView rcShowResult;
     private ShowResultAdapter adapter;
     private fragment_button btConfirm;
+    private String testCode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,8 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
     private void setRcShowResult(){
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         rcShowResult.setLayoutManager(manager);
-        listResult = (ArrayList<IdAndResult>) getIntent().getSerializableExtra("list_result");
+        listResult =  getIntent().getParcelableArrayListExtra("list_result");
+        testCode = getIntent().getStringExtra("test_code");
         adapter = new ShowResultAdapter(getLayoutInflater(),listResult);
         rcShowResult.setAdapter(adapter);
     }
@@ -61,7 +61,8 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
     @Override
     public void clickView(View v) {
         Intent intent = new Intent(ShowResultActivity.this,ResultActivity.class);
-        intent.putExtra("list_result",listResult);
+        intent.putParcelableArrayListExtra("list_result",listResult);
+        intent.putExtra("test_code",testCode);
         startActivity(intent);
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }

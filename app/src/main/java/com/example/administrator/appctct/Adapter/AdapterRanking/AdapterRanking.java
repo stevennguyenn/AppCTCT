@@ -15,6 +15,11 @@ import java.util.ArrayList;
 public class AdapterRanking extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private ArrayList<PointRank> list;
+    private SeeInformationIndividualListened listened;
+
+    public void setListened(SeeInformationIndividualListened listened){
+        this.listened = listened;
+    }
 
     public AdapterRanking(LayoutInflater inflater, ArrayList<PointRank> list) {
         this.inflater = inflater;
@@ -60,8 +65,9 @@ public class AdapterRanking extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return position<3?ViewTopType.ViewImage.getRawValue():ViewTopType.ViewNumber.getRawValue();
     }
 
-    class HolderPointRank extends RecyclerView.ViewHolder{
-        TextView tvNameRank,tvPointRank,tvNumberRank;
+    class HolderPointRank extends RecyclerView.ViewHolder implements View.OnClickListener{
+         TextView tvNameRank,tvPointRank,tvNumberRank;
+         private String id = "";
          HolderPointRank(@NonNull View itemView) {
             super(itemView);
             tvNameRank = itemView.findViewById(R.id.tvNameRank);
@@ -73,19 +79,35 @@ public class AdapterRanking extends RecyclerView.Adapter<RecyclerView.ViewHolder
              tvNameRank.setText(data.getFullname());
              tvPointRank.setText(String.valueOf("Points: "+data.getPoint()));
              tvNumberRank.setText(String.valueOf(getAdapterPosition()));
+             id = data.getId();
          }
+
+        @Override
+        public void onClick(View v) {
+            listened.seeInfor(id);
+        }
     }
 
-    class HolderPointRankTop extends RecyclerView.ViewHolder{
+    class HolderPointRankTop extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tvNameRank,tvPointRank;
+        private String id = "";
+
          HolderPointRankTop(@NonNull View itemView) {
             super(itemView);
             tvNameRank = itemView.findViewById(R.id.tvNameRankTop);
             tvPointRank = itemView.findViewById(R.id.tvPointRankTop);
+            itemView.setOnClickListener(this);
          }
+
          void bind(PointRank data){
              tvNameRank.setText(data.getFullname());
              tvPointRank.setText(String.valueOf("Points: "+data.getPoint()));
+             id = data.getId();
          }
+
+        @Override
+        public void onClick(View v) {
+            listened.seeInfor(id);
+        }
     }
 }

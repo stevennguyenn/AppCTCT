@@ -37,11 +37,12 @@ public class fragment_completion_result extends Fragment implements View.OnClick
         tvClickSeeTop = view.findViewById(R.id.tvClickToSeeTop);
         rbRatioResult = view.findViewById(R.id.rbRatioResult);
         if (getArguments()!= null){
-            ResultQuestion data = (ResultQuestion) getArguments().getSerializable("data");
-            tvTextPoint.setText(data.getPoint());
-            tvTextRate.setText(data.getRate());
-            Float ratio = Float.valueOf(data.getRatio());
-            rbRatioResult.setRating(ratio);
+            ResultQuestion data =  getArguments().getParcelable("data");
+            if (data != null) {
+                tvTextPoint.setText(data.getPoint());
+                tvTextRate.setText(data.getRate());
+                rbRatioResult.setRating(Float.valueOf(data.getRatio()));
+            }
         }
         return  view;
     }

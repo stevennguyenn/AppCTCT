@@ -121,7 +121,8 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     public void clickView(View v) {
 //        Notification.notify(MainActivity.this);
         Intent in = new Intent(MainActivity.this,ShowResultActivity.class);
-        in.putExtra("list_result",listIdandResult);
+        in.putParcelableArrayListExtra("list_result",listIdandResult);
+        in.putExtra("test_code",testCode);
         startActivity(in);
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
             btCTCT.getView().setVisibility(View.GONE);
         }
         Intent in = new Intent(MainActivity.this,ShowResultActivity.class);
-        in.putExtra("list_result",listIdandResult);
+        in.putParcelableArrayListExtra("list_result",listIdandResult);
         startActivity(in);
         overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
     }

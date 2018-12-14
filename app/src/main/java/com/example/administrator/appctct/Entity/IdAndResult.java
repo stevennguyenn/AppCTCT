@@ -1,8 +1,9 @@
 package com.example.administrator.appctct.Entity;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class IdAndResult implements Serializable {
+public class IdAndResult implements Parcelable {
 
     private String id;
     private String result;
@@ -22,6 +23,25 @@ public class IdAndResult implements Serializable {
         this.contentResult = contentResult;
         this.position = position;
     }
+
+    protected IdAndResult(Parcel in) {
+        id = in.readString();
+        result = in.readString();
+        contentResult = in.readString();
+        position = in.readInt();
+    }
+
+    public static final Creator<IdAndResult> CREATOR = new Creator<IdAndResult>() {
+        @Override
+        public IdAndResult createFromParcel(Parcel in) {
+            return new IdAndResult(in);
+        }
+
+        @Override
+        public IdAndResult[] newArray(int size) {
+            return new IdAndResult[size];
+        }
+    };
 
     public void setPosition(int position) {
         this.position = position;
@@ -53,5 +73,18 @@ public class IdAndResult implements Serializable {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(result);
+        dest.writeString(contentResult);
+        dest.writeInt(position);
     }
 }
