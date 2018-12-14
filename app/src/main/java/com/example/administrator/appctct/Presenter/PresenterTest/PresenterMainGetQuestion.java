@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.Presenter.PresenterTest;
 
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Model.ModelTest.ModelMainGetQuestion;
 import com.example.administrator.appctct.Model.ModelTest.ModelMainGetQuestionListened;
 
@@ -20,8 +21,8 @@ public class PresenterMainGetQuestion implements ModelMainGetQuestionListened{
     }
 
     @Override
-    public void getQuestionSuccessed(ArrayList<ModelQuestion> listQuestion) {
-        listened.getQuestionSuccessed(listQuestion);
+    public void getQuestionSuccessed(ModelQuestionOnlineOffline data) {
+        listened.getQuestionSuccessed(data);
     }
 
     @Override

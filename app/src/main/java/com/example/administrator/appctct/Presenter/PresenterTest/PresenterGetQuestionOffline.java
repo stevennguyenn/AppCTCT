@@ -1,16 +1,18 @@
 package com.example.administrator.appctct.Presenter.PresenterTest;
 
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Model.ModelTest.ModelGetQuestionOffline;
+import com.example.administrator.appctct.Model.ModelTest.ModelGetQuestionOfflineListened;
 import com.example.administrator.appctct.Model.ModelTest.ModelMainGetQuestionListened;
 
 import java.util.ArrayList;
 
-public class PresenterGetQuestionOffline implements ModelMainGetQuestionListened {
+public class PresenterGetQuestionOffline implements ModelGetQuestionOfflineListened {
     private ModelGetQuestionOffline model = new ModelGetQuestionOffline(this);
-    private PresenterMainGetQuestionListened listened;
+    private PresenterGetQuestionOfflineListened listened;
 
-    public PresenterGetQuestionOffline(PresenterMainGetQuestionListened listened) {
+    public PresenterGetQuestionOffline(PresenterGetQuestionOfflineListened listened) {
         this.listened = listened;
     }
 
@@ -19,8 +21,8 @@ public class PresenterGetQuestionOffline implements ModelMainGetQuestionListened
     }
 
     @Override
-    public void getQuestionSuccessed(ArrayList<ModelQuestion> listQuestion) {
-        listened.getQuestionSuccessed(listQuestion);
+    public void getQuestionOfflineSuccessed(ArrayList<ModelQuestion> listQuestion) {
+        listened.getQuestionOfflineSuccessed(listQuestion);
     }
 
     @Override

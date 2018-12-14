@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.administrator.appctct.Component.Constant.TypeSection;
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
 
@@ -23,7 +24,7 @@ public class ModelMainGetQuestion {
     }
 
     public void  getQuestion(int typeSection,String token){
-        Call<ArrayList<ModelQuestion>> call = null;
+        Call<ModelQuestionOnlineOffline> call = null;
 
         if (typeSection == TypeSection.GT1.rawValue()){
             call = client.getQuestionGT1(token);
@@ -39,11 +40,11 @@ public class ModelMainGetQuestion {
         }
 
         if (call != null) {
-            call.enqueue(new Callback<ArrayList<ModelQuestion>>() {
+            call.enqueue(new Callback<ModelQuestionOnlineOffline>() {
                 @Override
-                public void onResponse(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Response<ArrayList<ModelQuestion>> response) {
+                public void onResponse(@NonNull Call<ModelQuestionOnlineOffline> call, @NonNull Response<ModelQuestionOnlineOffline> response) {
                     if (response.body() != null) {
-                        if (response.body().size() > 0) {
+                        if (response.body().getListQuestion().size() > 0){
                             listened.getQuestionSuccessed(response.body());
                             return;
                         }
@@ -52,7 +53,7 @@ public class ModelMainGetQuestion {
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Throwable t) {
+                public void onFailure(@NonNull Call<ModelQuestionOnlineOffline> call, @NonNull Throwable t) {
                     listened.connectFailed(t.getMessage());
                 }
             });

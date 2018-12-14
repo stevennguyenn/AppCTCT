@@ -16,11 +16,13 @@ import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Constant.TypeStatus;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.TimeEnd;
 import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionOffline;
+import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionOfflineListened;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionTestTested;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionTestTestedListened;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterInitList;
@@ -32,7 +34,7 @@ import com.example.administrator.appctct.Presenter.PresenterTest.PresenterProces
 import com.example.administrator.appctct.R;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd,PresenterInitListened,PresenterGetQuestionTestTestedListened {
+public class MainActivity extends AppCompatActivity implements CheckBoxClick,ClickButton,PresenterMainGetQuestionListened,PresenterProcessResultListened,TimeEnd,PresenterInitListened,PresenterGetQuestionTestTestedListened,PresenterGetQuestionOfflineListened {
 
     RecyclerView rcQuestion;
     private ArrayList<ModelQuestion> listQuestion;
@@ -128,10 +130,25 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     }
 
     @Override
-    public void getQuestionSuccessed(ArrayList<ModelQuestion> listQuestion) {
+    public void getQuestionSuccessed(ModelQuestionOnlineOffline data) {
+        PresenterInitList presenterInitList = new PresenterInitList(this);
+        presenterInitList.process(data.getListQuestion());
+        adapter.setListQuestion(data.getListQuestion());
+        //have test code online
+        this.testCode = data.getTestCode();
+        this.listQuestion = data.getListQuestion();
+        if (skeleton != null){
+            skeleton.hide();
+            skeleton = null;
+        }
+    }
+
+    @Override
+    public void getQuestionOfflineSuccessed(ArrayList<ModelQuestion> listQuestion) {
         PresenterInitList presenterInitList = new PresenterInitList(this);
         presenterInitList.process(listQuestion);
         adapter.setListQuestion(listQuestion);
+        this.listQuestion = listQuestion;
         if (skeleton != null){
             skeleton.hide();
             skeleton = null;

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.administrator.appctct.Component.Constant.TypeSection;
 import com.example.administrator.appctct.Entity.ModelQuestion;
+import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
 
@@ -14,10 +15,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ModelGetQuestionOffline {
-    private ModelMainGetQuestionListened listened;
+    private ModelGetQuestionOfflineListened listened;
     private DataClient client = APIUtils.getData();
 
-    public ModelGetQuestionOffline(ModelMainGetQuestionListened listened){
+    public ModelGetQuestionOffline(ModelGetQuestionOfflineListened listened){
         this.listened = listened;
     }
 
@@ -42,8 +43,8 @@ public class ModelGetQuestionOffline {
                 @Override
                 public void onResponse(@NonNull Call<ArrayList<ModelQuestion>> call, @NonNull Response<ArrayList<ModelQuestion>> response) {
                     if (response.body() != null) {
-                        if (response.body().size() > 0) {
-                            listened.getQuestionSuccessed(response.body());
+                        if (response.body().size()>0) {
+                            listened.getQuestionOfflineSuccessed(response.body());
                             return;
                         }
                         listened.noQuestion();

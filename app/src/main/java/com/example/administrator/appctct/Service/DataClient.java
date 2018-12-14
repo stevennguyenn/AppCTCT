@@ -5,6 +5,7 @@ import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Entity.InformationIndividual;
+import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Entity.PointRank;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
@@ -43,19 +44,19 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("question/getdataquestion_gt1.php")
-    Call<ArrayList<ModelQuestion>> getQuestionGT1(@Field("id") String token);
+    Call<ModelQuestionOnlineOffline> getQuestionGT1(@Field("id") String token);
 
     @FormUrlEncoded
     @POST("question/getdataquestion_gt2.php")
-    Call<ArrayList<ModelQuestion>> getQuestionGT2(@Field("id") String token);
+    Call<ModelQuestionOnlineOffline> getQuestionGT2(@Field("id") String token);
 
     @FormUrlEncoded
     @POST("question/getdataquestion_vl1.php")
-    Call<ArrayList<ModelQuestion>> getQuestionVL1(@Field("id") String token);
+    Call<ModelQuestionOnlineOffline> getQuestionVL1(@Field("id") String token);
 
     @FormUrlEncoded
     @POST("question/getdataquestion_vl2.php")
-    Call<ArrayList<ModelQuestion>> getQuestionVL2(@Field("id") String token);
+    Call<ModelQuestionOnlineOffline> getQuestionVL2(@Field("id") String token);
 
 
     @FormUrlEncoded
