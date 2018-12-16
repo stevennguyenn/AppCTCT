@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class ListBookAdapter extends RecyclerView.Adapter<ListBookAdapter.ViewHolderBook>  {
     private LayoutInflater inflater;
     private ArrayList<Book> listBook;
+    private clickItemListBook listened;
+
+    public void setListened(clickItemListBook listened){
+        this.listened = listened;
+    }
 
     public ListBookAdapter(LayoutInflater inflater,ArrayList<Book> listBook){
         this.inflater = inflater;
@@ -43,12 +48,18 @@ public class ListBookAdapter extends RecyclerView.Adapter<ListBookAdapter.ViewHo
         return listBook.size();
     }
 
-    class ViewHolderBook extends RecyclerView.ViewHolder{
+    class ViewHolderBook extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tvNameBook, tvRatio;
         ViewHolderBook(@NonNull View itemView) {
             super(itemView);
             tvNameBook = itemView.findViewById(R.id.tvNameBook);
             tvRatio = itemView.findViewById(R.id.tvRatio);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listened.clickItem(getAdapterPosition());
         }
     }
 

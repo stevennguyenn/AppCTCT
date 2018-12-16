@@ -13,17 +13,23 @@ import android.widget.TextView;
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
 import com.example.administrator.appctct.Adapter.ListBookAdapter.ListBookAdapter;
+import com.example.administrator.appctct.Adapter.ListBookAdapter.clickItemListBook;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class FragmentListBook extends Fragment implements View.OnClickListener{
+public class Fragment_line_viewcontroller extends Fragment implements View.OnClickListener,clickItemListBook {
     TextView tvSeeAll,tvTile;
     RecyclerView rcListBook;
     private ListBookAdapter adapter;
     private ProcessPragmentListBook listened;
     private RecyclerViewSkeletonScreen skeleton;
+    private clickLineController listenedClick;
+
+    public void setListenedClick(clickLineController listenedClick){
+        this.listenedClick = listenedClick;
+    }
 
     public void setListened(ProcessPragmentListBook listened){
         this.listened = listened;
@@ -36,12 +42,6 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
         tvSeeAll = view.findViewById(R.id.tvSeeAll);
         tvTile = view.findViewById(R.id.tvTitle);
         rcListBook = view.findViewById(R.id.rcListBook);
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        tvSeeAll.setOnClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rcListBook.setLayoutManager(layoutManager);
         rcListBook.setHasFixedSize(true);
@@ -53,9 +53,15 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
                 .load(R.layout.layout_skeleton_controller)
                 .angle(0)
                 .show();
+        return view;
     }
 
-    public void setupView(String title){
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        tvSeeAll.setOnClickListener(this);
+    }
+
+    public void setTitle(String title){
         tvTile.setText(title);
     }
 
@@ -74,5 +80,10 @@ public class FragmentListBook extends Fragment implements View.OnClickListener{
                 listened.clickSeeAll(getView());
                 break;
         }
+    }
+
+    @Override
+    public void clickItem(int position) {
+        listenedClick.clickLinePosition(getView(),position);
     }
 }

@@ -76,4 +76,12 @@
     <string name="notesttested">No Test Tested</string>
     <string name="pointrank">Point Ranking</string>
     <string name="noinformationindividual">No Information Individual</string>
+    <string name="author">Author</string>
+    <string name="kind">Kind</string>
+    <string name="information">Inf</string>
+    <string name="dateupload">Date</string>
+    <string name="booktop">Book Top</string>
+    <string name="booksame">Book Same</string>
+    <string name="bookratio">Book Ratio</string>
+    <string name="comment">List Comment</string>
 </resources>

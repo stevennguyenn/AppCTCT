@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -23,16 +21,14 @@ import com.example.administrator.appctct.Component.Constant.TypeSearch;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
-import com.example.administrator.appctct.Fragment.FragmentListBook.FragmentListBook;
+import com.example.administrator.appctct.Fragment.FragmentListBook.Fragment_line_viewcontroller;
 import com.example.administrator.appctct.Fragment.FragmentListBook.ProcessPragmentListBook;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterController;
 import com.example.administrator.appctct.Presenter.PresenterController.PresenterControllerListened;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.View.Profile.ProfileActitivy;
-import com.example.administrator.appctct.View.SearchView.SearchActivity;
 import com.example.administrator.appctct.View.Setting.SettingActivity;
 import com.example.administrator.appctct.View.Test.ChoiceTestActivity;
-import com.example.administrator.appctct.View.Test.MainActivity;
 
 import java.util.ArrayList;
 
@@ -43,7 +39,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     private NaviApdater adapter;
     private Toolbar toolbar;
     private ContentHeader header = new ContentHeader();
-    private FragmentListBook listBookOne,listBookTwo,listBookThree,listBookFor;
+    private Fragment_line_viewcontroller listBookOne,listBookTwo,listBookThree,listBookFor;
     private PresenterController present;
 
     @Override
@@ -58,10 +54,10 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
     }
 
     private void setID(){
-        listBookOne = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookOne);
-        listBookTwo = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookTwo);
-        listBookThree = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookThree);
-        listBookFor = (FragmentListBook) getSupportFragmentManager().findFragmentById(R.id.viewListBookFor);
+        listBookOne = (Fragment_line_viewcontroller) getSupportFragmentManager().findFragmentById(R.id.viewListBookOne);
+        listBookTwo = (Fragment_line_viewcontroller) getSupportFragmentManager().findFragmentById(R.id.viewListBookTwo);
+        listBookThree = (Fragment_line_viewcontroller) getSupportFragmentManager().findFragmentById(R.id.viewListBookThree);
+        listBookFor = (Fragment_line_viewcontroller) getSupportFragmentManager().findFragmentById(R.id.viewListBookFor);
         drawerLayout = findViewById(R.id.drawer_layout);
         rcNavi = findViewById(R.id.rc_navi);
         //NavigationView navi = findViewById(R.id.nav_view);
@@ -78,13 +74,13 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         ItemOffetsetDecoration itemOffetsetDecoration = new ItemOffetsetDecoration(5);
         rcNavi.addItemDecoration(itemOffetsetDecoration);
         present = new PresenterController(this);
-        listBookOne.setupView(getResources().getString(R.string.math1));
+        listBookOne.setTitle(getResources().getString(R.string.math1));
         listBookOne.setListened(this);
-        listBookTwo.setupView(getResources().getString(R.string.math2));
+        listBookTwo.setTitle(getResources().getString(R.string.math2));
         listBookTwo.setListened(this);
-        listBookThree.setupView(getResources().getString(R.string.physical1));
+        listBookThree.setTitle(getResources().getString(R.string.physical1));
         listBookThree.setListened(this);
-        listBookFor.setupView(getResources().getString(R.string.physical2));
+        listBookFor.setTitle(getResources().getString(R.string.physical2));
         listBookFor.setListened(this);
     }
 
@@ -145,12 +141,12 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         return getSharedPreferences("data",MODE_PRIVATE).getString("token","");
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search,menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_search,menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -158,10 +154,10 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.icSeach:
-                startActivity(new Intent(ControllerActivity.this, SearchActivity.class));
-                overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
-                return true;
+//            case R.id.icSeach:
+//                startActivity(new Intent(ControllerActivity.this, SearchActivity.class));
+//                overridePendingTransition(R.anim.show_view_present,R.anim.hide_view_present);
+//                return true;
 
         }
         return super.onOptionsItemSelected(item);

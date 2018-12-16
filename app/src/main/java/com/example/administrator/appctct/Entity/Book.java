@@ -16,7 +16,7 @@ public class Book {
     @Expose
     private String ratioBook;
 
-    public Book( String nameBook, String ratioBook) {
+    public Book(String nameBook, String ratioBook) {
         this.nameBook = nameBook;
         this.ratioBook = ratioBook;
     }
