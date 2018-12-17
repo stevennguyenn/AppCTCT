@@ -16,7 +16,7 @@ import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class AdapterComment extends RecyclerView.Adapter<AdapterComment.HolderComment> {
+public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private ArrayList<BookComment> listComment;
 
@@ -32,19 +32,32 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.HolderCo
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        return position == 0 ? 0:1;
     }
 
     @NonNull
     @Override
-    public HolderComment onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.line_comment,viewGroup,false);
-        return new HolderComment(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view;
+        switch (i){
+            case 1:
+                view = inflater.inflate(R.layout.line_comment,viewGroup,false);
+                return new HolderComment(view);
+                default:
+                    view = inflater.inflate(R.layout.line_comment_first,viewGroup,false);
+                    return new HolderCommentFirst(view);
+        }
+
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HolderComment holderComment, int i) {
-        holderComment.bind(listComment.get(i));
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        //holderComment.bind(listComment.get(i));
+        if (viewHolder.getItemViewType() == 1){
+            HolderComment holderBookComment = (HolderComment) viewHolder;
+            holderBookComment.bind(listComment.get(i-1));
+        }
     }
 
 
@@ -73,5 +86,17 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.HolderCo
             tvTextComment.setText(data.getComment());
             rbRatioBookComment.setRating(data.getRatio());
         }
+    }
+
+    class HolderCommentFirst extends RecyclerView.ViewHolder{
+         RatingBar rbCommentFirstl;
+         TextView tvNumberRateCommentFirst,tvNumberPersonCommentFirst,tvSeeAllComment;
+         HolderCommentFirst(@NonNull View itemView) {
+            super(itemView);
+            rbCommentFirstl = itemView.findViewById(R.id.rbRatioBookCommentFirst);
+            tvNumberPersonCommentFirst = itemView.findViewById(R.id.tvNumberPersonCommentFirst);
+            tvNumberRateCommentFirst = itemView.findViewById(R.id.tvNumberRateCommentFirst);
+            tvSeeAllComment = itemView.findViewById(R.id.tvSeeAllCommentFirst);
+         }
     }
 }
