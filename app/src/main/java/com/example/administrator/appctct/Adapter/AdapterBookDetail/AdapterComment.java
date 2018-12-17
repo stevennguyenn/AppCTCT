@@ -30,6 +30,11 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.HolderCo
         notifyDataSetChanged();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
     @NonNull
     @Override
     public HolderComment onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -41,6 +46,7 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.HolderCo
     public void onBindViewHolder(@NonNull HolderComment holderComment, int i) {
         holderComment.bind(listComment.get(i));
     }
+
 
     @Override
     public int getItemCount() {
