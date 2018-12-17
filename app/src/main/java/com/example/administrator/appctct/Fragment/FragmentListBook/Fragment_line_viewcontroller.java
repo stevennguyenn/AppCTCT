@@ -47,6 +47,7 @@ public class Fragment_line_viewcontroller extends Fragment implements View.OnCli
         rcListBook.setHasFixedSize(true);
         ArrayList<Book> listBook = new ArrayList<>();
         adapter = new ListBookAdapter(getActivity().getLayoutInflater(), listBook);
+        adapter.setListened(this);
         rcListBook.setAdapter(adapter);
         skeleton = Skeleton.bind(rcListBook)
                 .adapter(adapter)

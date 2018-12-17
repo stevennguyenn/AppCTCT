@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.Adapter.AdapterBookDetail;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -137,24 +138,32 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    class HolderBookComment extends RecyclerView.ViewHolder{
+    class HolderBookComment extends RecyclerView.ViewHolder implements View.OnClickListener{
         RecyclerView rcComment;
         TextView tvNoComment;
+        TextView tvAddComment;
         AdapterComment apdater;
         HolderBookComment(@NonNull View itemView) {
             super(itemView);
             rcComment = itemView.findViewById(R.id.rcComment);
             tvNoComment = itemView.findViewById(R.id.tvNoComment);
             rcComment.setVisibility(View.GONE);
+            tvAddComment = itemView.findViewById(R.id.tvAddComment);
             LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
             rcComment.setLayoutManager(manager);
             apdater = new AdapterComment(inflater,new ArrayList<BookComment>());
             rcComment.setAdapter(apdater);
+            tvAddComment.setOnClickListener(this);
         }
         void bind(ArrayList<BookComment> listComment){
             apdater.setListComment(listComment);
             rcComment.setVisibility(View.VISIBLE);
             tvNoComment.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.d("AAAA","click comment");
         }
     }
 
