@@ -76,6 +76,10 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
         }
     }
 
+    public void setHideLoadMore(){
+        adapter.hidenLoadMore();
+    }
+
     @Override
     public void onClick(View v) {
         listened.clickSearch(typeSearch);

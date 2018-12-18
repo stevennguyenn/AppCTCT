@@ -12,6 +12,8 @@ public class Strings {
     static public final String isPhone = "isPhone";
     static public final String token = "token";
     static public final String successed = "Successed";
+    static public final String failed = "Failed";
+    static public final String nodata = "No Data";
 
 
     public class Dialog {

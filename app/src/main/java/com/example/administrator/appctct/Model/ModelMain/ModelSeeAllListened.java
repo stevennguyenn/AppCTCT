@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface ModelSeeAllListened {
     void getAllSuccessed(ArrayList<FullBook> listBook);
-    void getAllFailed();
+    void loadmoreFaield();
     void connectFailed(String message);
 }

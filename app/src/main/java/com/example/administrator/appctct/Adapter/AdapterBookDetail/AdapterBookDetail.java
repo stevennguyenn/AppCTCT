@@ -173,7 +173,7 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .load(data.getImgBook())
                     .into(imgAVTBook);
             tvNameBook.setText(data.getNameBook());
-            rbRatioBook.setRating(Float.valueOf(data.getRatioBook()));
+            rbRatioBook.setRating(data.getRatioBook());
             tvRatioBook.setText(String.valueOf("("+data.getRatioBook()+")"));
         }
     }

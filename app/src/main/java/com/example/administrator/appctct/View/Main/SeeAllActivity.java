@@ -3,6 +3,7 @@ package com.example.administrator.appctct.View.Main;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
@@ -64,15 +65,14 @@ public class SeeAllActivity extends AppCompatActivity implements PresenterSeeAll
 
     @Override
     public void getAllSuccessed(ArrayList<FullBook> listBook) {
+        Log.d("AAAA",page+"");
         fragmentSeeAll.setListBook(listBook,type);
-        if (listBook.size() == 20){
-            page += 1;
-            return;
-        }
+        page+=1;
     }
 
     @Override
-    public void getAllFailed() {
+    public void loadmoreFailed() {
+        fragmentSeeAll.setHideLoadMore();
     }
 
     @Override

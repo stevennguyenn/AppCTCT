@@ -37,8 +37,8 @@ public class PresenterSeeAll implements ModelSeeAllListened {
     }
 
     @Override
-    public void getAllFailed() {
-        listened.getAllFailed();
+    public void loadmoreFaield() {
+        listened.loadmoreFailed();
     }
 
     @Override
