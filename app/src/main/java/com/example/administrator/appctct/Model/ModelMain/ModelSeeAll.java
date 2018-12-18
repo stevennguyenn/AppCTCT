@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Model.ModelController;
+package com.example.administrator.appctct.Model.ModelMain;
 
 import android.support.annotation.NonNull;
 

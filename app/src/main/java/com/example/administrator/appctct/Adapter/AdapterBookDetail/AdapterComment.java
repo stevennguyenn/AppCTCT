@@ -1,6 +1,7 @@
 package com.example.administrator.appctct.Adapter.AdapterBookDetail;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? 0:1;
+        return position == 0 ? 0:(position == 1)?1:2;
     }
 
     @NonNull
@@ -40,30 +41,37 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
         switch (i){
-            case 1:
+            case 2:
                 view = inflater.inflate(R.layout.line_comment,viewGroup,false);
                 return new HolderComment(view);
+            case 0:
+                view = inflater.inflate(R.layout.line_comment_first,viewGroup,false);
+                return new HolderCommentFirst(view);
                 default:
-                    view = inflater.inflate(R.layout.line_comment_first,viewGroup,false);
-                    return new HolderCommentFirst(view);
+                    view = inflater.inflate(R.layout.line_no_comment,viewGroup,false);
+                    return new HolderNoComment(view);
         }
-
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        //holderComment.bind(listComment.get(i));
-        if (viewHolder.getItemViewType() == 1){
-            HolderComment holderBookComment = (HolderComment) viewHolder;
-            holderBookComment.bind(listComment.get(i-1));
+        if (listComment.size() > 0) {
+            if (viewHolder.getItemViewType() == 2) {
+                HolderComment holderBookComment = (HolderComment) viewHolder;
+                holderBookComment.bind(listComment.get(i - 1));
+            }
+            return;
+        }
+        if (viewHolder.getItemViewType() == 1) {
+            HolderNoComment holderNoComment = (HolderNoComment) viewHolder;
+            holderNoComment.setVisible();
         }
     }
 
 
     @Override
     public int getItemCount() {
-        return listComment.size();
+        return listComment.size()==0?2:2+listComment.size();
     }
 
     class HolderComment extends RecyclerView.ViewHolder{
@@ -79,11 +87,11 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         void bind(BookComment data){
             Glide.with(inflater.getContext())
-                    .load(data.getImgPerson())
+                    .load(data.getAvatar())
                     .apply(RequestOptions.circleCropTransform())
                     .into(imgAVTComment);
-            tvNameComment.setText(data.getNamePerson());
-            tvTextComment.setText(data.getComment());
+            tvNameComment.setText(data.getFullName());
+            tvTextComment.setText(data.getContentComment());
             rbRatioBookComment.setRating(data.getRatio());
         }
     }
@@ -98,5 +106,18 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvNumberRateCommentFirst = itemView.findViewById(R.id.tvNumberRateCommentFirst);
             tvSeeAllComment = itemView.findViewById(R.id.tvSeeAllCommentFirst);
          }
+    }
+
+    class HolderNoComment extends RecyclerView.ViewHolder{
+        ConstraintLayout layout;
+        HolderNoComment(@NonNull View itemView) {
+            super(itemView);
+            layout = itemView.findViewById(R.id.viewNoComment);
+            layout.setVisibility(View.GONE);
+        }
+
+        void setVisible(){
+            itemView.setVisibility(View.VISIBLE);
+        }
     }
 }

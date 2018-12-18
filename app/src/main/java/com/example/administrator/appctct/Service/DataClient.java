@@ -2,6 +2,9 @@ package com.example.administrator.appctct.Service;
 
 
 import com.example.administrator.appctct.Entity.Book;
+import com.example.administrator.appctct.Entity.BookDetail.BookComment;
+import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
+import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Entity.InformationIndividual;
@@ -208,5 +211,17 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("individual/get_information_individual.php")
     Call<InformationIndividual> getInformationIndividual(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("book/bookdetail/get_comment_book_detail.php")
+    Call<ArrayList<BookComment>> getCommentBook(@Field("id_book") String idBook);
+
+    @FormUrlEncoded
+    @POST("book/bookdetail/get_content_book_detail.php")
+    Call<BookDetail> getBookDetail(@Field("id_book") String idBook);
+
+    @FormUrlEncoded
+    @POST("book/bookdetail/getbook_same_and_top_ratio.php")
+    Call<BookExtened> getBookExtend(@Field("key_word") String keyword);
 }
 

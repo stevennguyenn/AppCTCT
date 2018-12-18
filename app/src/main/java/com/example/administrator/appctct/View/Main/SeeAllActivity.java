@@ -10,8 +10,8 @@ import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.FragmentSellAllListBook;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.LoadMoreForFragment;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.SearchSeeAllListened;
-import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAll;
-import com.example.administrator.appctct.Presenter.PresenterController.PresenterSeeAllListened;
+import com.example.administrator.appctct.Presenter.PresenterMain.PresenterSeeAll;
+import com.example.administrator.appctct.Presenter.PresenterMain.PresenterSeeAllListened;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.View.SearchView.SearchActivity;
 

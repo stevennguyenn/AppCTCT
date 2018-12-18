@@ -1,9 +1,9 @@
-package com.example.administrator.appctct.Presenter.PresenterController;
+package com.example.administrator.appctct.Presenter.PresenterMain;
 
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.ContentHeader;
-import com.example.administrator.appctct.Model.ModelController.ModelController;
-import com.example.administrator.appctct.Model.ModelController.ModelControllerListened;
+import com.example.administrator.appctct.Model.ModelMain.ModelController;
+import com.example.administrator.appctct.Model.ModelMain.ModelControllerListened;
 
 import java.util.ArrayList;
 

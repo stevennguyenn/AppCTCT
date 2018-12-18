@@ -1,7 +1,6 @@
 package com.example.administrator.appctct.Adapter.AdapterBookDetail;
 
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
+import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
 import com.example.administrator.appctct.Entity.BookDetail.InformationBook;
 import com.example.administrator.appctct.Entity.BookDetail.TitleBook;
 import com.example.administrator.appctct.Fragment.FragmentListBook.Fragment_line_viewcontroller;
@@ -25,35 +25,77 @@ import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private LayoutInflater inflater;
     private BookDetail bookDetail;
+    private ArrayList<BookComment> listComment;
+    private BookExtened bookExtened;
     private FragmentManager fragmentManager;
+    private OnLoadMorebookDetail onLoadMore;
+    private boolean isLoadingComment = false;
+    private boolean isLoadingBookExtened = false;
 
-    public AdapterBookDetail(LayoutInflater inflater, BookDetail bookDetail,FragmentManager fragmentManager) {
+    public AdapterBookDetail(RecyclerView recyclerView,LayoutInflater inflater,FragmentManager fragmentManager) {
+
         this.inflater = inflater;
-        this.bookDetail = bookDetail;
         this.fragmentManager = fragmentManager;
+        final LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (manager != null) {
+                    int currentVisible = manager.getItemCount();
+                    if (!isLoadingComment && currentVisible == 1) {
+                        isLoadingComment = true;
+                        onLoadMore.onLoadMoreComment();
+                    }
+                    if (!isLoadingBookExtened && currentVisible == 2) {
+                        isLoadingBookExtened = true;
+                        onLoadMore.onLoadMoreBookExtened();
+                    }
+                }
+            }
+        });
     }
 
+    public void setOnLoadMore(OnLoadMorebookDetail onLoadMore){
+        this.onLoadMore = onLoadMore;
+    }
+
+    public void setBookDetail(BookDetail bookDetail) {
+        this.bookDetail = bookDetail;
+        notifyDataSetChanged();
+    }
+
+    public void setListComment(ArrayList<BookComment> listComment){
+        this.listComment = listComment;
+        notifyItemChanged(2);
+    }
+
+    public void setBookExtened(BookExtened bookExtened){
+        this.bookExtened = bookExtened;
+        notifyItemChanged(3);
+    }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
-        switch (i){
+        switch (i) {
             case 0:
-                view = inflater.inflate(R.layout.line_first_information_book,viewGroup,false);
+                view = inflater.inflate(R.layout.line_first_information_book, viewGroup, false);
                 return new HolderTitleBook(view);
             case 1:
-                view = inflater.inflate(R.layout.line_two_information_book,viewGroup,false);
+                view = inflater.inflate(R.layout.line_two_information_book, viewGroup, false);
                 return new HolderInformationBook(view);
             case 2:
-                view = inflater.inflate(R.layout.line_three_information_book,viewGroup,false);
+                view = inflater.inflate(R.layout.line_three_information_book, viewGroup, false);
                 return new HolderBookComment(view);
-                default:
-                    view = inflater.inflate(R.layout.line_four_information_book,viewGroup,false);
-                    return new HolderBookExtened(view);
+            default:
+                view = inflater.inflate(R.layout.line_four_information_book, viewGroup, false);
+                return new HolderBookExtened(view);
         }
     }
 
@@ -66,8 +108,10 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
                 return 1;
             case 2:
                 return 2;
+            case 3:
+                return 3;
                 default:
-                    return 3;
+                    return -1;
         }
     }
 
@@ -83,20 +127,35 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
                 holderInformationBook.bind(bookDetail.getInformationBook());
                 break;
             case 2:
-                HolderBookComment holderBookComment = (HolderBookComment) viewHolder;
-                holderBookComment.bind(bookDetail.getListComment());
+                if (listComment != null) {
+                    HolderBookComment holderBookComment = (HolderBookComment) viewHolder;
+                    holderBookComment.bind(listComment);
+                }
                 break;
-                default:
+            case 3:
+                if (bookExtened != null) {
                     HolderBookExtened holderBookExtened = (HolderBookExtened) viewHolder;
-                    holderBookExtened.bind(bookDetail.getListBookTop(),bookDetail.getListBookSame(),bookDetail.getListBookRatio());
+                    holderBookExtened.bind(bookExtened.getListBookRatio(), bookExtened.getListBookSame());
                     break;
+                }
         }
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        if (bookExtened != null){
+            return 4;
+        }
+        if (listComment != null ){
+            return 3;
+        }
+
+        if (bookDetail != null) {
+            return 2;
+        }
+        return  0;
     }
+
 
     class HolderTitleBook extends RecyclerView.ViewHolder{
         ImageView imgAVTBook;
@@ -133,21 +192,18 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
         void bind(InformationBook data){
             tvNameAuthor.setText(data.getNameAuthor());
             tvNameKind.setText(data.getKind());
-            tvInformationBook.setText(data.getInformation());
+            tvInformationBook.setText(data.getContent());
             tvDateuploadBook.setText(data.getDateupload());
         }
     }
 
     class HolderBookComment extends RecyclerView.ViewHolder implements View.OnClickListener{
         RecyclerView rcComment;
-        TextView tvNoComment;
         TextView tvAddComment;
         AdapterComment apdater;
         HolderBookComment(@NonNull View itemView) {
             super(itemView);
             rcComment = itemView.findViewById(R.id.rcComment);
-            tvNoComment = itemView.findViewById(R.id.tvNoComment);
-            rcComment.setVisibility(View.GONE);
             tvAddComment = itemView.findViewById(R.id.tvAddComment);
             LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
             rcComment.setLayoutManager(manager);
@@ -155,10 +211,11 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
             rcComment.setAdapter(apdater);
             tvAddComment.setOnClickListener(this);
         }
+
         void bind(ArrayList<BookComment> listComment){
-            apdater.setListComment(listComment);
-            rcComment.setVisibility(View.VISIBLE);
-            tvNoComment.setVisibility(View.INVISIBLE);
+            if (listComment.size() > 0) {
+                apdater.setListComment(listComment);
+            }
         }
 
         @Override
@@ -169,25 +226,25 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     class HolderBookExtened extends RecyclerView.ViewHolder implements clickLineController {
 
-        Fragment_line_viewcontroller viewSame,viewTop,viewRatio;
+        Fragment_line_viewcontroller viewSame,viewTop;
 
         HolderBookExtened(@NonNull View itemView) {
             super(itemView);
             viewSame = (Fragment_line_viewcontroller) fragmentManager.findFragmentById(R.id.fragmentTheSame);
             viewTop = (Fragment_line_viewcontroller) fragmentManager.findFragmentById(R.id.fragmentTheTop);
-            viewRatio = (Fragment_line_viewcontroller) fragmentManager.findFragmentById(R.id.fragmentRatio);
             viewTop.setTitle(inflater.getContext().getResources().getString(R.string.booktop));
             viewSame.setTitle(inflater.getContext().getResources().getString(R.string.booksame));
-            viewRatio.setTitle(inflater.getContext().getResources().getString(R.string.bookratio));
-            viewRatio.setListenedClick(this);
             viewSame.setListenedClick(this);
-            viewTop.setListenedClick(this );
+            viewTop.setListenedClick(this);
+            itemView.setVisibility(View.GONE);
         }
 
-        void bind(ArrayList<Book> bookTop, ArrayList<Book> bookSame,ArrayList<Book> bookRatio) {
+        void bind(ArrayList<Book> bookTop, ArrayList<Book> bookSame) {
+            if (bookTop.size() > 0 || bookSame.size() > 0 ){
+                itemView.setVisibility(View.VISIBLE);
+            }
             viewTop.setListBook(bookTop);
             viewSame.setListBook(bookSame);
-            viewRatio.setListBook(bookRatio);
         }
 
         @Override
@@ -199,10 +256,15 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
                 case R.id.fragmentTheTop:
                     Log.d("AAA","click 1");
                     break;
-                case R.id.fragmentRatio:
-                    Log.d("AAA","click 3");
-                    break;
             }
         }
     }
+//
+//    class HolderLoading extends RecyclerView.ViewHolder{
+//        ProgressBar loading;
+//        public HolderLoading(@NonNull View itemView) {
+//            super(itemView);
+//            loading = itemView.findViewById(R.id.pbLoading);
+//        }
+//    }
 }

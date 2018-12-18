@@ -1,32 +1,53 @@
 package com.example.administrator.appctct.Entity.BookDetail;
 
-public class BookComment {
-    private String imgPerson;
-    private String namePerson;
-    private Float ratio;
-    private String comment;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class BookComment {
+    @SerializedName("id_user")
+    @Expose
+    private String idUser;
+
+    @SerializedName("img_person")
+    @Expose
+    private String avatar;
+
+    @SerializedName("name_person")
+    @Expose
+    private String fullName;
+
+    @SerializedName("ratio")
+    @Expose
+    private Float ratio;
+
+    @SerializedName("comment")
+    @Expose
+    private String contentComment;
 
     public BookComment(String imgPerson,String namePerson, Float ratio, String comment) {
-        this.imgPerson = imgPerson;
-        this.namePerson = namePerson;
+        this.avatar = imgPerson;
+        this.fullName = namePerson;
         this.ratio = ratio;
-        this.comment = comment;
+        this.contentComment = comment;
     }
 
-    public String getImgPerson() {
-        return imgPerson;
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 
     public Float getRatio() {
         return ratio;
     }
 
-    public String getComment() {
-        return comment;
+    public String getContentComment() {
+        return contentComment;
     }
 
-    public String getNamePerson() {
-        return namePerson;
+    public String getFullName() {
+        return fullName;
     }
 }
