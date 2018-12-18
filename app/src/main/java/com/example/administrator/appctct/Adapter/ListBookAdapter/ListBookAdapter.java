@@ -59,7 +59,7 @@ public class ListBookAdapter extends RecyclerView.Adapter<ListBookAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            listened.clickItem(getAdapterPosition());
+            listened.clickItem(listBook.get(getAdapterPosition()).getId());
         }
     }
 

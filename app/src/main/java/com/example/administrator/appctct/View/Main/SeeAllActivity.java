@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.FullBook;
+import com.example.administrator.appctct.Fragment.FragmentListBook.clickLineController;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.FragmentSellAllListBook;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.LoadMoreForFragment;
 import com.example.administrator.appctct.Fragment.FragmentSeeAllListBook.SearchSeeAllListened;
@@ -18,12 +19,13 @@ import com.example.administrator.appctct.View.SearchView.SearchActivity;
 
 import java.util.ArrayList;
 
-public class SeeAllActivity extends AppCompatActivity implements PresenterSeeAllListened, SearchSeeAllListened, LoadMoreForFragment {
+public class SeeAllActivity extends AppCompatActivity implements PresenterSeeAllListened, SearchSeeAllListened, LoadMoreForFragment,clickLineController {
 
     FragmentSellAllListBook fragmentSeeAll;
     private PresenterSeeAll presenter;
     private int type = 0;
     private int page = 0;
+    private clickLineController listened;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class SeeAllActivity extends AppCompatActivity implements PresenterSeeAll
         presenter = new PresenterSeeAll(this);
         fragmentSeeAll.setListened(this);
         fragmentSeeAll.setLoadMore(this);
+        fragmentSeeAll.setLineController(this);
     }
 
     private void getData(){
@@ -104,5 +107,13 @@ public class SeeAllActivity extends AppCompatActivity implements PresenterSeeAll
                 presenter.getDataVatLy2(page);
                 break;
         }
+    }
+
+    @Override
+    public void clickLinePosition(String idBook) {
+        Intent intent = new Intent(SeeAllActivity.this,BookDetailActivity.class);
+        intent.putExtra("id_book",idBook);
+        startActivity(intent);
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
     }
 }

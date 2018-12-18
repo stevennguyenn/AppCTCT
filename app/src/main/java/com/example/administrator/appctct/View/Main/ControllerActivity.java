@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -19,10 +20,12 @@ import com.example.administrator.appctct.Adapter.SettingsApdater.ItemOffetsetDec
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Constant.TypeSearch;
 import com.example.administrator.appctct.Entity.Book;
+import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
 import com.example.administrator.appctct.Entity.CellNavi;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Fragment.FragmentListBook.Fragment_line_viewcontroller;
 import com.example.administrator.appctct.Fragment.FragmentListBook.ProcessPragmentListBook;
+import com.example.administrator.appctct.Fragment.FragmentListBook.clickLineController;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterController;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterControllerListened;
 import com.example.administrator.appctct.R;
@@ -32,7 +35,7 @@ import com.example.administrator.appctct.View.Test.ChoiceTestActivity;
 
 import java.util.ArrayList;
 
-public class ControllerActivity extends AppCompatActivity implements ClickNaviItem, PresenterControllerListened, ProcessPragmentListBook {
+public class ControllerActivity extends AppCompatActivity implements ClickNaviItem, PresenterControllerListened, ProcessPragmentListBook,clickLineController {
 
     private DrawerLayout drawerLayout;
     private RecyclerView rcNavi;
@@ -76,12 +79,16 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         present = new PresenterController(this);
         listBookOne.setTitle(getResources().getString(R.string.math1));
         listBookOne.setListened(this);
+        listBookOne.setListenedClick(this);
         listBookTwo.setTitle(getResources().getString(R.string.math2));
         listBookTwo.setListened(this);
+        listBookTwo.setListenedClick(this);
         listBookThree.setTitle(getResources().getString(R.string.physical1));
         listBookThree.setListened(this);
+        listBookThree.setListenedClick(this);
         listBookFor.setTitle(getResources().getString(R.string.physical2));
         listBookFor.setListened(this);
+        listBookFor.setListenedClick(this);
     }
 
     private void setToolbar(){
@@ -243,5 +250,13 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
 
     @Override
     public void onBackPressed() {
+    }
+
+    @Override
+    public void clickLinePosition(String idBook) {
+        Intent intent = new Intent(ControllerActivity.this,BookDetailActivity.class);
+        intent.putExtra("id_book",idBook);
+        startActivity(intent);
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
     }
 }

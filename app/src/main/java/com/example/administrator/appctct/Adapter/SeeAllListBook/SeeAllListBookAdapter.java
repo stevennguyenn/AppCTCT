@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.administrator.appctct.Adapter.ListBookAdapter.clickItemListBook;
 import com.example.administrator.appctct.Entity.FullBook;
 import com.example.administrator.appctct.R;
 
@@ -24,6 +25,11 @@ public class SeeAllListBookAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private LoadMore loadMore;
     private Boolean isLoading = false;
     private Boolean isHiddenLoadmore = false;
+    private clickItemListBook listened;
+
+    public void setListened(clickItemListBook listened) {
+        this.listened = listened;
+    }
 
     public void setLoadMore(LoadMore loadMore){
         this.loadMore = loadMore;
@@ -104,7 +110,7 @@ public class SeeAllListBookAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    class SeeAllViewHolder extends RecyclerView.ViewHolder{
+    class SeeAllViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tvName,tvAuthor,tvDateupload;
         RatingBar rbRatio;
         SeeAllViewHolder(@NonNull View itemView) {
@@ -113,6 +119,7 @@ public class SeeAllListBookAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             tvAuthor = itemView.findViewById(R.id.tvAuthor);
             tvDateupload = itemView.findViewById(R.id.tvDateUpload);
             rbRatio = itemView.findViewById(R.id.rbRatio);
+            itemView.setOnClickListener(this);
         }
 
         void bind(FullBook data){
@@ -120,6 +127,11 @@ public class SeeAllListBookAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             tvAuthor.setText(data.getAuthor());
             tvDateupload.setText(data.getDateupload());
             rbRatio.setRating(Float.parseFloat(data.getRatio()));
+        }
+
+        @Override
+        public void onClick(View v) {
+            listened.clickItem(listBook.get(getAdapterPosition()).getId());
         }
     }
 }

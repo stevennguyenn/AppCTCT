@@ -8,6 +8,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.AdapterBookDetail;
+import com.example.administrator.appctct.Component.Custom.KeyWord;
 import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
@@ -29,8 +30,8 @@ import java.util.ArrayList;
 public class BookDetailActivity extends AppCompatActivity implements PresenterGetCommentBookListened,PresenterGetBookDetailListened,PresenterGetBookExtendListened,NotifyOnLoadMore {
 
     FragmentInfomationBook viewInformationBook;
-    private String idBook = "GT1_10104";
-    private String keyword=  "GT1";
+    private String idBook = "";
+    private String keyword=  "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,8 @@ public class BookDetailActivity extends AppCompatActivity implements PresenterGe
 
     private void setID(){
         viewInformationBook = (FragmentInfomationBook) getSupportFragmentManager().findFragmentById(R.id.fragmentInformationBook);
+        idBook = getIntent().getStringExtra("id_book");
+        keyword = KeyWord.getKeyWord(idBook);
     }
     private void setupView(){
         PresenterGetBookDetail presenterGetBookDetail = new PresenterGetBookDetail(this);
@@ -83,7 +86,9 @@ public class BookDetailActivity extends AppCompatActivity implements PresenterGe
 
     @Override
     public void onLoadMoreBookExtened() {
-        PresenterGetBookExtened presenterGetBookExtened = new PresenterGetBookExtened(this);
-        presenterGetBookExtened.process(keyword);
+        if (!keyword.equals("")) {
+            PresenterGetBookExtened presenterGetBookExtened = new PresenterGetBookExtened(this);
+            presenterGetBookExtened.process(keyword);
+        }
     }
 }

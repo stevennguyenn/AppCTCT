@@ -248,15 +248,8 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         @Override
-        public void clickLinePosition(View view, int position) {
-            switch (view.getId()){
-                case R.id.fragmentTheSame:
-                    Log.d("AAA","click 2");
-                    break;
-                case R.id.fragmentTheTop:
-                    Log.d("AAA","click 1");
-                    break;
-            }
+        public void clickLinePosition(String idBook) {
+            Log.d("AAAA",idBook);
         }
     }
 //

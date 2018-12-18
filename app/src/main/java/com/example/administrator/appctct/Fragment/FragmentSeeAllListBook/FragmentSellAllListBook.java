@@ -13,14 +13,16 @@ import android.widget.ImageView;
 
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
 import com.ethanhua.skeleton.Skeleton;
+import com.example.administrator.appctct.Adapter.ListBookAdapter.clickItemListBook;
 import com.example.administrator.appctct.Adapter.SeeAllListBook.LoadMore;
 import com.example.administrator.appctct.Adapter.SeeAllListBook.SeeAllListBookAdapter;
 import com.example.administrator.appctct.Entity.FullBook;
+import com.example.administrator.appctct.Fragment.FragmentListBook.clickLineController;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class FragmentSellAllListBook extends Fragment implements View.OnClickListener, LoadMore {
+public class FragmentSellAllListBook extends Fragment implements View.OnClickListener, LoadMore,clickItemListBook {
 
     private RecyclerView rcSeeAll;
     private ImageView imgSearch;
@@ -29,6 +31,11 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
     private SearchSeeAllListened listened;
     private LoadMoreForFragment loadMore;
     private RecyclerViewSkeletonScreen skeleton;
+    private clickLineController listenedController;
+
+    public void setLineController(clickLineController listenedController){
+        this.listenedController = listenedController;
+    }
 
 
     public void setLoadMore(LoadMoreForFragment loadMore){
@@ -57,6 +64,7 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
         ArrayList<FullBook> listBook = new ArrayList<>();
         adapter = new SeeAllListBookAdapter(rcSeeAll,getLayoutInflater(), listBook);
         adapter.setLoadMore(this);
+        adapter.setListened(this);
         rcSeeAll.setAdapter(adapter);
         skeleton = Skeleton.bind(rcSeeAll)
                 .adapter(adapter)
@@ -88,5 +96,10 @@ public class FragmentSellAllListBook extends Fragment implements View.OnClickLis
     @Override
     public void onLoadMore() {
         loadMore.onLoadMore();
+    }
+
+    @Override
+    public void clickItem(String idBook) {
+        listenedController.clickLinePosition(idBook);
     }
 }
