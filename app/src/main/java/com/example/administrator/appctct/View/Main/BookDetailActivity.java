@@ -1,5 +1,6 @@
 package com.example.administrator.appctct.View.Main;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
 import com.example.administrator.appctct.Entity.BookDetail.InformationBook;
 import com.example.administrator.appctct.Entity.BookDetail.TitleBook;
 import com.example.administrator.appctct.Fragment.FragmentBookDetail.FragmentInfomationBook;
+import com.example.administrator.appctct.Fragment.FragmentBookDetail.NotifyClickToSeeTheDocument;
 import com.example.administrator.appctct.Fragment.FragmentBookDetail.NotifyOnLoadMore;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterGetBookDetail;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterGetBookDetailListened;
@@ -24,10 +26,11 @@ import com.example.administrator.appctct.Presenter.PresenterMain.PresenterGetBoo
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterGetCommentBook;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterGetCommentBookListened;
 import com.example.administrator.appctct.R;
+import com.example.administrator.appctct.View.Test.PDFActivity;
 
 import java.util.ArrayList;
 
-public class BookDetailActivity extends AppCompatActivity implements PresenterGetCommentBookListened,PresenterGetBookDetailListened,PresenterGetBookExtendListened,NotifyOnLoadMore {
+public class BookDetailActivity extends AppCompatActivity implements PresenterGetCommentBookListened,PresenterGetBookDetailListened,PresenterGetBookExtendListened,NotifyOnLoadMore,NotifyClickToSeeTheDocument {
 
     FragmentInfomationBook viewInformationBook;
     private String idBook = "";
@@ -49,6 +52,7 @@ public class BookDetailActivity extends AppCompatActivity implements PresenterGe
         PresenterGetBookDetail presenterGetBookDetail = new PresenterGetBookDetail(this);
         presenterGetBookDetail.process(idBook);
         viewInformationBook.setOnLoadMore(this);
+        viewInformationBook.setListenedNotifyClickToSeeTheDocument(this);
     }
 
     @Override
@@ -90,5 +94,13 @@ public class BookDetailActivity extends AppCompatActivity implements PresenterGe
             PresenterGetBookExtened presenterGetBookExtened = new PresenterGetBookExtened(this);
             presenterGetBookExtened.process(keyword);
         }
+    }
+
+    @Override
+    public void click(String link) {
+        Intent intent = new Intent(BookDetailActivity.this,PDFActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+
     }
 }

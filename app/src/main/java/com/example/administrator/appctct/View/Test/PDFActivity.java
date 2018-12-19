@@ -16,7 +16,7 @@ public class PDFActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf);
         webView = findViewById(R.id.wvPDF);
-//        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.setEnabled(false);
         webView.loadUrl("https://docs.google.com/gview?embedded=true&url="+link);
         webView.setWebViewClient(new WebViewClient(){

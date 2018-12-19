@@ -87,4 +87,5 @@
     <string name="addcomment">Add comment</string>
     <string name="producevalution">Product Evalution</string>
     <string name = "nocomment">No Comment</string>
+    <string name="clicktoseethedocument">Click To See The Document</string>
 </resources>

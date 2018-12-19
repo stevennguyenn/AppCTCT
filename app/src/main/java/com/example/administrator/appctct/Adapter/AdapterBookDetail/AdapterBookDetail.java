@@ -34,6 +34,11 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
     private OnLoadMorebookDetail onLoadMore;
     private boolean isLoadingComment = false;
     private boolean isLoadingBookExtened = false;
+    private ClickToSeeDocument listenedClickToSeeDocument;
+
+    public void setListenedClickToSeeDocument(ClickToSeeDocument listenedClickToSeeDocument){
+        this.listenedClickToSeeDocument = listenedClickToSeeDocument;
+    }
 
     public AdapterBookDetail(RecyclerView recyclerView,LayoutInflater inflater,FragmentManager fragmentManager) {
 
@@ -157,9 +162,9 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    class HolderTitleBook extends RecyclerView.ViewHolder{
+    class HolderTitleBook extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imgAVTBook;
-        TextView tvNameBook,tvRatioBook;
+        TextView tvNameBook,tvRatioBook,tvClickToSeeTheDocument;
         RatingBar rbRatioBook;
         HolderTitleBook(@NonNull View itemView) {
             super(itemView);
@@ -167,6 +172,8 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvNameBook = itemView.findViewById(R.id.tvNameBook);
             tvRatioBook = itemView.findViewById(R.id.tvRatioBook);
             rbRatioBook = itemView.findViewById(R.id.rbRatioBook);
+            tvClickToSeeTheDocument = itemView.findViewById(R.id.tvClickToSeeTheDocument);
+            tvClickToSeeTheDocument.setOnClickListener(this);
         }
         void bind(TitleBook data){
             Glide.with(inflater.getContext())
@@ -175,6 +182,11 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvNameBook.setText(data.getNameBook());
             rbRatioBook.setRating(data.getRatioBook());
             tvRatioBook.setText(String.valueOf("("+data.getRatioBook()+")"));
+        }
+
+        @Override
+        public void onClick(View v) {
+            listenedClickToSeeDocument.click("");
         }
     }
 

@@ -97,6 +97,7 @@ public class SeeAllActivity extends AppCompatActivity implements PresenterSeeAll
             case 1:
                 presenter.getDataGiaiTich1(page);
                 break;
+
             case 2:
                 presenter.getDataGiaiTich2(page);
                 break;

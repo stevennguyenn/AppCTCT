@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.AdapterBookDetail;
+import com.example.administrator.appctct.Adapter.AdapterBookDetail.ClickToSeeDocument;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.OnLoadMorebookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
@@ -19,10 +20,15 @@ import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDetail {
+public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDetail,ClickToSeeDocument {
     RecyclerView rcInfomationBook;
     AdapterBookDetail adapter;
     private NotifyOnLoadMore onLoadMore;
+    private NotifyClickToSeeTheDocument listenedNotifyClickToSeeTheDocument;
+
+    public void setListenedNotifyClickToSeeTheDocument(NotifyClickToSeeTheDocument listenedNotifyClickToSeeTheDocument){
+        this.listenedNotifyClickToSeeTheDocument = listenedNotifyClickToSeeTheDocument;
+    }
 
     public void setOnLoadMore(NotifyOnLoadMore onLoadMore){
         this.onLoadMore = onLoadMore;
@@ -38,6 +44,7 @@ public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDe
         if (getLayoutInflater() != null) {
             adapter = new AdapterBookDetail(rcInfomationBook,getActivity().getLayoutInflater(), getActivity().getSupportFragmentManager());
             adapter.setOnLoadMore(this);
+            adapter.setListenedClickToSeeDocument(this);
             rcInfomationBook.setAdapter(adapter);
         }
         return view;
@@ -62,5 +69,10 @@ public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDe
     @Override
     public void onLoadMoreBookExtened() {
         onLoadMore.onLoadMoreBookExtened();
+    }
+
+    @Override
+    public void click(String linkDocument) {
+        listenedNotifyClickToSeeTheDocument.click(linkDocument);
     }
 }
