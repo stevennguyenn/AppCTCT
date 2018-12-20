@@ -9,6 +9,7 @@ import com.example.administrator.appctct.Component.Custom.KeyWord;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
+import com.example.administrator.appctct.Entity.BookDetail.FullBookComment;
 import com.example.administrator.appctct.Fragment.FragmentBookDetail.FragmentInfomationBook;
 import com.example.administrator.appctct.Fragment.FragmentBookDetail.NotifyAddComment;
 import com.example.administrator.appctct.Fragment.FragmentBookDetail.NotifyClickToSeeTheDocument;
@@ -50,7 +51,7 @@ public class BookDetailActivity extends AppCompatActivity implements PresenterGe
     }
 
     @Override
-    public void getBookCommentSuccessed(ArrayList<BookComment> data) {
+    public void getBookCommentSuccessed(FullBookComment data) {
         viewInformationBook.setBookComment(data);
     }
 

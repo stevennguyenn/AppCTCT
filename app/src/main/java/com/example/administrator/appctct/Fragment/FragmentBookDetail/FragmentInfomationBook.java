@@ -14,12 +14,10 @@ import com.example.administrator.appctct.Adapter.AdapterBookDetail.AdapterBookDe
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.AddComment;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.ClickToSeeDocument;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.OnLoadMorebookDetail;
-import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
+import com.example.administrator.appctct.Entity.BookDetail.FullBookComment;
 import com.example.administrator.appctct.R;
-
-import java.util.ArrayList;
 
 public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDetail,ClickToSeeDocument,AddComment {
     RecyclerView rcInfomationBook;
@@ -60,8 +58,8 @@ public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDe
         adapter.setBookDetail(bookDetail);
     }
 
-    public void setBookComment(ArrayList<BookComment> listBookComment){
-        adapter.setListComment(listBookComment);
+    public void setBookComment(FullBookComment listBookComment){
+        adapter.setComment(listBookComment);
     }
 
     public void setBookExntend(BookExtened bookExntend){

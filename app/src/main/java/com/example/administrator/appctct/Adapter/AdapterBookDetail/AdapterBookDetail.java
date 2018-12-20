@@ -17,6 +17,7 @@ import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
+import com.example.administrator.appctct.Entity.BookDetail.FullBookComment;
 import com.example.administrator.appctct.Entity.BookDetail.InformationBook;
 import com.example.administrator.appctct.Entity.BookDetail.TitleBook;
 import com.example.administrator.appctct.Fragment.FragmentListBook.Fragment_line_viewcontroller;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private LayoutInflater inflater;
     private BookDetail bookDetail;
-    private ArrayList<BookComment> listComment;
+    private FullBookComment comment;
     private BookExtened bookExtened;
     private FragmentManager fragmentManager;
     private OnLoadMorebookDetail onLoadMore;
@@ -79,8 +80,8 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
-    public void setListComment(ArrayList<BookComment> listComment){
-        this.listComment = listComment;
+    public void setComment(FullBookComment comment){
+        this.comment = comment;
         notifyItemChanged(2);
     }
 
@@ -137,9 +138,9 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
                 holderInformationBook.bind(bookDetail.getInformationBook());
                 break;
             case 2:
-                if (listComment != null) {
+                if (comment != null) {
                     HolderBookComment holderBookComment = (HolderBookComment) viewHolder;
-                    holderBookComment.bind(listComment);
+                    holderBookComment.bind(comment);
                 }
                 break;
             case 3:
@@ -156,7 +157,7 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (bookExtened != null){
             return 4;
         }
-        if (listComment != null ){
+        if (comment != null ){
             return 3;
         }
 
@@ -224,14 +225,14 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvAddComment = itemView.findViewById(R.id.tvAddComment);
             LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
             rcComment.setLayoutManager(manager);
-            apdater = new AdapterComment(inflater,new ArrayList<BookComment>());
+            apdater = new AdapterComment(inflater);
             rcComment.setAdapter(apdater);
             tvAddComment.setOnClickListener(this);
         }
 
-        void bind(ArrayList<BookComment> listComment){
-            if (listComment.size() > 0) {
-                apdater.setListComment(listComment);
+        void bind(FullBookComment comment){
+            if (comment != null) {
+                apdater.setComment(comment);
             }
         }
 

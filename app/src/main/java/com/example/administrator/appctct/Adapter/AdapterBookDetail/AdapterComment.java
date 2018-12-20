@@ -12,28 +12,29 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
+import com.example.administrator.appctct.Entity.BookDetail.FullBookComment;
+import com.example.administrator.appctct.Entity.BookDetail.TitleComment;
 import com.example.administrator.appctct.R;
 
-import java.util.ArrayList;
 
 public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
-    private ArrayList<BookComment> listComment;
+    private FullBookComment comment;
 
-    public AdapterComment(LayoutInflater inflater, ArrayList<BookComment> listComment) {
+    public AdapterComment(LayoutInflater inflater) {
         this.inflater = inflater;
-        this.listComment = listComment;
     }
 
-    public void setListComment(ArrayList<BookComment> listComment){
-        this.listComment = listComment;
+    public void setComment(FullBookComment comment){
+        this.comment = comment;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? 0:(listComment != null && position == listComment.size())?1:2;
+        return position == 0 ? 0 : (comment.getListComment() != null && position <= comment.getListComment().size()) ? 1 : 2;
     }
 
     @NonNull
@@ -55,10 +56,18 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        if (listComment.size() > 0) {
-            if (viewHolder.getItemViewType() == 1) {
+
+        if (viewHolder.getItemViewType() == 1){
+            if (comment != null && comment.getListComment().size() > 0){
                 HolderComment holderBookComment = (HolderComment) viewHolder;
-                holderBookComment.bind(listComment.get(i - 1));
+                holderBookComment.bind(comment.getListComment().get(i - 1));
+            }
+        }
+
+        if (viewHolder.getItemViewType() == 0) {
+            if (comment.getTitleComment().getMessage().equals(Strings.successed)) {
+                HolderCommentFirst holderCommentFirst = (HolderCommentFirst) viewHolder;
+                holderCommentFirst.bind(comment.getTitleComment());
             }
         }
     }
@@ -68,7 +77,10 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return listComment.size()==0?2:1+listComment.size();
+        if (comment != null) {
+            return comment.getListComment().size() == 0 ? 2 : 1 + comment.getListComment().size();
+        }
+        return 2;
     }
 
     class HolderComment extends RecyclerView.ViewHolder{
@@ -94,14 +106,20 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     class HolderCommentFirst extends RecyclerView.ViewHolder{
-         RatingBar rbCommentFirstl;
+         RatingBar rbCommentFirst;
          TextView tvNumberRateCommentFirst,tvNumberPersonCommentFirst,tvSeeAllComment;
          HolderCommentFirst(@NonNull View itemView) {
             super(itemView);
-            rbCommentFirstl = itemView.findViewById(R.id.rbRatioBookCommentFirst);
+            rbCommentFirst = itemView.findViewById(R.id.rbRatioBookCommentFirst);
             tvNumberPersonCommentFirst = itemView.findViewById(R.id.tvNumberPersonCommentFirst);
             tvNumberRateCommentFirst = itemView.findViewById(R.id.tvNumberRateCommentFirst);
             tvSeeAllComment = itemView.findViewById(R.id.tvSeeAllCommentFirst);
+         }
+
+         void bind(TitleComment data){
+             rbCommentFirst.setRating(data.getAvgRate());
+             tvNumberRateCommentFirst.setText(String.valueOf(data.getAvgRate()));
+             tvNumberPersonCommentFirst.setText(String.valueOf("(" +data.getNumberRate()+")"));
          }
     }
 
@@ -110,10 +128,6 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
         HolderNoComment(@NonNull View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.viewNoComment);
-        }
-
-        void setInvisible(){
-            layout.setVisibility(View.GONE);
         }
     }
 }

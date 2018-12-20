@@ -5,6 +5,7 @@ import com.example.administrator.appctct.Entity.Book;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
+import com.example.administrator.appctct.Entity.BookDetail.FullBookComment;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.InformationIndividual;
 import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
@@ -214,7 +215,7 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("book/bookdetail/get_comment_book_detail.php")
-    Call<ArrayList<BookComment>> getCommentBook(@Field("id_book") String idBook);
+    Call<FullBookComment> getCommentBook(@Field("id_book") String idBook);
 
     @FormUrlEncoded
     @POST("book/bookdetail/get_content_book_detail.php")
