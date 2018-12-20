@@ -86,6 +86,10 @@
     <string name="comment">List Comment</string>
     <string name="addcomment">Add comment</string>
     <string name="producevalution">Product Evalution</string>
-    <string name = "nocomment">No Comment</string>
+    <string name="nocomment">No Comment</string>
     <string name="clicktoseethedocument">Click To See The Document</string>
+    <string name="rateview">Rate View</string>
+    <string name="writecomment">Write Comment</string>
+    <string name="ratestart">Rate Start</string>
+    <string name="sendcomment">Send Comment</string>
 </resources>

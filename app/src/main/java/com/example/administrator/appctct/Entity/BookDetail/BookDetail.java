@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 public class BookDetail implements Serializable {
 
+    @SerializedName("id_book")
+    @Expose
+    private String idBook;
+
+
     @SerializedName("title_book")
     @Expose
     private TitleBook titleBook;
@@ -17,6 +22,9 @@ public class BookDetail implements Serializable {
     @Expose
     private InformationBook informationBook;
 
+    public String getIdBook() {
+        return idBook;
+    }
 
     public InformationBook getInformationBook() {
         return informationBook;

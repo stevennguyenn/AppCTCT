@@ -223,5 +223,12 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("book/bookdetail/getbook_same_and_top_ratio.php")
     Call<BookExtened> getBookExtend(@Field("key_word") String keyword);
+
+    @FormUrlEncoded
+    @POST("book/ratebook/send_comment_user.php")
+    Call<String> sendComment(@Field("id_user") String idUser
+                            ,@Field("id_book") String idBook
+                            ,@Field("contentcomment") String contentComment
+                            ,@Field("ratio") Float ratio);
 }
 

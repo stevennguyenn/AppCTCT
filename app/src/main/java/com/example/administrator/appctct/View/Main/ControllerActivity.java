@@ -245,7 +245,7 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         }
         intent.putExtra(Strings.typeSearch,typeSearch);
         startActivity(intent);
-        overridePendingTransition(R.anim.show_view_navigation,R.anim.show_view_navigation);
+        overridePendingTransition(R.anim.show_view_navigation,0);
     }
 
     @Override
@@ -257,6 +257,6 @@ public class ControllerActivity extends AppCompatActivity implements ClickNaviIt
         Intent intent = new Intent(ControllerActivity.this,BookDetailActivity.class);
         intent.putExtra("id_book",idBook);
         startActivity(intent);
-        overridePendingTransition(R.anim.show_view_navigation,R.anim.hide_view_navigation);
+        overridePendingTransition(R.anim.show_view_navigation,0);
     }
 }

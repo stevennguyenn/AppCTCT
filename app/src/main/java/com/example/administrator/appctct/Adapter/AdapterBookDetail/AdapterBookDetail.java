@@ -35,6 +35,11 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
     private boolean isLoadingComment = false;
     private boolean isLoadingBookExtened = false;
     private ClickToSeeDocument listenedClickToSeeDocument;
+    private AddComment addCommentListened;
+
+    public void setAddCommentListened(AddComment addCommentListened){
+        this.addCommentListened = addCommentListened;
+    }
 
     public void setListenedClickToSeeDocument(ClickToSeeDocument listenedClickToSeeDocument){
         this.listenedClickToSeeDocument = listenedClickToSeeDocument;
@@ -51,12 +56,12 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (manager != null) {
-                    int currentVisible = manager.getItemCount();
-                    if (!isLoadingComment && currentVisible == 1) {
+                    int lastVisible = manager.findLastVisibleItemPosition();
+                    if (!isLoadingComment && lastVisible == 1) {
                         isLoadingComment = true;
                         onLoadMore.onLoadMoreComment();
                     }
-                    if (!isLoadingBookExtened && currentVisible == 2) {
+                    if (!isLoadingBookExtened && lastVisible == 2) {
                         isLoadingBookExtened = true;
                         onLoadMore.onLoadMoreBookExtened();
                     }
@@ -232,7 +237,7 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         @Override
         public void onClick(View v) {
-            Log.d("AAAA","click comment");
+            addCommentListened.send();
         }
     }
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.AdapterBookDetail;
+import com.example.administrator.appctct.Adapter.AdapterBookDetail.AddComment;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.ClickToSeeDocument;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.OnLoadMorebookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
@@ -20,11 +21,16 @@ import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDetail,ClickToSeeDocument {
+public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDetail,ClickToSeeDocument,AddComment {
     RecyclerView rcInfomationBook;
     AdapterBookDetail adapter;
     private NotifyOnLoadMore onLoadMore;
     private NotifyClickToSeeTheDocument listenedNotifyClickToSeeTheDocument;
+    private NotifyAddComment addCommentListened;
+
+    public void setAddCommentListened(NotifyAddComment addCommentListened){
+        this.addCommentListened = addCommentListened;
+    }
 
     public void setListenedNotifyClickToSeeTheDocument(NotifyClickToSeeTheDocument listenedNotifyClickToSeeTheDocument){
         this.listenedNotifyClickToSeeTheDocument = listenedNotifyClickToSeeTheDocument;
@@ -41,10 +47,11 @@ public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDe
         rcInfomationBook = view.findViewById(R.id.rc_information_book);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         rcInfomationBook.setLayoutManager(manager);
-        if (getLayoutInflater() != null) {
+        if (getActivity() != null) {
             adapter = new AdapterBookDetail(rcInfomationBook,getActivity().getLayoutInflater(), getActivity().getSupportFragmentManager());
             adapter.setOnLoadMore(this);
             adapter.setListenedClickToSeeDocument(this);
+            adapter.setAddCommentListened(this);
             rcInfomationBook.setAdapter(adapter);
         }
         return view;
@@ -74,5 +81,10 @@ public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDe
     @Override
     public void click(String linkDocument) {
         listenedNotifyClickToSeeTheDocument.click(linkDocument);
+    }
+
+    @Override
+    public void send() {
+        addCommentListened.send();
     }
 }

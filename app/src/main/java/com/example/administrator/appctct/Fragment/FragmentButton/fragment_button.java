@@ -29,13 +29,8 @@ public class fragment_button extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_button_ctct,container,false);
         btButton = view.findViewById(R.id.btButton);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         btButton.setOnClickListener(this);
+        return view;
     }
 
     public void setRegister(ClickButton listened){

@@ -33,7 +33,7 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? 0:(position == 1)?1:2;
+        return position == 0 ? 0:(listComment != null && position == listComment.size())?1:2;
     }
 
     @NonNull
@@ -41,7 +41,7 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
         switch (i){
-            case 2:
+            case 1:
                 view = inflater.inflate(R.layout.line_comment,viewGroup,false);
                 return new HolderComment(view);
             case 0:
@@ -56,35 +56,32 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (listComment.size() > 0) {
-            if (viewHolder.getItemViewType() == 2) {
+            if (viewHolder.getItemViewType() == 1) {
                 HolderComment holderBookComment = (HolderComment) viewHolder;
                 holderBookComment.bind(listComment.get(i - 1));
             }
-            return;
-        }
-        if (viewHolder.getItemViewType() == 1) {
-            HolderNoComment holderNoComment = (HolderNoComment) viewHolder;
-            holderNoComment.setVisible();
         }
     }
 
 
+
+
     @Override
     public int getItemCount() {
-        return listComment.size()==0?2:2+listComment.size();
+        return listComment.size()==0?2:1+listComment.size();
     }
 
     class HolderComment extends RecyclerView.ViewHolder{
         ImageView imgAVTComment;
         RatingBar rbRatioBookComment;
         TextView tvNameComment,tvTextComment;
-        public HolderComment(@NonNull View itemView) {
+         HolderComment(@NonNull View itemView) {
             super(itemView);
             imgAVTComment = itemView.findViewById(R.id.imgAVTComment);
             tvNameComment = itemView.findViewById(R.id.tvNameComment);
             tvTextComment = itemView.findViewById(R.id.tvTextComment);
             rbRatioBookComment = itemView.findViewById(R.id.rbRatioBookComment);
-        }
+         }
         void bind(BookComment data){
             Glide.with(inflater.getContext())
                     .load(data.getAvatar())
@@ -113,11 +110,10 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
         HolderNoComment(@NonNull View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.viewNoComment);
-            layout.setVisibility(View.GONE);
         }
 
-        void setVisible(){
-            itemView.setVisibility(View.VISIBLE);
+        void setInvisible(){
+            layout.setVisibility(View.GONE);
         }
     }
 }

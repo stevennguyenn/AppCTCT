@@ -1,4 +1,5 @@
-package com.example.administrator.appctct.View.Test;
+package com.example.administrator.appctct.View.Main;
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -11,6 +12,7 @@ public class PDFActivity extends AppCompatActivity {
 
     WebView webView;
     String link = "https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf";
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,5 +29,11 @@ public class PDFActivity extends AppCompatActivity {
                         "document.querySelector('[role=\"toolbar\"]').remove();})()");
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0,R.anim.hide_view_navigation);
     }
 }
