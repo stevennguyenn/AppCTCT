@@ -37,6 +37,10 @@ public class Fragment_Number_Rate extends Fragment implements View.OnClickListen
         }
     }
 
+    public void setTitle(String text){
+        tvNumberStart.setText(text);
+    }
+
     void click(){
         if (getActivity() != null){
             bgViewRate.setBackground(getActivity().getResources().getDrawable(R.drawable.background_corner_overorange));

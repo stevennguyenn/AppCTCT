@@ -24,7 +24,7 @@
         app:layout_constraintLeft_toRightOf="@id/tvRatingSeeAllComment"
         android:textColor="@color/black_overlay"
         android:textSize="16sp"
-        android:text="@string/label"
+        android:text="@string/sumNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <RatingBar
@@ -164,7 +164,7 @@
         android:textColor="@color/black_overlay"
         android:textSize="12sp"
         android:gravity="end"
-        android:text="@string/label"
+        android:text="@string/five"
         android:textAlignment="textEnd"
         android:layout_width="35dp"
         android:layout_height="wrap_content" />
@@ -178,7 +178,7 @@
         android:textColor="@color/black_overlay"
         android:textSize="12sp"
         android:gravity="end"
-        android:text="@string/label"
+        android:text="@string/four"
         android:textAlignment="textEnd"
         android:layout_width="35dp"
         android:layout_height="wrap_content" />
@@ -192,7 +192,7 @@
         android:textColor="@color/black_overlay"
         android:textSize="12sp"
         android:gravity="end"
-        android:text="@string/label"
+        android:text="@string/three"
         android:textAlignment="textEnd"
         android:layout_width="35dp"
         android:layout_height="wrap_content" />
@@ -206,7 +206,7 @@
         android:textColor="@color/black_overlay"
         android:textSize="12sp"
         android:gravity="end"
-        android:text="@string/label"
+        android:text="@string/two"
         android:textAlignment="textEnd"
         android:layout_width="35dp"
         android:layout_height="wrap_content" />
@@ -220,7 +220,7 @@
         android:textColor="@color/black_overlay"
         android:textSize="12sp"
         android:gravity="end"
-        android:text="@string/label"
+        android:text="@string/one"
         android:textAlignment="textEnd"
         android:layout_width="35dp"
         android:layout_height="wrap_content" />
