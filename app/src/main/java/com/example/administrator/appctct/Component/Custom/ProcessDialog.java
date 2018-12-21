@@ -13,8 +13,6 @@ import android.widget.EditText;
 
 import com.example.administrator.appctct.Component.Constant.Ints;
 import com.example.administrator.appctct.Component.Constant.Strings;
-import com.example.administrator.appctct.Interfaces.Dialog.ProcessAlterDialogClick;
-import com.example.administrator.appctct.Interfaces.Dialog.ProcessCustomDialogClick;
 import com.example.administrator.appctct.R;
 
 public class ProcessDialog implements DialogInterface.OnClickListener, View.OnClickListener {

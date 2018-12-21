@@ -14,6 +14,7 @@ import com.example.administrator.appctct.Fragment.FragmentBookDetail.FragmentInf
 import com.example.administrator.appctct.Fragment.FragmentBookDetail.NotifyAddComment;
 import com.example.administrator.appctct.Fragment.FragmentBookDetail.NotifyClickToSeeTheDocument;
 import com.example.administrator.appctct.Fragment.FragmentBookDetail.NotifyOnLoadMore;
+import com.example.administrator.appctct.Fragment.FragmentBookDetail.NotifyViewClickSeeAllComment;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterGetBookDetail;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterGetBookDetailListened;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterGetBookExtendListened;
@@ -24,7 +25,7 @@ import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class BookDetailActivity extends AppCompatActivity implements PresenterGetCommentBookListened,PresenterGetBookDetailListened,PresenterGetBookExtendListened,NotifyOnLoadMore,NotifyClickToSeeTheDocument,NotifyAddComment {
+public class BookDetailActivity extends AppCompatActivity implements PresenterGetCommentBookListened,PresenterGetBookDetailListened,PresenterGetBookExtendListened,NotifyOnLoadMore,NotifyClickToSeeTheDocument,NotifyAddComment,NotifyViewClickSeeAllComment {
 
     FragmentInfomationBook viewInformationBook;
     private String idBook = "";
@@ -48,6 +49,7 @@ public class BookDetailActivity extends AppCompatActivity implements PresenterGe
         viewInformationBook.setOnLoadMore(this);
         viewInformationBook.setListenedNotifyClickToSeeTheDocument(this);
         viewInformationBook.setAddCommentListened(this);
+        viewInformationBook.setNotifyViewClickSeeAllCommentListened(this);
     }
 
     @Override
@@ -111,5 +113,10 @@ public class BookDetailActivity extends AppCompatActivity implements PresenterGe
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(0,R.anim.hide_view_navigation);
+    }
+
+    @Override
+    public void clickSeeAllComment() {
+
     }
 }

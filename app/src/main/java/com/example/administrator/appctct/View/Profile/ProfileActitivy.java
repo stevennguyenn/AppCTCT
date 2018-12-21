@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Custom.ProcessDialog;
 import com.example.administrator.appctct.Entity.Profile;
-import com.example.administrator.appctct.Interfaces.Dialog.ProcessCustomDialogClick;
+import com.example.administrator.appctct.Component.Custom.ProcessCustomDialogClick;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterProfile;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterProfileListened;
 import com.example.administrator.appctct.R;

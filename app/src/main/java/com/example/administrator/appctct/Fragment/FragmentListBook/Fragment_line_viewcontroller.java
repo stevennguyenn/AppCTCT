@@ -59,6 +59,10 @@ public class Fragment_line_viewcontroller extends Fragment implements View.OnCli
         return view;
     }
 
+    public void hideSeeAll(){
+        tvSeeAll.setVisibility(View.INVISIBLE);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tvSeeAll.setOnClickListener(this);

@@ -52,8 +52,9 @@
         <activity android:name=".View.Test.TestedActivity" />
         <activity android:name=".View.Test.SeeTopActivity" />
         <activity android:name=".View.Profile.IndividualActivity" />
-        <activity android:name=".View.Main.BookDetailActivity"></activity>
-        <activity android:name=".View.Main.RateActivity"></activity>
+        <activity android:name=".View.Main.BookDetailActivity" />
+        <activity android:name=".View.Main.RateActivity" />
+        <activity android:name=".View.Main.SeeAllCommentActivity"></activity>
     </application>
 
 </manifest>

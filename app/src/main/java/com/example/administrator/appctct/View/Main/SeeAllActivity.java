@@ -30,7 +30,7 @@ public class SeeAllActivity extends AppCompatActivity implements PresenterSeeAll
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_see_all_giai_tich1);
+        setContentView(R.layout.activity_see_all);
         setID();
         setupView();
         getData();

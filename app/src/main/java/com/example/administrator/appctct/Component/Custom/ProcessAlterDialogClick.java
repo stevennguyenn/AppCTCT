@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Interfaces.Dialog;
+package com.example.administrator.appctct.Component.Custom;
 
 public interface ProcessAlterDialogClick {
     void onClickPositive();

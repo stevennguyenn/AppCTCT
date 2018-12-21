@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.appctct.Entity.Book;
-import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
 import com.example.administrator.appctct.Entity.BookDetail.FullBookComment;
@@ -37,6 +36,11 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
     private boolean isLoadingBookExtened = false;
     private ClickToSeeDocument listenedClickToSeeDocument;
     private AddComment addCommentListened;
+    private NotifyFragmentClickSeeAllComment notifyFragmentClickSeeAllCommentListened;
+
+    public void setNotifyFragmentClickSeeAllCommentListened(NotifyFragmentClickSeeAllComment notifyFragmentClickSeeAllCommentListened){
+        this.notifyFragmentClickSeeAllCommentListened = notifyFragmentClickSeeAllCommentListened;
+    }
 
     public void setAddCommentListened(AddComment addCommentListened){
         this.addCommentListened = addCommentListened;
@@ -215,7 +219,7 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    class HolderBookComment extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class HolderBookComment extends RecyclerView.ViewHolder implements View.OnClickListener,ClickSeeAllComment{
         RecyclerView rcComment;
         TextView tvAddComment;
         AdapterComment apdater;
@@ -226,8 +230,9 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
             LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
             rcComment.setLayoutManager(manager);
             apdater = new AdapterComment(inflater);
-            rcComment.setAdapter(apdater);
             tvAddComment.setOnClickListener(this);
+            apdater.setClickSeeAllCommentListened(this);
+            rcComment.setAdapter(apdater);
         }
 
         void bind(FullBookComment comment){
@@ -239,6 +244,11 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
         @Override
         public void onClick(View v) {
             addCommentListened.send();
+        }
+
+        @Override
+        public void clickSeeAllComment() {
+            notifyFragmentClickSeeAllCommentListened.clickSeeAllComment();
         }
     }
 
@@ -252,8 +262,10 @@ public class AdapterBookDetail extends RecyclerView.Adapter<RecyclerView.ViewHol
             viewTop = (Fragment_line_viewcontroller) fragmentManager.findFragmentById(R.id.fragmentTheTop);
             viewTop.setTitle(inflater.getContext().getResources().getString(R.string.booktop));
             viewSame.setTitle(inflater.getContext().getResources().getString(R.string.booksame));
+            viewSame.hideSeeAll();
             viewSame.setListenedClick(this);
             viewTop.setListenedClick(this);
+            viewTop.hideSeeAll();
             itemView.setVisibility(View.GONE);
         }
 

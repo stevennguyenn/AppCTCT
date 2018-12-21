@@ -13,18 +13,24 @@ import android.view.ViewGroup;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.AdapterBookDetail;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.AddComment;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.ClickToSeeDocument;
+import com.example.administrator.appctct.Adapter.AdapterBookDetail.NotifyFragmentClickSeeAllComment;
 import com.example.administrator.appctct.Adapter.AdapterBookDetail.OnLoadMorebookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookDetail;
 import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
 import com.example.administrator.appctct.Entity.BookDetail.FullBookComment;
 import com.example.administrator.appctct.R;
 
-public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDetail,ClickToSeeDocument,AddComment {
+public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDetail,ClickToSeeDocument,AddComment, NotifyFragmentClickSeeAllComment {
     RecyclerView rcInfomationBook;
     AdapterBookDetail adapter;
     private NotifyOnLoadMore onLoadMore;
     private NotifyClickToSeeTheDocument listenedNotifyClickToSeeTheDocument;
     private NotifyAddComment addCommentListened;
+    private NotifyViewClickSeeAllComment notifyViewClickSeeAllCommentListened;
+
+    public void setNotifyViewClickSeeAllCommentListened(NotifyViewClickSeeAllComment notifyViewClickSeeAllCommentListened){
+        this.notifyViewClickSeeAllCommentListened = notifyViewClickSeeAllCommentListened;
+    }
 
     public void setAddCommentListened(NotifyAddComment addCommentListened){
         this.addCommentListened = addCommentListened;
@@ -50,6 +56,7 @@ public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDe
             adapter.setOnLoadMore(this);
             adapter.setListenedClickToSeeDocument(this);
             adapter.setAddCommentListened(this);
+            adapter.setNotifyFragmentClickSeeAllCommentListened(this);
             rcInfomationBook.setAdapter(adapter);
         }
         return view;
@@ -84,5 +91,10 @@ public class FragmentInfomationBook extends Fragment implements OnLoadMorebookDe
     @Override
     public void send() {
         addCommentListened.send();
+    }
+
+    @Override
+    public void clickSeeAllComment() {
+        notifyViewClickSeeAllCommentListened.clickSeeAllComment();
     }
 }

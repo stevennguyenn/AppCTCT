@@ -22,8 +22,13 @@ import com.example.administrator.appctct.R;
 public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private FullBookComment comment;
+    private ClickSeeAllComment clickSeeAllCommentListened;
 
-    public AdapterComment(LayoutInflater inflater) {
+    public  void setClickSeeAllCommentListened(ClickSeeAllComment clickSeeAllCommentListened){
+        this.clickSeeAllCommentListened = clickSeeAllCommentListened;
+    }
+
+    AdapterComment(LayoutInflater inflater) {
         this.inflater = inflater;
     }
 
@@ -105,7 +110,7 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    class HolderCommentFirst extends RecyclerView.ViewHolder{
+    class HolderCommentFirst extends RecyclerView.ViewHolder implements View.OnClickListener{
          RatingBar rbCommentFirst;
          TextView tvNumberRateCommentFirst,tvNumberPersonCommentFirst,tvSeeAllComment;
          HolderCommentFirst(@NonNull View itemView) {
@@ -114,6 +119,7 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvNumberPersonCommentFirst = itemView.findViewById(R.id.tvNumberPersonCommentFirst);
             tvNumberRateCommentFirst = itemView.findViewById(R.id.tvNumberRateCommentFirst);
             tvSeeAllComment = itemView.findViewById(R.id.tvSeeAllCommentFirst);
+            tvSeeAllComment.setOnClickListener(this);
          }
 
          void bind(TitleComment data){
@@ -121,13 +127,18 @@ public class AdapterComment extends RecyclerView.Adapter<RecyclerView.ViewHolder
              tvNumberRateCommentFirst.setText(String.valueOf(data.getAvgRate()));
              tvNumberPersonCommentFirst.setText(String.valueOf("(" +data.getNumberRate()+")"));
          }
+
+        @Override
+        public void onClick(View v) {
+            clickSeeAllCommentListened.clickSeeAllComment();
+        }
     }
 
     class HolderNoComment extends RecyclerView.ViewHolder{
-        ConstraintLayout layout;
+//        ConstraintLayout layout;
         HolderNoComment(@NonNull View itemView) {
             super(itemView);
-            layout = itemView.findViewById(R.id.viewNoComment);
+//            layout = itemView.findViewById(R.id.viewNoComment);
         }
     }
 }
