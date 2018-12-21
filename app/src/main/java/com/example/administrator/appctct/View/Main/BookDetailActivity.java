@@ -117,6 +117,8 @@ public class BookDetailActivity extends AppCompatActivity implements PresenterGe
 
     @Override
     public void clickSeeAllComment() {
-
+        Intent intent = new Intent(BookDetailActivity.this,SeeAllCommentActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.show_view_navigation,0);
     }
 }

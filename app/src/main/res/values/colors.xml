@@ -6,9 +6,11 @@
     <color name="colorWhite">#f7f4f4</color>
     <color name="colorTextLogin">#041635</color>
     <color name="colorOrange">#ef730e</color>
+    <color name="colorOverOrange">#33ef730e</color>
     <color name="colorFacebook">#3581f4</color>
     <color name="black">#0a0909</color>
     <color name="black_overlay">#66000000</color>
+    <color name="black_overoverlay">#30000000</color>
     <color name="color_red">#ef0909</color>
     <color name="color_yellow">#f4b20b</color>
     <color name="color_disable">#807d7d</color>
