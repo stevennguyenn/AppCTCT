@@ -12,6 +12,7 @@ import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Entity.PointRank;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
+import com.example.administrator.appctct.Entity.RateBook.CommentSeeAll;
 import com.example.administrator.appctct.Entity.RateBook.TitleCommentSeeAll;
 import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Entity.ResultSeeAll;
@@ -236,5 +237,9 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("book/ratebook/get_title_see_all_comment.php")
     Call<TitleCommentSeeAll> getTitleSeeAllComment(@Field("id_book") String idBook);
+
+    @FormUrlEncoded
+    @POST("book/ratebook/get_see_all_comment.php")
+    Call<CommentSeeAll> getAllComment(@Field("page") int page,@Field("id_book") String idBook);
 }
 

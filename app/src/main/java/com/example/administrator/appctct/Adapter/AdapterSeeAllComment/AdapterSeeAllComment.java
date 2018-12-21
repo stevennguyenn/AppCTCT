@@ -2,6 +2,7 @@ package com.example.administrator.appctct.Adapter.AdapterSeeAllComment;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +20,50 @@ import com.example.administrator.appctct.Entity.RateBook.TitleCommentSeeAll;
 import com.example.administrator.appctct.Fragment.FragmentRate.Fragment_Number_Rate;
 import com.example.administrator.appctct.R;
 
+import java.util.ArrayList;
+
 public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private FragmentManager manager;
     private TitleCommentSeeAll titleCommentSeeAll;
+    private OnLoadMoreComment loadMoreCommentListened;
+    private Boolean isLoadMore = false;
+    private ArrayList<BookComment> listComment;
 
-    public AdapterSeeAllComment(LayoutInflater inflater, FragmentManager manager){
+    public void setLoadMoreCommentListened(OnLoadMoreComment loadMoreCommentListened){
+        this.loadMoreCommentListened = loadMoreCommentListened;
+    }
+
+    public void setListComment(ArrayList<BookComment> listComment){
+        if (this.listComment == null){
+            this.listComment = listComment;
+        } else {
+            this.listComment.addAll(listComment);
+        }
+        notifyDataSetChanged();
+    }
+
+    public AdapterSeeAllComment(RecyclerView recyclerView, LayoutInflater inflater, final FragmentManager manager){
         this.inflater = inflater;
         this.manager = manager;
+        final LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (layoutManager != null){
+                    int itemCount = layoutManager.getItemCount();
+                    int lastVisible = layoutManager.findLastVisibleItemPosition();
+
+                    if (!isLoadMore && lastVisible >= itemCount - 2 && listComment!=null){
+                        loadMoreCommentListened.loadMoreComment();
+                    }
+                }
+            }
+        });
+    }
+
+    public void setNoLoadMore(){
+        this.isLoadMore = true;
     }
 
     public void setTitleCommentSeeAll(TitleCommentSeeAll titleCommentSeeAll){
@@ -67,12 +104,18 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
                     holderChoiceStartSeeAllComment.bind(titleCommentSeeAll.getDetailRateNum());
                 }
                 break;
+                default:
+                    if (listComment != null){
+                        HolderComment holderComment = (HolderComment) viewHolder;
+                        holderComment.bind(listComment.get(i-2));
+                    }
+                    break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return 6;
+        return (listComment == null)? 2 : 2 + listComment.size();
     }
 
     @Override
