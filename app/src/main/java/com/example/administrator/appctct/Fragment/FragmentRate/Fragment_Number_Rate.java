@@ -18,10 +18,12 @@ public class Fragment_Number_Rate extends Fragment implements View.OnClickListen
     ImageView imgStart;
     private Boolean isClick = false;
     private ClickFragmentRate listened;
+    private LoadAllComment loadAllCommentListened;
     public boolean isEnable = false;
 
-    public void setListened(ClickFragmentRate listened){
+    public void setListened(ClickFragmentRate listened, LoadAllComment loadAllCommentListened){
         this.listened = listened;
+        this.loadAllCommentListened = loadAllCommentListened;
     }
 
     @Nullable
@@ -48,6 +50,10 @@ public class Fragment_Number_Rate extends Fragment implements View.OnClickListen
 
     public void setDidChoice(){
         dontClick();
+    }
+
+    public Boolean getIsClick(){
+        return isClick;
     }
 
     public void resetClick(){
@@ -81,6 +87,7 @@ public class Fragment_Number_Rate extends Fragment implements View.OnClickListen
             }
             dontClick();
             isClick = false;
+            loadAllCommentListened.loadALlComment();
         }
     }
 }

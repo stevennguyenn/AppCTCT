@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.appctct.Adapter.AdapterSeeAllComment.AdapterSeeAllComment;
+import com.example.administrator.appctct.Adapter.AdapterSeeAllComment.LoadAgainComment;
 import com.example.administrator.appctct.Adapter.AdapterSeeAllComment.LoadCommentForRate;
 import com.example.administrator.appctct.Adapter.AdapterSeeAllComment.OnLoadMoreComment;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
@@ -24,7 +25,7 @@ import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
 
-public class SeeAllCommentActivity extends AppCompatActivity implements PresenterGetTitleSeeAllCommentListened, PresenterGetAllCommentListened,OnLoadMoreComment, View.OnClickListener,LoadCommentForRate,PresenterGetCommentForRateListened {
+public class SeeAllCommentActivity extends AppCompatActivity implements PresenterGetTitleSeeAllCommentListened, PresenterGetAllCommentListened,OnLoadMoreComment, View.OnClickListener,LoadCommentForRate,PresenterGetCommentForRateListened, LoadAgainComment {
 
     private RecyclerView rcSeeAllComment;
     private AdapterSeeAllComment adapter;
@@ -57,6 +58,7 @@ public class SeeAllCommentActivity extends AppCompatActivity implements Presente
         adapter = new AdapterSeeAllComment(rcSeeAllComment,getLayoutInflater(),getSupportFragmentManager());
         adapter.setLoadMoreCommentListened(this);
         adapter.setLoadCommentForRateLisntened(this);
+        adapter.setLoadAgainCommentListened(this);
         rcSeeAllComment.setAdapter(adapter);
     }
 
@@ -108,5 +110,11 @@ public class SeeAllCommentActivity extends AppCompatActivity implements Presente
     public void loadComment(int rate) {
         PresenterGetCommentForRate presenterGetCommentForRate = new PresenterGetCommentForRate(this);
         presenterGetCommentForRate.process(rate,idBook);
+    }
+
+    @Override
+    public void loadAgainComment() {
+        page = 0;
+        presenterGetAllComment.process(page,idBook);
     }
 }

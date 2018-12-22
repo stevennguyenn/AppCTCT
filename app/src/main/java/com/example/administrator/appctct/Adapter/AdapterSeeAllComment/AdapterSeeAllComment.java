@@ -20,11 +20,10 @@ import com.example.administrator.appctct.Entity.RateBook.DetailRateNum;
 import com.example.administrator.appctct.Entity.RateBook.TitleCommentSeeAll;
 import com.example.administrator.appctct.Fragment.FragmentRate.ClickFragmentRate;
 import com.example.administrator.appctct.Fragment.FragmentRate.Fragment_Number_Rate;
+import com.example.administrator.appctct.Fragment.FragmentRate.LoadAllComment;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
@@ -34,6 +33,11 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
     private Boolean isLoadMore = false;
     private ArrayList<BookComment> listComment;
     private LoadCommentForRate loadCommentForRateLisntened;
+    private LoadAgainComment loadAgainCommentListened;
+
+    public void setLoadAgainCommentListened(LoadAgainComment loadAgainCommentListened){
+        this.loadAgainCommentListened = loadAgainCommentListened;
+    }
 
     public void setLoadCommentForRateLisntened(LoadCommentForRate loadCommentForRateLisntened){
         this.loadCommentForRateLisntened = loadCommentForRateLisntened;
@@ -88,6 +92,9 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
             case 0:
                 view = inflater.inflate(R.layout.line_title_see_all_comment,viewGroup,false);
                 return new HolderTitleSeeAllComment(view);
+            case 3:
+                view = inflater.inflate(R.layout.line_no_comment,viewGroup,false);
+                return new HolderNoComment(view);
             case 2:
                 view = inflater.inflate(R.layout.line_comment_see_all,viewGroup,false);
                 return  new HolderComment(view);
@@ -113,6 +120,12 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
                     holderChoiceStartSeeAllComment.bind(titleCommentSeeAll.getDetailRateNum());
                 }
                 break;
+            case 3:
+                if (listComment != null){
+                    HolderNoComment holderNoComment = (HolderNoComment) viewHolder;
+                    holderNoComment.hideView();
+                }
+                break;
                 default:
                     if (listComment != null){
                         HolderComment holderComment = (HolderComment) viewHolder;
@@ -124,12 +137,12 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        return (listComment == null)? 2 : 2 + listComment.size();
+        return (listComment == null)? 3 : 2 + listComment.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? 0 : (position == 1) ? 1 : 2;
+        return position == 0 ? 0 : (position == 1) ? 1 : (listComment != null) ? 2 : 3;
     }
 
     class HolderTitleSeeAllComment extends RecyclerView.ViewHolder{
@@ -171,7 +184,7 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
          }
     }
 
-    class HolderChoiceStartSeeAllComment extends RecyclerView.ViewHolder implements ClickFragmentRate {
+    class HolderChoiceStartSeeAllComment extends RecyclerView.ViewHolder implements ClickFragmentRate, LoadAllComment {
 
          Fragment_Number_Rate view5Start,view4Start,view3Start,view2Start,view1Start;
          Boolean view5isEnabled = false,view4isEnabled= false,view3isEnabled= false,view2isEnabled= false,view1isEnabled= false;
@@ -188,11 +201,11 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
             view3Start.setTitle("3");
             view2Start.setTitle("2");
             view1Start.setTitle("1");
-            view5Start.setListened(this);
-            view4Start.setListened(this);
-            view2Start.setListened(this);
-            view3Start.setListened(this);
-            view1Start.setListened(this);
+            view5Start.setListened(this,this);
+            view4Start.setListened(this,this);
+            view2Start.setListened(this,this);
+            view3Start.setListened(this,this);
+            view1Start.setListened(this,this);
          }
 
          void processButton(final int id){
@@ -299,7 +312,7 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
                              default:
                                  break;
                      }
-                     listComment.clear();
+                     listComment = null;
                      loadCommentForRateLisntened.loadComment(rate);
                  }
              });
@@ -339,6 +352,15 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
         public void ClickFragment(int id) {
             processButton(id);
         }
+
+        @Override
+        public void loadALlComment() {
+            if (!view5Start.getIsClick() && !view4Start.getIsClick() && !view3Start.getIsClick() && !view2Start.getIsClick() && !view1Start.getIsClick()){
+                listComment = null;
+                isLoadMore = false;
+                loadAgainCommentListened.loadAgainComment();
+            }
+        }
     }
     class HolderComment extends RecyclerView.ViewHolder{
         ImageView imgAVTComment;
@@ -359,6 +381,15 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
             tvNameComment.setText(data.getFullName());
             tvTextComment.setText(data.getContentComment());
             rbRatioBookComment.setRating(data.getRatio());
+        }
+    }
+    class HolderNoComment extends RecyclerView.ViewHolder{
+        HolderNoComment(@NonNull View itemView) {
+            super(itemView);
+        }
+
+        void hideView(){
+            itemView.setVisibility(View.GONE);
         }
     }
 }
