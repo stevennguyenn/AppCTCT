@@ -28,7 +28,7 @@ public class PresenterGetAllComment implements ModelGetAllCommentListened {
     }
 
     @Override
-    public void connectFailed() {
-        listened.connectFailed();
+    public void connectFailed(String message) {
+        listened.connectFailed(message);
     }
 }

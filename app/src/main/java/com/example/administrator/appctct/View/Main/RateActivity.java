@@ -35,7 +35,7 @@ public class RateActivity extends AppCompatActivity implements RatingBar.OnRatin
     }
 
     private void setID(){
-        btSendComment = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btSendComment);
+        btSendComment = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.tvSendComment);
         idBook = getIntent().getStringExtra("id_book");
         rbCountStart = findViewById(R.id.rbCountStart);
         edComment = findViewById(R.id.edComment);

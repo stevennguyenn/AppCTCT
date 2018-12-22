@@ -33,7 +33,7 @@ public class ModelGetAllComment {
                         listened.nomoreComment();
                         return;
                     }
-                    listened.connectFailed();
+                    listened.connectFailed(Strings.nodata);
                 }
             }
 

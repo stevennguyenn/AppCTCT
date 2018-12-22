@@ -1,5 +1,6 @@
 package com.example.administrator.appctct.Adapter.AdapterSeeAllComment;
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,10 +18,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.administrator.appctct.Entity.BookDetail.BookComment;
 import com.example.administrator.appctct.Entity.RateBook.DetailRateNum;
 import com.example.administrator.appctct.Entity.RateBook.TitleCommentSeeAll;
+import com.example.administrator.appctct.Fragment.FragmentRate.ClickFragmentRate;
 import com.example.administrator.appctct.Fragment.FragmentRate.Fragment_Number_Rate;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
@@ -29,6 +33,11 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
     private OnLoadMoreComment loadMoreCommentListened;
     private Boolean isLoadMore = false;
     private ArrayList<BookComment> listComment;
+    private LoadCommentForRate loadCommentForRateLisntened;
+
+    public void setLoadCommentForRateLisntened(LoadCommentForRate loadCommentForRateLisntened){
+        this.loadCommentForRateLisntened = loadCommentForRateLisntened;
+    }
 
     public void setLoadMoreCommentListened(OnLoadMoreComment loadMoreCommentListened){
         this.loadMoreCommentListened = loadMoreCommentListened;
@@ -162,9 +171,10 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
          }
     }
 
-    class HolderChoiceStartSeeAllComment extends RecyclerView.ViewHolder{
+    class HolderChoiceStartSeeAllComment extends RecyclerView.ViewHolder implements ClickFragmentRate {
 
          Fragment_Number_Rate view5Start,view4Start,view3Start,view2Start,view1Start;
+         Boolean view5isEnabled = false,view4isEnabled= false,view3isEnabled= false,view2isEnabled= false,view1isEnabled= false;
 
          HolderChoiceStartSeeAllComment(@NonNull View itemView) {
             super(itemView);
@@ -178,25 +188,157 @@ public class AdapterSeeAllComment extends RecyclerView.Adapter<RecyclerView.View
             view3Start.setTitle("3");
             view2Start.setTitle("2");
             view1Start.setTitle("1");
+            view5Start.setListened(this);
+            view4Start.setListened(this);
+            view2Start.setListened(this);
+            view3Start.setListened(this);
+            view1Start.setListened(this);
+         }
+
+         void processButton(final int id){
+             new Handler().post(new Runnable() {
+                 @Override
+                 public void run() {
+                     int rate = 0;
+                     switch (id){
+                         case R.id.view5Rate:
+                             rate = 5;
+                             if (view4isEnabled){
+                                 view4Start.setDidChoice();
+                                 view4Start.resetClick();
+                             }
+                             if (view3isEnabled){
+                                 view3Start.setDidChoice();
+                                 view3Start.resetClick();
+                             }
+                             if (view2isEnabled){
+                                 view2Start.setDidChoice();
+                                 view2Start.resetClick();
+                             }
+                             if (view1isEnabled) {
+                                 view1Start.setDidChoice();
+                                 view1Start.resetClick();
+                             }
+                             break;
+                         case R.id.view4Rate:
+                             rate = 4;
+                             if (view5isEnabled){
+                                 view5Start.setDidChoice();
+                                 view5Start.resetClick();
+                             }
+                             if (view3isEnabled){
+                                 view3Start.setDidChoice();
+                                 view3Start.resetClick();
+                             }
+                             if (view2isEnabled){
+                                 view2Start.setDidChoice();
+                                 view2Start.resetClick();
+                             }
+                             if (view1isEnabled) {
+                                 view1Start.setDidChoice();
+                                 view1Start.resetClick();
+                             }
+                             break;
+                         case R.id.view3Rate:
+                             rate = 3;
+                             if (view5isEnabled){
+                                 view5Start.setDidChoice();
+                                 view5Start.resetClick();
+                             }
+                             if (view4isEnabled){
+                                 view4Start.setDidChoice();
+                                 view4Start.resetClick();
+                             }
+                             if (view2isEnabled){
+                                 view2Start.setDidChoice();
+                                 view2Start.resetClick();
+                             }
+                             if (view1isEnabled) {
+                                 view1Start.setDidChoice();
+                                 view1Start.resetClick();
+                             }
+                             break;
+                         case R.id.view2Rate:
+                             rate = 2;
+                             if (view5isEnabled){
+                                 view5Start.setDidChoice();
+                                 view5Start.resetClick();
+                             }
+                             if (view3isEnabled){
+                                 view3Start.setDidChoice();
+                                 view3Start.resetClick();
+                             }
+                             if (view4isEnabled){
+                                 view4Start.setDidChoice();
+                                 view4Start.resetClick();
+                             }
+                             if (view1isEnabled) {
+                                 view1Start.setDidChoice();
+                                 view1Start.resetClick();
+                             }
+                             break;
+                         case R.id.view1Rate:
+                             rate = 1;
+                             if (view5isEnabled){
+                                 view5Start.setDidChoice();
+                                 view5Start.resetClick();
+                             }
+                             if (view3isEnabled){
+                                 view3Start.setDidChoice();
+                                 view3Start.resetClick();
+                             }
+                             if (view2isEnabled){
+                                 view2Start.setDidChoice();
+                                 view2Start.resetClick();
+                             }
+                             if (view4isEnabled) {
+                                 view4Start.setDidChoice();
+                                 view4Start.resetClick();
+                             }
+                             break;
+                             default:
+                                 break;
+                     }
+                     listComment.clear();
+                     loadCommentForRateLisntened.loadComment(rate);
+                 }
+             });
          }
 
          void bind(DetailRateNum data){
              if (data.getRatio5() > 0){
                  view5Start.enableView();
+                 view5isEnabled = true;
+                 view5Start.isEnable = true;
              }
              if (data.getRatio4() > 0){
                  view4Start.enableView();
+                 view4isEnabled = true;
+                 view4Start.isEnable = true;
              }
              if (data.getRatio3() > 0){
                  view3Start.enableView();
+                 view3isEnabled = true;
+                 view3Start.isEnable = true;
+
              }
              if (data.getRatio2() > 0){
                  view2Start.enableView();
+                 view2isEnabled = true;
+                 view2Start.isEnable = true;
+
              }
              if (data.getRatio1() > 0){
                  view1Start.enableView();
+                 view1isEnabled = true;
+                 view1Start.isEnable = true;
              }
          }
+
+        @Override
+        public void ClickFragment(int id) {
+            processButton(id);
+        }
     }
     class HolderComment extends RecyclerView.ViewHolder{
         ImageView imgAVTComment;

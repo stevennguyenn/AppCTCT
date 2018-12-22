@@ -20,7 +20,8 @@
         android:layout_width="45dp"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="10sp"
+            android:gravity="center"
+            android:textSize="12sp"
             android:id="@+id/tvStartRate"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
@@ -30,16 +31,14 @@
             app:layout_constraintTop_toTopOf="@+id/viewChildren"
             app:layout_constraintLeft_toLeftOf="@+id/viewChildren"
             android:textColor="@color/black_overlay"
-            android:text="@string/label"
-            android:layout_width="wrap_content"
+            android:text="@string/one"
+            android:layout_width="20dp"
             android:layout_height="wrap_content" />
         <ImageView
             android:contentDescription="@string/label"
             android:id="@+id/imgStartRate"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintRight_toRightOf="@+id/viewChildren"
             app:layout_constraintBottom_toBottomOf="@+id/viewChildren"
             app:layout_constraintTop_toTopOf="@+id/viewChildren"

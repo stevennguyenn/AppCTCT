@@ -5,5 +5,5 @@ import com.example.administrator.appctct.Entity.RateBook.CommentSeeAll;
 public interface PresenterGetAllCommentListened {
     void getCommentSuccessed(CommentSeeAll data);
     void nomoreComment();
-    void connectFailed();
+    void connectFailed(String message);
 }

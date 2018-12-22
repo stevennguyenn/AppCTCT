@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.administrator.appctct.R;
 
 public class Fragment_Number_Rate extends Fragment implements View.OnClickListener {
@@ -18,6 +17,12 @@ public class Fragment_Number_Rate extends Fragment implements View.OnClickListen
     TextView tvNumberStart;
     ImageView imgStart;
     private Boolean isClick = false;
+    private ClickFragmentRate listened;
+    public boolean isEnable = false;
+
+    public void setListened(ClickFragmentRate listened){
+        this.listened = listened;
+    }
 
     @Nullable
     @Override
@@ -26,6 +31,7 @@ public class Fragment_Number_Rate extends Fragment implements View.OnClickListen
         bgViewRate = view.findViewById(R.id.viewChildren);
         tvNumberStart = view.findViewById(R.id.tvStartRate);
         imgStart = view.findViewById(R.id.imgStartRate);
+        view.setOnClickListener(this);
         return view;
     }
 
@@ -33,12 +39,19 @@ public class Fragment_Number_Rate extends Fragment implements View.OnClickListen
         if (getActivity() != null) {
             tvNumberStart.setTextColor(getActivity().getResources().getColor(R.color.black));
             imgStart.setImageResource(R.drawable.ic_start_enable);
-            bgViewRate.setOnClickListener(this);
         }
     }
 
     public void setTitle(String text){
         tvNumberStart.setText(text);
+    }
+
+    public void setDidChoice(){
+        dontClick();
+    }
+
+    public void resetClick(){
+        isClick = false;
     }
 
     void click(){
@@ -59,12 +72,15 @@ public class Fragment_Number_Rate extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if (!isClick){
-            click();
-            isClick = true;
-            return;
+        if (isEnable) {
+            if (!isClick) {
+                click();
+                isClick = true;
+                listened.ClickFragment(v.getId());
+                return;
+            }
+            dontClick();
+            isClick = false;
         }
-        dontClick();
-        isClick = false;
     }
 }

@@ -241,5 +241,9 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("book/ratebook/get_see_all_comment.php")
     Call<CommentSeeAll> getAllComment(@Field("page") int page,@Field("id_book") String idBook);
+
+    @FormUrlEncoded
+    @POST("book/ratebook/get_comment_for_rate.php")
+    Call<ArrayList<BookComment>> getBookCommentForRate(@Field("rate") int rate,@Field("id_book") String idBook);
 }
 
