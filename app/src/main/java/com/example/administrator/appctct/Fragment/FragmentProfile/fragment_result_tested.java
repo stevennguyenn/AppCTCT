@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.View.Profile.fragment_profile;
+package com.example.administrator.appctct.Fragment.FragmentProfile;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

@@ -7,8 +7,8 @@ import android.os.Bundle;
 import com.example.administrator.appctct.Adapter.AdapterViewPager.AdapterViewPager;
 import com.example.administrator.appctct.Component.Custom.WrapContentHeightViewPager;
 import com.example.administrator.appctct.R;
-import com.example.administrator.appctct.View.Profile.fragment_profile.fragment_load_data;
-import com.example.administrator.appctct.View.Profile.fragment_profile.fragment_result_tested;
+import com.example.administrator.appctct.Fragment.FragmentProfile.fragment_load_data;
+import com.example.administrator.appctct.Fragment.FragmentProfile.fragment_result_tested;
 
 import java.util.ArrayList;
 
