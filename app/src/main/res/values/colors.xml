@@ -17,4 +17,7 @@
     <color name="color_orange_process">#f5c158</color>
     <color name="bgShowResult">#33000000</color>
     <color name="colornull">#00000000</color>
+    <color name="colorPur">#b049f9</color>
+    <color name="colorPurBlue">#d088fa</color>
+    <color name="colorBlur">#4aa2f4</color>
 </resources>

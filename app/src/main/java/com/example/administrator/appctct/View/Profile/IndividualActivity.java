@@ -12,7 +12,7 @@ import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGet
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationIndividualListened;
 import com.example.administrator.appctct.R;
 
-public class IndividualActivity extends AppCompatActivity implements PresenterGetInformationIndividualListened {
+public class  IndividualActivity extends AppCompatActivity implements PresenterGetInformationIndividualListened {
 
     RecyclerView rcViewInformationIndividual;
     PresenterGetInformationIndividual presenter;

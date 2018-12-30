@@ -24,11 +24,7 @@
             android:name=".View.Test.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".View.Login.Login_Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".View.Setting.Register_Activity" />
         <activity android:name=".View.Setting.ChangePasswordActivity" />
@@ -55,6 +51,13 @@
         <activity android:name=".View.Main.BookDetailActivity" />
         <activity android:name=".View.Main.RateActivity" />
         <activity android:name=".View.Main.SeeAllCommentActivity"></activity>
+        <activity android:name=".View.Profile.ProfileIndividual">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
