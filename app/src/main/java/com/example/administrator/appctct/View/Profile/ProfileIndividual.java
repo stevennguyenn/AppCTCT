@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.ethanhua.skeleton.Skeleton;
+import com.ethanhua.skeleton.ViewSkeletonScreen;
 import com.example.administrator.appctct.Adapter.AdapterViewPager.AdapterViewPager;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Custom.WrapContentHeightViewPager;
@@ -27,8 +29,9 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
     WrapContentHeightViewPager viewPager;
     PresenterGetInformationProfile presenter;
     ImageView imgAVT;
-    ConstraintLayout viewImg,viewLikes,viewFollows;
+    ConstraintLayout viewImg,viewLikes,viewFollows,view;
     TextView tvTitleName,tvTitleDetail,tvTitleEmail,tvLikesName,tvFollowsName,tvLikesNumber,tvFollowsNumber;
+    private ViewSkeletonScreen skeleton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
     }
 
     private void setID(){
+        view = findViewById(R.id.viewChildParent);
         viewLikes = findViewById(R.id.viewLikes);
         viewFollows = findViewById(R.id.viewFollows);
         tvLikesName = viewLikes.findViewById(R.id.tvName);
@@ -53,6 +57,11 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
         tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
+        skeleton = Skeleton.bind(view)
+                            .angle(0)
+                            .load(R.layout.layout_default_item_skeleton)
+                            .show();
 
         presenter = new PresenterGetInformationProfile(this);
     }
@@ -77,6 +86,10 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
     @Override
     public void getInformationProfileSuccessed(InformationProfile data){
         setData(data);
+        if (skeleton != null){
+            skeleton.hide();
+            skeleton = null;
+        }
     }
 
     @Override
