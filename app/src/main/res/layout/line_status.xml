@@ -47,7 +47,7 @@
                 android:layout_width="20dp"
                 android:layout_height="10dp" />
             <TextView
-                android:gravity="left"
+                android:gravity="start"
                 android:textSize="13sp"
                 android:textColor="@color/black"
                 android:text="@string/label"
