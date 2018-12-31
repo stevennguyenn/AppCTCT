@@ -8,7 +8,9 @@ import com.example.administrator.appctct.Entity.BookDetail.BookExtened;
 import com.example.administrator.appctct.Entity.BookDetail.FullBookComment;
 import com.example.administrator.appctct.Entity.ContentHeader;
 import com.example.administrator.appctct.Entity.InformationIndividual;
+import com.example.administrator.appctct.Entity.InformationProfile;
 import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
+import com.example.administrator.appctct.Entity.PointNameCourse;
 import com.example.administrator.appctct.Entity.PointRank;
 import com.example.administrator.appctct.Entity.Profile;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
@@ -245,5 +247,14 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("book/ratebook/get_comment_for_rate.php")
     Call<ArrayList<BookComment>> getBookCommentForRate(@Field("rate") int rate,@Field("id_book") String idBook);
+
+    @FormUrlEncoded
+    @POST("individual/get_information_test_tested.php")
+    Call<ArrayList<PointNameCourse>> getInformationTestTested(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("individual/get_information_profile.php")
+    Call<InformationProfile> getInformationProfile(@Field("id") String id);
+
 }
 

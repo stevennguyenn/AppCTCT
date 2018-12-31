@@ -120,7 +120,6 @@
             </android.support.design.widget.TabLayout>
 
             <com.example.administrator.appctct.Component.Custom.WrapContentHeightViewPager
-                android:background="@color/colorPur"
                 android:id="@+id/viewPager"
                 app:layout_constraintTop_toBottomOf="@id/tablayout"
                 android:layout_marginTop="5dp"

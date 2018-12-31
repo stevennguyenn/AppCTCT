@@ -9,43 +9,47 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.administrator.appctct.Adapter.Profile.AdapterInformationIndividual;
+import com.example.administrator.appctct.Adapter.Profile.AdapterTestTested;
 import com.example.administrator.appctct.Entity.InformationIndividual;
-import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationIndividual;
-import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationIndividualListened;
+import com.example.administrator.appctct.Entity.PointNameCourse;
+import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationTestTested;
+import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationTestTestedListened;
 import com.example.administrator.appctct.R;
 
-public class fragment_result_tested extends Fragment implements PresenterGetInformationIndividualListened {
+import java.util.ArrayList;
 
-    private AdapterInformationIndividual adapter;
+public class Fragment_test_tested extends Fragment implements PresenterGetInformationTestTestedListened {
 
-    public fragment_result_tested(){
+    private AdapterTestTested adapter;
+
+    public Fragment_test_tested(){
 
     }
 
-    public static fragment_result_tested newInstance(){
-        return new fragment_result_tested();
+    public static Fragment_test_tested newInstance(){
+        return new Fragment_test_tested();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_result_tested,container,false);
-        RecyclerView rcViewInformationIndividual = view.findViewById(R.id.rcViewInformationIndividual);
+        View view = inflater.inflate(R.layout.fragment_test_tested,container,false);
+        RecyclerView rcViewInformationIndividual = view.findViewById(R.id.rcTestTested);
         if (getActivity() != null){
-            PresenterGetInformationIndividual presenter = new PresenterGetInformationIndividual(this);
-            presenter.process("51");
+            PresenterGetInformationTestTested presenter = new PresenterGetInformationTestTested(this);
+            presenter.process("31");
             LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             rcViewInformationIndividual.setLayoutManager(manager);
-            adapter = new AdapterInformationIndividual(getLayoutInflater(), new InformationIndividual());
+            adapter = new AdapterTestTested(getLayoutInflater());
             rcViewInformationIndividual.setAdapter(adapter);
         }
         return view;
     }
 
+
     @Override
-    public void getIndiformationIndividualSuccessed(InformationIndividual info) {
-        adapter.setInfo(info);
+    public void getIndiformationIndividualSuccessed(ArrayList<PointNameCourse> data) {
+        adapter.setList(data);
     }
 
     @Override
