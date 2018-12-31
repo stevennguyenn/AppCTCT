@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Custom.ProcessDialog;
-import com.example.administrator.appctct.Entity.Profile;
+import com.example.administrator.appctct.Entity.Profile.Profile;
 import com.example.administrator.appctct.Service.APIUtils;
 import com.example.administrator.appctct.Service.DataClient;
 

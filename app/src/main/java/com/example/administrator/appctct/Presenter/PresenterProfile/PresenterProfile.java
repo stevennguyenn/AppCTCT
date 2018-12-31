@@ -1,6 +1,6 @@
 package com.example.administrator.appctct.Presenter.PresenterProfile;
 
-import com.example.administrator.appctct.Entity.Profile;
+import com.example.administrator.appctct.Entity.Profile.Profile;
 import com.example.administrator.appctct.Model.ModelProfile.ModelProfile;
 import com.example.administrator.appctct.Model.ModelProfile.ModelProfileListened;
 

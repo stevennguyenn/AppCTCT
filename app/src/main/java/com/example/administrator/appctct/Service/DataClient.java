@@ -12,7 +12,8 @@ import com.example.administrator.appctct.Entity.InformationProfile;
 import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Entity.PointNameCourse;
 import com.example.administrator.appctct.Entity.PointRank;
-import com.example.administrator.appctct.Entity.Profile;
+import com.example.administrator.appctct.Entity.Profile.Profile;
+import com.example.administrator.appctct.Entity.Profile.Respone;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
 import com.example.administrator.appctct.Entity.RateBook.CommentSeeAll;
 import com.example.administrator.appctct.Entity.RateBook.TitleCommentSeeAll;
@@ -255,6 +256,10 @@ public interface DataClient {
     @FormUrlEncoded
     @POST("individual/get_information_profile.php")
     Call<InformationProfile> getInformationProfile(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("individual/get_status_user.php")
+    Call<Respone> getStatusUser(@Field("id") String id);
 
 }
 

@@ -20,6 +20,22 @@ public class InformationProfile {
     @Expose
     private String live;
 
+    @SerializedName("likes")
+    @Expose
+    private int lieks;
+
+    @SerializedName("follows")
+    @Expose
+    private int follows;
+
+    public int getFollows() {
+        return follows;
+    }
+
+    public int getLieks() {
+        return lieks;
+    }
+
     public String getSchool() {
         return school;
     }

@@ -1,4 +1,4 @@
-package com.example.administrator.appctct.Entity;
+package com.example.administrator.appctct.Entity.Profile;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

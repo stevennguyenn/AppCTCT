@@ -1,6 +1,6 @@
 package com.example.administrator.appctct.Model.ModelProfile;
 
-import com.example.administrator.appctct.Entity.Profile;
+import com.example.administrator.appctct.Entity.Profile.Profile;
 
 public interface ModelProfileListened {
     void getInformationSuccessed(Profile profile);

@@ -98,5 +98,7 @@
     <string name="three">3</string>
     <string name="four">4</string>
     <string name="five">5</string>
-    <string name="follow">Follow</string>
+    <string name="follow">Follows</string>
+    <string name="like">Likes</string>
+    <string name="admin">Admin</string>
 </resources>
