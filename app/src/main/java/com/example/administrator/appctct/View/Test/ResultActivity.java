@@ -11,7 +11,7 @@ import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Entity.ResultQuestion;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
-import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button;
 import com.example.administrator.appctct.Fragment.Fragment_question.ClickTVSeeTop;
 import com.example.administrator.appctct.Fragment.Fragment_question.fragment_completion_result;
 import com.example.administrator.appctct.Fragment.Fragment_question.fragment_load_data;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class ResultActivity extends AppCompatActivity implements PresenterShowResultListened,ClickButton,ClickTVSeeTop{
 
     private PresenterShowResult presenter;
-    private fragment_button btShowResult;
+    private Fragment_Button btShowResult;
     private fragment_load_data viewLoadData = new fragment_load_data();
     private fragment_completion_result viewConpletion = new fragment_completion_result();
     private Boolean isCancelLoad = true;
@@ -40,7 +40,7 @@ public class ResultActivity extends AppCompatActivity implements PresenterShowRe
     }
 
     private void setID(){
-        btShowResult = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btShowResult);
+        btShowResult = (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.btShowResult);
     }
 
     private void setupView(){

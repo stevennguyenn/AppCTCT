@@ -55,7 +55,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/codePhoneNumber"
         android:id="@+id/fragConfirm"
-        android:name="com.example.administrator.appctct.Fragment.FragmentButton.fragment_button"
+        android:name="com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.administrator.appctct.Component.Custom.ConstraintLayoutCustom xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="80dp"
     android:layout_height="30dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_corner">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
+        android:id="@+id/tvBtFollows"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -15,5 +15,4 @@
         android:text="@string/follow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-</android.support.constraint.ConstraintLayout>
+</com.example.administrator.appctct.Component.Custom.ConstraintLayoutCustom>

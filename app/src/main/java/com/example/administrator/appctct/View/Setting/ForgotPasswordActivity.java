@@ -7,14 +7,14 @@ import android.view.View;
 import com.example.administrator.appctct.Component.Custom.CheckPhoneEmail;
 import com.example.administrator.appctct.Fragment.EditText.TextWatcherListened;
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
-import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity implements ClickButton,TextWatcherListened {
 
     fragment_edittext_changepassword edPhoneMail;
-    fragment_button btConfirm;
+    Fragment_Button btConfirm;
     Boolean isPhone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ClickBu
 
     private void setID(){
         edPhoneMail = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragmentPhoneEmail);
-        btConfirm = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.fragmentConfirm);
+        btConfirm = (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.fragmentConfirm);
     }
     private void setupView(){
         isPhone = getIntent().getBooleanExtra("isPhone",false);

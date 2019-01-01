@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.os.Handler;
 import com.example.administrator.appctct.R;
 
-public class fragment_button extends Fragment implements View.OnClickListener{
+public class Fragment_Button extends Fragment implements View.OnClickListener{
     private Button btButton;
     private ClickButton listened;
     final Handler handler = new Handler();

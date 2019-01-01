@@ -108,7 +108,7 @@
                 app:layout_constraintRight_toRightOf="@id/viewChildren"
                 android:layout_marginTop="10dp"
                 android:id="@+id/tvSendComment"
-                android:name="com.example.administrator.appctct.Fragment.FragmentButton.fragment_button"
+                android:name="com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content" />
 

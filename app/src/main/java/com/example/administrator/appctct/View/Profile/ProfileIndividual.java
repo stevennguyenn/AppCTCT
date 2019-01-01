@@ -1,10 +1,12 @@
 package com.example.administrator.appctct.View.Profile;
 
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import com.ethanhua.skeleton.Skeleton;
 import com.ethanhua.skeleton.ViewSkeletonScreen;
 import com.example.administrator.appctct.Adapter.AdapterViewPager.AdapterViewPager;
 import com.example.administrator.appctct.Component.Constant.Strings;
+import com.example.administrator.appctct.Component.Custom.ConstraintLayoutCustom;
 import com.example.administrator.appctct.Component.Custom.WrapContentHeightViewPager;
 import com.example.administrator.appctct.Entity.InformationProfile;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationProfile;
@@ -24,13 +27,15 @@ import com.example.administrator.appctct.Fragment.FragmentProfile.Fragment_test_
 
 import java.util.ArrayList;
 
-public class ProfileIndividual extends AppCompatActivity implements PresenterGetInformationProfileListened {
+public class ProfileIndividual extends AppCompatActivity implements PresenterGetInformationProfileListened, View.OnClickListener {
     TabLayout tabLayout;
     WrapContentHeightViewPager viewPager;
     PresenterGetInformationProfile presenter;
     ImageView imgAVT;
-    ConstraintLayout viewImg,viewLikes,viewFollows,view;
-    TextView tvTitleName,tvTitleDetail,tvTitleEmail,tvLikesName,tvFollowsName,tvLikesNumber,tvFollowsNumber;
+    AppBarLayout viewToolBar;
+    ConstraintLayoutCustom btFollows;
+    ConstraintLayout viewImg,viewLikes,viewFollows,view, viewNotificationUnfollow,viewBtUnfollows,viewBtCancel;
+    TextView tvTitleName,tvTitleDetail,tvTitleEmail,tvLikesName,tvFollowsName,tvLikesNumber,tvFollowsNumber,tvBtFollows;
     private ViewSkeletonScreen skeleton;
 
     @Override
@@ -42,6 +47,14 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
     }
 
     private void setID(){
+        viewNotificationUnfollow = findViewById(R.id.viewNotificationUnfollow);
+        viewToolBar = findViewById(R.id.toolbar);
+        btFollows = viewToolBar.findViewById(R.id.btFollows);
+        tvBtFollows = btFollows.findViewById(R.id.tvBtFollows);
+        viewBtUnfollows = viewNotificationUnfollow.findViewById(R.id.viewUnFollow);
+        viewBtCancel = viewNotificationUnfollow.findViewById(R.id.viewCancel);
+        viewBtUnfollows.setOnClickListener(this);
+        viewBtCancel.setOnClickListener(this);
         view = findViewById(R.id.viewChildParent);
         viewLikes = findViewById(R.id.viewLikes);
         viewFollows = findViewById(R.id.viewFollows);
@@ -57,16 +70,17 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
         tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewPager);
         tabLayout.setupWithViewPager(viewPager);
-
         skeleton = Skeleton.bind(view)
                             .angle(0)
                             .load(R.layout.layout_default_item_skeleton)
                             .show();
-
+        btFollows.setOnClickListener(this);
         presenter = new PresenterGetInformationProfile(this);
     }
 
+
     private void setupView(){
+        viewNotificationUnfollow.setY(300);
         tvLikesName.setText(getResources().getString(R.string.like));
         tvFollowsName.setText(getResources().getString(R.string.follow));
         presenter.process(getToken());
@@ -124,5 +138,55 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
         } else {
             tvTitleEmail.setText(String.valueOf("School: "+ "No Infor"));
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btFollows:
+                if (btFollows.isEnableView()) {
+                    disableView();
+                    hideNotification();
+                    break;
+                }
+                enableView();
+                showNotification();
+                break;
+            case R.id.viewUnFollow:
+                hideNotification();
+                break;
+            case R.id.viewCancel:
+                hideNotification();
+                if (btFollows.isEnableView()) {
+                    disableView();
+                    break;
+                }
+                enableView();
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    void enableView(){
+        tvBtFollows.setText(getResources().getString(R.string.follow));
+        btFollows.setEnable();
+    }
+    void disableView(){
+        tvBtFollows.setText(getResources().getString(R.string.unfollow));
+        btFollows.setDisable();
+    }
+
+    void hideNotification(){
+        viewNotificationUnfollow.animate()
+                .translationY(300)
+                .setDuration(500);
+    }
+
+    void showNotification(){
+        viewNotificationUnfollow.animate()
+                .translationY(0)
+                .setDuration(500);
     }
 }

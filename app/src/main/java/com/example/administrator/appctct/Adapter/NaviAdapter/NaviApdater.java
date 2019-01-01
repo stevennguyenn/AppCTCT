@@ -45,7 +45,7 @@ public class NaviApdater extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             switch (i) {
                 case 0:
-                    View view = layoutInflater.inflate(R.layout.header_nav, viewGroup, false);
+                    View view = layoutInflater.inflate(R.layout.line_header_nav, viewGroup, false);
                     return new ViewHoldHeader(view);
                 case 1:
                     view = layoutInflater.inflate(R.layout.line_in_navigationview, viewGroup, false);

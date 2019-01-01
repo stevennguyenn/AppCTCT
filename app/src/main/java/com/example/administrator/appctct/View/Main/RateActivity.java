@@ -11,14 +11,14 @@ import android.widget.TextView;
 
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
-import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterSendComment;
 import com.example.administrator.appctct.Presenter.PresenterMain.PresenterSendCommentListened;
 import com.example.administrator.appctct.R;
 
 public class RateActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener, View.OnClickListener, TextWatcher,ClickButton, PresenterSendCommentListened {
 
-    fragment_button btSendComment;
+    Fragment_Button btSendComment;
     RatingBar rbCountStart;
     EditText edComment;
     TextView tvCancel;
@@ -35,7 +35,7 @@ public class RateActivity extends AppCompatActivity implements RatingBar.OnRatin
     }
 
     private void setID(){
-        btSendComment = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.tvSendComment);
+        btSendComment = (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.tvSendComment);
         idBook = getIntent().getStringExtra("id_book");
         rbCountStart = findViewById(R.id.rbCountStart);
         edComment = findViewById(R.id.edComment);

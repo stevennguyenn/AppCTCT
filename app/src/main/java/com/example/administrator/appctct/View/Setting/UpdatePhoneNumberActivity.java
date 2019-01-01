@@ -1,6 +1,6 @@
 package com.example.administrator.appctct.View.Setting;
 import com.example.administrator.appctct.Fragment.EditText.fragment_edittext_changepassword;
-import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.R;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class UpdatePhoneNumberActivity extends AppCompatActivity implements View.OnClickListener,ClickButton {
 
     fragment_edittext_changepassword fragCurrentPhoneNumber,fragNewPhoneNumber,codePhoneNumber;
-    fragment_button fragConfirm;
+    Fragment_Button fragConfirm;
     TextView tvConfirmCode;
 
     @Override
@@ -34,7 +34,7 @@ public class UpdatePhoneNumberActivity extends AppCompatActivity implements View
         fragCurrentPhoneNumber = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragCurrentPhoneNumber);
         fragNewPhoneNumber = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.fragNewPhoneNumber);
         codePhoneNumber = (fragment_edittext_changepassword) getSupportFragmentManager().findFragmentById(R.id.codePhoneNumber);
-        fragConfirm = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.fragConfirm);
+        fragConfirm = (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.fragConfirm);
         tvConfirmCode = findViewById(R.id.tvConfirmCode);
         tvConfirmCode.setOnClickListener(this);
     }

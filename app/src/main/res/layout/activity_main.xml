@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/btCTCT"
         android:layout_marginBottom="5dp"
-        android:name="com.example.administrator.appctct.Fragment.FragmentButton.fragment_button"
+        android:name="com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button"
         android:layout_height="wrap_content"
         android:layout_width="200dp" />
     <android.support.constraint.ConstraintLayout

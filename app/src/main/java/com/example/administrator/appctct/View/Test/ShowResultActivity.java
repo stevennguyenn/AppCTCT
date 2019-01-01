@@ -10,7 +10,7 @@ import android.view.View;
 import com.example.administrator.appctct.Adapter.QuestionApdater.ShowResultAdapter;
 import com.example.administrator.appctct.Entity.IdAndResult;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
-import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button;
 import com.example.administrator.appctct.R;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
     private ArrayList<IdAndResult> listResult;
     private RecyclerView rcShowResult;
     private ShowResultAdapter adapter;
-    private fragment_button btConfirm;
+    private Fragment_Button btConfirm;
     private String testCode = "";
 
     @Override
@@ -51,7 +51,7 @@ public class ShowResultActivity extends AppCompatActivity implements ClickButton
 
     private void setID(){
         rcShowResult = findViewById(R.id.rcShowResult);
-        btConfirm =  (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btConfirmShowResult);
+        btConfirm =  (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.btConfirmShowResult);
     }
 
     @Override

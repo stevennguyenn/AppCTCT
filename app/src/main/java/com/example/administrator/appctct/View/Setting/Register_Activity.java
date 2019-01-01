@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.example.administrator.appctct.Component.Custom.InformationImage;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
-import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button;
 import com.example.administrator.appctct.Presenter.PresenterRegister.PresenterRegisterListened;
 import com.example.administrator.appctct.Presenter.PresenterRegister.PresenterRegister;
 import com.example.administrator.appctct.R;
@@ -39,7 +39,7 @@ import okhttp3.RequestBody;
 public class Register_Activity extends AppCompatActivity implements View.OnClickListener, PresenterRegisterListened,ClickButton,TextWatcher, CompoundButton.OnCheckedChangeListener {
 
     EditText edFullName,edUserName,edPassword,edConfirmPassword;
-    fragment_button btRegister;
+    Fragment_Button btRegister;
     ImageView imgCamera,imgCollection,imgAvatar;
     Switch swShowPass;
     private PresenterRegister present;
@@ -63,7 +63,7 @@ public class Register_Activity extends AppCompatActivity implements View.OnClick
         edUserName = findViewById(R.id.edUser);
         edPassword = findViewById(R.id.edPassword);
         edConfirmPassword = findViewById(R.id.edConfirmPassword);
-        btRegister = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btRegister);
+        btRegister = (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.btRegister);
         swShowPass = findViewById(R.id.swShowPass);
     }
 

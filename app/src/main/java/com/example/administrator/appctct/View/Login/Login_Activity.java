@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Custom.CountTimer;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
-import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button;
 import com.example.administrator.appctct.Presenter.PresenterLogin.PresenterLoginListened;
 import com.example.administrator.appctct.Presenter.PresenterLogin.PresenterLogin;
 import com.example.administrator.appctct.R;
@@ -33,7 +33,7 @@ import com.example.administrator.appctct.View.Setting.Register_Activity;
 public class Login_Activity extends AppCompatActivity implements View.OnClickListener, PresenterLoginListened,ClickButton,TextWatcher {
 
     EditText edUserName,edPassword;
-    fragment_button btLogin,btLoginFacebook;
+    Fragment_Button btLogin,btLoginFacebook;
     TextView tvRegister,tvForgotPassword;
     Dialog dialog;
     SharedPreferences share;
@@ -57,8 +57,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         edUserName = findViewById(R.id.edUser);
         edPassword = findViewById(R.id.edPassword);
-        btLogin = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btLogin);
-        btLoginFacebook = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btLoginFacebook);
+        btLogin = (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.btLogin);
+        btLoginFacebook = (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.btLoginFacebook);
         viewProgress = findViewById(R.id.viewProgress);
     }
 

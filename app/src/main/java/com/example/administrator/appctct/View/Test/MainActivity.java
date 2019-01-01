@@ -20,7 +20,7 @@ import com.example.administrator.appctct.Entity.ModelQuestionOnlineOffline;
 import com.example.administrator.appctct.Entity.QuestionTestTested;
 import com.example.administrator.appctct.Fragment.FragmentButton.ClickButton;
 import com.example.administrator.appctct.Fragment.FragmentButton.TimeEnd;
-import com.example.administrator.appctct.Fragment.FragmentButton.fragment_button;
+import com.example.administrator.appctct.Fragment.FragmentButton.Fragment_Button;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionOffline;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionOfflineListened;
 import com.example.administrator.appctct.Presenter.PresenterTest.PresenterGetQuestionTestTested;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     private QuestionAdapter adapter;
     private ArrayList<IdAndResult> listIdandResult;
     private RecyclerViewSkeletonScreen skeleton;
-    private fragment_button btCTCT;
+    private Fragment_Button btCTCT;
     private PresenterProcessResult processResult;
     private int typeStatus = -1;
     private int typeSection = -1;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements CheckBoxClick,Cli
     private void setID(){
         rcQuestion = findViewById(R.id.rcMain);
         layoutNoQuestion = findViewById(R.id.viewChildren);
-        btCTCT = (fragment_button) getSupportFragmentManager().findFragmentById(R.id.btCTCT);
+        btCTCT = (Fragment_Button) getSupportFragmentManager().findFragmentById(R.id.btCTCT);
         typeStatus = getIntent().getIntExtra("status",-1);
         typeSection = getIntent().getIntExtra("type_section",-1);
         testCode = getIntent().getStringExtra("testCode");
