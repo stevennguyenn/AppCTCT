@@ -261,5 +261,15 @@ public interface DataClient {
     @POST("individual/get_status_user.php")
     Call<Respone> getStatusUser(@Field("id") String id);
 
+
+    @FormUrlEncoded
+    @POST("individual/user_follows.php")
+    Call<String> userFollows(@Field("id_user") int idUser
+                            ,@Field("id_user_from") String idUserFrom);
+
+    @FormUrlEncoded
+    @POST("individual/user_unfollows.php")
+    Call<String> userUnFollows(@Field("id_user") int idUser
+            ,@Field("id_user_from") String idUserFrom);
 }
 

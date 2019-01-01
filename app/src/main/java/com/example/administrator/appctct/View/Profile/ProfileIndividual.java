@@ -17,17 +17,22 @@ import com.ethanhua.skeleton.ViewSkeletonScreen;
 import com.example.administrator.appctct.Adapter.AdapterViewPager.AdapterViewPager;
 import com.example.administrator.appctct.Component.Constant.Strings;
 import com.example.administrator.appctct.Component.Custom.ConstraintLayoutCustom;
+import com.example.administrator.appctct.Component.Custom.CustomAnimation;
 import com.example.administrator.appctct.Component.Custom.WrapContentHeightViewPager;
 import com.example.administrator.appctct.Entity.InformationProfile;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationProfile;
 import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterGetInformationProfileListened;
+import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterUserUnFollows;
+import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterUserFollows;
+import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterUserFollowsListened;
+import com.example.administrator.appctct.Presenter.PresenterProfile.PresenterUserUnFollowsListened;
 import com.example.administrator.appctct.R;
 import com.example.administrator.appctct.Fragment.FragmentProfile.fragment_load_status;
 import com.example.administrator.appctct.Fragment.FragmentProfile.Fragment_test_tested;
 
 import java.util.ArrayList;
 
-public class ProfileIndividual extends AppCompatActivity implements PresenterGetInformationProfileListened, View.OnClickListener {
+public class ProfileIndividual extends AppCompatActivity implements PresenterGetInformationProfileListened, View.OnClickListener,PresenterUserUnFollowsListened,PresenterUserFollowsListened {
     TabLayout tabLayout;
     WrapContentHeightViewPager viewPager;
     PresenterGetInformationProfile presenter;
@@ -36,7 +41,10 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
     ConstraintLayoutCustom btFollows;
     ConstraintLayout viewImg,viewLikes,viewFollows,view, viewNotificationUnfollow,viewBtUnfollows,viewBtCancel;
     TextView tvTitleName,tvTitleDetail,tvTitleEmail,tvLikesName,tvFollowsName,tvLikesNumber,tvFollowsNumber,tvBtFollows;
+
+    private int idUser= 51;
     private ViewSkeletonScreen skeleton;
+    private int follows = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,18 +120,27 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
     }
 
     @Override
-    public void connectFailed(String message) {
-
+    public void userUnFollowsSuccessed() {
+        follows -= 1;
+        tvFollowsNumber.setText(String.valueOf(follows));
     }
 
-    private String getToken(){
-        return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
+    @Override
+    public void userFollowsSuccessed() {
+        follows += 1;
+        tvFollowsNumber.setText(String.valueOf(follows));
+    }
+
+    @Override
+    public void connectFailed(String message) {
+
     }
 
     private void setData(InformationProfile profile){
         Glide.with(this).load(profile.getAvatar())
                 .apply(RequestOptions.circleCropTransform())
                 .into(imgAVT);
+        follows = profile.getLieks();
         tvTitleName.setText(profile.getFullname());
         tvLikesNumber.setText(String.valueOf(profile.getLieks()));
         tvFollowsNumber.setText(String.valueOf(profile.getFollows()));
@@ -145,6 +162,7 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
         switch (v.getId()){
             case R.id.btFollows:
                 if (btFollows.isEnableView()) {
+                    userFollows();
                     disableView();
                     hideNotification();
                     break;
@@ -153,6 +171,7 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
                 showNotification();
                 break;
             case R.id.viewUnFollow:
+                userUnFollows();
                 hideNotification();
                 break;
             case R.id.viewCancel:
@@ -179,14 +198,24 @@ public class ProfileIndividual extends AppCompatActivity implements PresenterGet
     }
 
     void hideNotification(){
-        viewNotificationUnfollow.animate()
-                .translationY(300)
-                .setDuration(500);
+        CustomAnimation.hideNotification(viewNotificationUnfollow);
     }
 
     void showNotification(){
-        viewNotificationUnfollow.animate()
-                .translationY(0)
-                .setDuration(500);
+        CustomAnimation.showNotification(viewNotificationUnfollow);
+    }
+
+    void userFollows(){
+        PresenterUserFollows presenter = new PresenterUserFollows(this);
+        presenter.process(idUser,getToken());
+    }
+
+    void userUnFollows(){
+        PresenterUserUnFollows presenter = new PresenterUserUnFollows(this);
+        presenter.process(idUser,getToken());
+    }
+
+    private String getToken(){
+        return getSharedPreferences(Strings.data,MODE_PRIVATE).getString(Strings.token,"");
     }
 }
